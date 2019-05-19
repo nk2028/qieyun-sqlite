@@ -22,7 +22,7 @@ after_build:
 - git config --global user.email "32255369+chromezh@users.noreply.github.com"
 - git config --global user.name "sgalal"
 - git checkout gh-pages
-- rm -rf *
+- git clean -xdf
 - mv -f ../guangyun.sqlite3 .
 - git add .
 - |-
