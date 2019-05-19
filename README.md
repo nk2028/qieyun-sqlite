@@ -4,9 +4,9 @@ _Guangyun_ (廣韻) SQLite database for Traditional Chinese Phonology
 
 ## Usage
 
-The database could be accessed at `https://sgalal.github.io/guangyun/guangyun.sqlite3`.
+The database could be accessed at `https://sgalal.github.io/Guangyun/guangyun.sqlite3`.
 
-See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html).
+See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed description.
 
 ## Featured Users
 
