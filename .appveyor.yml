@@ -14,7 +14,7 @@ before_build:
 
 build_script:
 - python3 build.py
-- mv -f guangyun.sqlite3 ..
+- mv -f README.md guangyun.sqlite3 ..
 
 after_build:
 - git config --global credential.helper store
@@ -23,7 +23,7 @@ after_build:
 - git config --global user.name "sgalal"
 - git checkout gh-pages
 - git clean -xdf
-- mv -f ../guangyun.sqlite3 .
+- mv -f ../README.md ../guangyun.sqlite3 .
 - git add .
 - |-
   if [ -n "$(git status --porcelain)" ]; then
