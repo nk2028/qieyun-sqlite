@@ -24,7 +24,7 @@ cur = conn.cursor()
 
 cur.execute('''
 	CREATE TABLE 'rhymes'                -- 韻
-	( 'name'        VARCHAR PRIMARY KEY  -- 韻母
+	( 'name'        VARCHAR PRIMARY KEY  -- 韻
 	, 'rhyme_group' VARCHAR NOT NULL     -- 韻系（舉平以該上去入，以及祭泰夬廢）
 	, 'tone'        INTEGER NOT NULL     -- 聲調（1-4）
 		CHECK
@@ -50,7 +50,7 @@ cur.execute('''
 	CREATE TABLE 'temp_small_rhyme_2'   -- temp_small_rhyme_2
 	( 'id'         INTEGER PRIMARY KEY
 	, 'rhyme1'     VARCHAR NOT NULL     -- 對應細分韻
-	, 'division'   INTEGER              -- 等（1-4）
+	, 'division'   INTEGER NOT NULL     -- 等（1-4）
 	, 'rounding'   VARCHAR NOT NULL     -- 開合
 	  CHECK
 		(   division >= 1
@@ -63,14 +63,16 @@ cur.execute('''
 cur.execute('''
 	CREATE TABLE 'small_rhymes'                          -- 小韻
 	( 'id'         INTEGER PRIMARY KEY
+	, 'name'       VARCHAR NOT NULL                      -- 小韻
 	, 'of_rhyme'   VARCHAR NOT NULL REFERENCES 'rhymes'  -- 對應韻
 	, 'initial'    VARCHAR NOT NULL                      -- 聲母（三十八聲母系統）
 	, 'rounding'   VARCHAR NOT NULL                      -- 開合
-	, 'division'   INTEGER                               -- 等（1-4）
+	, 'division'   INTEGER NOT NULL                      -- 等（1-4）
 	, 'upper_char' VARCHAR                               -- 反切上字
 	, 'lower_char' VARCHAR                               -- 反切下字
 		CHECK
-		(   LENGTH(initial) = 1
+		(   LENGTH(name) = 1
+		AND LENGTH(initial) = 1
 		AND rounding IN ('開', '合')
 		AND division >= 1
 		AND division <= 4
@@ -83,7 +85,7 @@ cur.execute('''
 cur.execute('''
 	CREATE TABLE 'char_entities'                                       -- 字頭
 	( 'id'                 INTEGER PRIMARY KEY
-	, 'name'               VARCHAR NOT NULL                            -- 字
+	, 'name'               VARCHAR NOT NULL                            -- 字頭
 	, 'of_small_rhyme'     INTEGER NOT NULL REFERENCES 'small_rhymes'  -- 對應小韻
 	, 'num_in_small_rhyme' INTEGER NOT NULL                            -- 在小韻中的序號
 	, 'explanation'        VARCHAR NOT NULL                            -- 解釋
@@ -107,7 +109,7 @@ cur.executemany('INSERT INTO char_entities VALUES (?, ?, ?, ?, ?)', zip(repeat(N
 
 cur.execute('''
 	INSERT INTO small_rhymes
-		SELECT temp_small_rhyme_1.id, rhyme AS of_rhyme, initial, rounding, division, SUBSTR(fanqie, 1, 1) AS upper_char, SUBSTR(fanqie, 2) AS lower_char
+		SELECT temp_small_rhyme_1.id, name, rhyme AS of_rhyme, initial, rounding, division, SUBSTR(fanqie, 1, 1) AS upper_char, SUBSTR(fanqie, 2) AS lower_char
 			FROM temp_small_rhyme_1, temp_small_rhyme_2
 			WHERE temp_small_rhyme_1.rhyme1 = temp_small_rhyme_2.rhyme1;
 	''')
