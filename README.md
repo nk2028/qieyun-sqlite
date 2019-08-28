@@ -8,13 +8,12 @@ The database could be accessed at `https://sgalal.github.io/Guangyun/data.sqlite
 
 **Tables**
 
-`rhymes`: 韻
+`core_rhymes`: 韻
 
 * `name`: 韻
-* `rhyme_group`: 韻系（舉平以該上去入，以及祭泰夬廢）
 * `tone`: 聲調（1-4）
 
-`small_rhymes`: 小韻
+`core_small_rhymes`: 小韻
 
 * `id`
 * `name`: 韻
@@ -25,13 +24,14 @@ The database could be accessed at `https://sgalal.github.io/Guangyun/data.sqlite
 * `upper_char`: 反切上字
 * `lower_char`: 反切下字
 
-`character_entities`: 字頭
+`core_character_entities`: 字頭
 
-* `id`
+* `num_in_small_rhyme`: 在小韻中的序號
 * `name`: 字頭
 * `of_small_rhyme`: 對應小韻
-* `num_in_small_rhyme`: 在小韻中的序號
 * `explanation`: 解釋
+
+TODO FIXME: Add documentation
 
 See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed description.
 
