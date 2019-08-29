@@ -147,7 +147,7 @@ cur.execute('CREATE INDEX idx_core_small_rhymes_lower_char on core_small_rhymes 
 cur.execute('''
 	CREATE TABLE 'extd_rhymes'
 	( 'of_rhyme' TEXT PRIMARY KEY REFERENCES 'core_rhymes'  -- 韻
-	, 'subgroup' TEXT NOT NULL REFERENCES 'extd_subgroup'   -- 韻系（平入）
+	, 'subgroup' TEXT NOT NULL                              -- 韻系（平入）
 		CHECK ( LENGTH(of_rhyme) = LENGTH(subgroup) )
 	);
 	''')
@@ -159,8 +159,8 @@ cur.executemany('INSERT INTO extd_rhymes VALUES (?, ?)', zip(data_extd_rhyme['Rh
 
 cur.execute('''
 	CREATE TABLE 'extd_subgroups'
-	( 'of_subgroup' TEXT PRIMARY KEY                         -- 韻系（平入）
-	, 'rhyme_group' TEXT NOT NULL REFERENCES 'extd_classes'  -- 韻系（平）
+	( 'of_subgroup' TEXT PRIMARY KEY REFERENCES 'extd_rhymes'  -- 韻系（平入）
+	, 'rhyme_group' TEXT NOT NULL                              -- 韻系（平）
 		CHECK ( LENGTH(of_subgroup) = LENGTH(rhyme_group) )
 	);
 	''')
@@ -172,8 +172,8 @@ cur.executemany('INSERT INTO extd_subgroups VALUES (?, ?)', zip(data_rhyme_group
 
 cur.execute('''
 	CREATE TABLE 'extd_classes'
-	( 'of_rhyme_group' TEXT PRIMARY KEY  -- 韻系（平）
-	, 'class'          TEXT NOT NULL     -- 攝
+	( 'of_rhyme_group' TEXT PRIMARY KEY REFERENCES 'extd_subgroups'  -- 韻系（平）
+	, 'class'          TEXT NOT NULL                                 -- 攝
 		CHECK ( LENGTH(class) = 1 )
 	);
 	''')
@@ -197,6 +197,36 @@ cur.execute('''
 data_extd_small_rhyme = pandas.read_csv('PrengQim.txt', sep=' ', keep_default_na=False, na_values=[''])  # https://stackoverflow.com/a/27173640
 data_extd_small_rhyme2 = pandas.read_csv('Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
 cur.executemany('INSERT INTO extd_small_rhymes VALUES (?, ?, ?, ?, ?, ?)', zip(data_extd_small_rhyme['#序號'], data_extd_small_rhyme['古韻'], data_extd_small_rhyme['有女'], data_extd_small_rhyme['Baxter'], data_extd_small_rhyme2['推導中州音'], data_extd_small_rhyme2['推導普通話']))
+
+# Create views
+
+## full_rhymes
+
+cur.execute('''
+	CREATE VIEW full_rhymes AS
+		SELECT name AS rhyme, tone, subgroup, rhyme_group, class
+		FROM core_rhymes, extd_rhymes, extd_subgroups, extd_classes
+		WHERE name = of_rhyme
+			AND subgroup = of_subgroup
+			AND rhyme_group = of_rhyme_group;
+	''')
+
+## full_small_rhymes
+
+cur.execute('''
+	CREATE VIEW full_small_rhymes AS
+		SELECT id, name AS small_rhyme, of_rhyme, initial, rounding, division, upper_char, lower_char, guyun, younu, baxter, zhongzhou, putonghua
+		FROM core_small_rhymes, extd_small_rhymes
+		WHERE id = of_small_rhyme;
+	''')
+
+## full_char_entities
+
+cur.execute('''
+	CREATE VIEW full_char_entities AS
+		SELECT *
+		FROM core_char_entities;
+	''')
 
 # Close database
 
