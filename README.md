@@ -1,10 +1,10 @@
-# _Guangyun_ [![Build status](https://ci.appveyor.com/api/projects/status/94tnbkamru7vk0iu?svg=true)](https://ci.appveyor.com/project/chromezh/guangyun)
+# _Guangyun_
 
 _Guangyun_ (廣韻) SQLite database for Traditional Chinese Phonology
 
 ## Usage
 
-The database could be accessed at `https://sgalal.github.io/Guangyun/data.sqlite3`.
+The database could be downloaded from [release page](https://github.com/sgalal/Guangyun/releases).
 
 ![Tables](tables.png)
 
