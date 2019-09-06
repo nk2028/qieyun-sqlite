@@ -21,6 +21,6 @@ See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed
 
 ## License
 
-Code for constructing database is distributed under MIT license.
+Code for building the data is distributed under MIT license.
 
-_Guangyun_ data is from YonhTenxMyangx, distributed with its original license.
+Dictionary data follows the original license.
