@@ -333,11 +333,11 @@
 			<text x="16.86" y="911.44" class="st6">full_small_rhymes</text>		</g>
 		<g id="shape138-281" transform="translate(595.783,-217.131)">
 			<title>圆角的矩形.138</title>
-			<desc>full_rhymes</desc>
+			<desc>full_char_entities</desc>
 			<path d="M11.37 922.66 L102.37 922.66 A11.3738 11.3738 -180 0 0 113.74 911.29 L113.74 905.6 A11.3738 11.3738 -180 0 0
 						 102.37 894.22 L11.37 894.22 A11.3738 11.3738 -180 0 0 0 905.6 L0 911.29 A11.3738 11.3738 -180 0 0 11.37
 						 922.66 Z" class="st1"/>
-			<text x="31.31" y="911.44" class="st6">full_rhymes</text>		</g>
+			<text x="19.35" y="911.44" class="st6">full_char_entities</text>		</g>
 		<g id="shape139-285" transform="translate(1382.13,616.808) rotate(90.1614)">
 			<title>现代箭头.139</title>
 			<g id="shadow139-286" transform="matrix(1,0,0,1,1.97181,-0.351155)" class="st3">
