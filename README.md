@@ -6,7 +6,7 @@ _Guangyun_ (廣韻) SQLite database for Traditional Chinese Phonology
 
 The database could be downloaded from [release page](https://github.com/sgalal/Guangyun/releases).
 
-![Tables](tables.png)
+![Tables](tables.svg)
 
 See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed description.
 

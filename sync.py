@@ -53,26 +53,26 @@ cur.execute('''
 data_rhyme = pandas.read_csv('YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '聲調'])
 cur.executemany('INSERT INTO core_rhymes VALUES (?, ?)', zip(data_rhyme['#韻目'], data_rhyme['聲調']))
 
-## Emplace temp_core_small_rhyme_1
+## Emplace TEMP core_small_rhyme_1
 
 cur.execute('''
-	CREATE TABLE 'temp_core_small_rhyme_1' -- temp_core_small_rhyme_1
+	CREATE TEMP TABLE 'core_small_rhyme_1' -- core_small_rhyme_1
 	( 'id'      INTEGER PRIMARY KEY
-	, 'name'    TEXT                      -- 小韻
-	, 'initial' TEXT NOT NULL             -- 聲母（三十八聲母系統）
-	, 'rhyme1'  TEXT NOT NULL             -- 對應細分韻
-	, 'rhyme'   TEXT NOT NULL             -- 對應韻
-	, 'fanqie'  TEXT                      -- 反切
+	, 'name'    TEXT                       -- 小韻
+	, 'initial' TEXT NOT NULL              -- 聲母（三十八聲母系統）
+	, 'rhyme1'  TEXT NOT NULL              -- 對應細分韻
+	, 'rhyme'   TEXT NOT NULL              -- 對應韻
+	, 'fanqie'  TEXT                       -- 反切
 	);
 	''')
 
 data_small_rhyme_1 = pandas.read_csv('SieuxYonh.txt', sep=' ', header=None, usecols=[0, 1, 2, 3, 4, 5], names=['SmallRhymeId', 'SmallRhyme', 'Initial', 'Rhyme1', 'Rhyme', 'Fanqie'])
-cur.executemany('INSERT INTO temp_core_small_rhyme_1 VALUES (?, ?, ?, ?, ?, ?)', zip(data_small_rhyme_1['SmallRhymeId'], data_small_rhyme_1['SmallRhyme'], data_small_rhyme_1['Initial'], data_small_rhyme_1['Rhyme1'], data_small_rhyme_1['Rhyme'], data_small_rhyme_1['Fanqie']))
+cur.executemany('INSERT INTO core_small_rhyme_1 VALUES (?, ?, ?, ?, ?, ?)', zip(data_small_rhyme_1['SmallRhymeId'], data_small_rhyme_1['SmallRhyme'], data_small_rhyme_1['Initial'], data_small_rhyme_1['Rhyme1'], data_small_rhyme_1['Rhyme'], data_small_rhyme_1['Fanqie']))
 
-## Emplace temp_core_small_rhyme_2
+## Emplace TEMP core_small_rhyme_2
 
 cur.execute('''
-	CREATE TABLE 'temp_core_small_rhyme_2'  -- temp_core_small_rhyme_2
+	CREATE TEMP TABLE 'core_small_rhyme_2'  -- core_small_rhyme_2
 	( 'id'         INTEGER PRIMARY KEY
 	, 'rhyme1'     TEXT NOT NULL            -- 對應細分韻
 	, 'division'   INTEGER NOT NULL         -- 等（1-4）
@@ -86,7 +86,7 @@ cur.execute('''
 	''')
 
 data_small_rhyme_2 = pandas.read_csv('YonhMux.txt', sep=' ', na_filter=False, usecols=['#韻母', '等', '呼'])
-cur.executemany('INSERT INTO temp_core_small_rhyme_2 VALUES (?, ?, ?, ?)', zip(repeat(None), data_small_rhyme_2['#韻母'], data_small_rhyme_2['等'], data_small_rhyme_2['呼']))
+cur.executemany('INSERT INTO core_small_rhyme_2 VALUES (?, ?, ?, ?)', zip(repeat(None), data_small_rhyme_2['#韻母'], data_small_rhyme_2['等'], data_small_rhyme_2['呼']))
 
 ## Emplace core_small_rhymes
 
@@ -114,13 +114,10 @@ cur.execute('''
 
 cur.execute('''
 	INSERT INTO core_small_rhymes
-		SELECT temp_core_small_rhyme_1.id, name, rhyme AS of_rhyme, initial, rounding, division, SUBSTR(fanqie, 1, 1) AS upper_char, SUBSTR(fanqie, 2) AS lower_char
-			FROM temp_core_small_rhyme_1, temp_core_small_rhyme_2
-			WHERE temp_core_small_rhyme_1.rhyme1 = temp_core_small_rhyme_2.rhyme1;
+		SELECT core_small_rhyme_1.id, name, rhyme AS of_rhyme, initial, rounding, division, SUBSTR(fanqie, 1, 1) AS upper_char, SUBSTR(fanqie, 2) AS lower_char
+			FROM core_small_rhyme_1, core_small_rhyme_2
+			WHERE core_small_rhyme_1.rhyme1 = core_small_rhyme_2.rhyme1;
 	''')
-
-cur.execute('DROP TABLE temp_core_small_rhyme_1')
-cur.execute('DROP TABLE temp_core_small_rhyme_2')
 
 ## Emplace core_char_entities
 
