@@ -50,7 +50,7 @@ const databaseLoaded = (async () => {
 	// Wait for Guangyun database loaded
 	const response = await databaseFileLoaded;
 	if (!response.ok)
-		alert(`Failed to load database from ${dataBaseUrl}.`);
+		alert(`Failed to load database.`);
 	else {
 		// Write database to the global variable
 		db = new SQL.Database(new Uint8Array(await response.arrayBuffer()));
