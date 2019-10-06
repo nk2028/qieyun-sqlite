@@ -25,44 +25,7 @@ const mkTablesFromSqlResult = xss => !xss.length
 	? '<p>The query produces no result.</p>'
 	: xss.map(mkTableFromSqlResult).join('');
 
-const importScript = src =>
-	new Promise((resolve, reject) => {
-		const script = document.createElement('script');
-		document.head.appendChild(script);
-		script.onload = resolve;
-		script.onerror = reject;
-		script.async = true;
-		script.src = src;
-	});
-
-/* Load sql.js and initialize data table */
-
-let db;
-
-const databaseLoaded = (async () => {
-	// Fetch Guangyun database
-	const databaseFileLoaded = fetch('data.sqlite3');
-
-	// Waite for sql.js loaded
-	await importScript('https://kripken.github.io/sql.js/dist/sql-wasm.js');
-	await initSqlJs({ locateFile: url => 'https://kripken.github.io/sql.js/dist/sql-wasm.wasm' });
-
-	// Wait for Guangyun database loaded
-	const response = await databaseFileLoaded;
-	if (!response.ok)
-		alert(`Failed to load database.`);
-	else {
-		// Write database to the global variable
-		db = new SQL.Database(new Uint8Array(await response.arrayBuffer()));
-	}
-})()
-
-const myCodeMirror = CodeMirror(customSqlInput, {
-	value: '-- SQLite statements go here\nSELECT * FROM sqlite_master;\n',
-	mode: 'sql',
-	theme: 'blackboard-modified',
-	lineNumbers: true
-});
+/* Query handler */
 
 const handleCustomQuery = () => {
 	let res;
@@ -76,3 +39,44 @@ const handleCustomQuery = () => {
 	errorOutput.innerText = '';
 	wrapperOutput.innerHTML = mkTablesFromSqlResult(res);
 }
+
+/* Load sql.js and initialize data table */
+
+let db;
+
+const databaseLoaded = (async () => {
+	// Fetch Guangyun database
+	const databaseFileLoaded = fetch('data.sqlite3');
+
+	// Wait for sql.js loaded
+	await initSqlJs({ locateFile: url => 'https://kripken.github.io/sql.js/dist/sql-wasm.wasm' });
+
+	// Wait for Guangyun database loaded
+	const response = await databaseFileLoaded;
+	if (!response.ok)
+		alert(`Failed to load database.`);
+	else {
+		// Write database to the global variable
+		db = new SQL.Database(new Uint8Array(await response.arrayBuffer()));
+	}
+})()
+
+/* Page Loaded Event */
+
+let myCodeMirror;
+
+document.addEventListener('DOMContentLoaded', () => {
+	myCodeMirror = CodeMirror(customSqlInput, {
+		value: '-- SQLite statements go here\nSELECT * FROM sqlite_master;\n',
+		mode: 'sql',
+		theme: 'blackboard-modified',
+		lineNumbers: true
+	});
+});
+
+window.addEventListener('load', async e => {
+	await databaseLoaded;
+
+	// Unblur the page
+	document.body.classList.add('unblur');
+})
