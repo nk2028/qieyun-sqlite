@@ -1,0 +1,45 @@
+@font-face {
+	font-family: 'Segoe UI-Web';
+	src: url('https://ir.sugina.cc/cdn/segoeui.ttf');
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #222;
+	color: #ddd;
+	font-family: 'Segoe UI', 'Segoe UI-Web', 'Source Han Sans HC', 'Noto Sans HK', sans-serif;
+	margin: 0 auto;
+	max-width: 1000px;
+	padding: 2em 1em;
+}
+
+h1, form p {
+	text-align: center;
+}
+
+#customSqlInput {
+	margin: 2em 0;
+}
+
+input[type="submit"] {
+	border: 1px solid #ddd;
+	background-color: #222;
+	color: #ddd;
+	font-family: 'Segoe UI', 'Segoe UI-Web', sans-serif;
+	font-size: 110%;
+	margin: 0 3em;
+	padding: 0.25em 1em;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 2em 0;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 0.5em 1em;
+}

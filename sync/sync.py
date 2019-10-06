@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 from itertools import repeat
 import os
@@ -14,16 +15,16 @@ def download_file_if_not_exist(name, download_prefix='https://raw.githubusercont
 
 ## Data files
 
-download_file_if_not_exist('YonhMiuk.txt')
-download_file_if_not_exist('SieuxYonh.txt')
-download_file_if_not_exist('Yonhmux.txt')
-download_file_if_not_exist('Dzih.txt')
+download_file_if_not_exist('sync/YonhMiuk.txt')
+download_file_if_not_exist('sync/SieuxYonh.txt')
+download_file_if_not_exist('sync/Yonhmux.txt')
+download_file_if_not_exist('sync/Dzih.txt')
 
 ## Knowledge files
 
-download_file_if_not_exist('YonhGheh.txt')
-download_file_if_not_exist('PrengQim.txt')
-download_file_if_not_exist('Dauh.txt')
+download_file_if_not_exist('sync/YonhGheh.txt')
+download_file_if_not_exist('sync/PrengQim.txt')
+download_file_if_not_exist('sync/Dauh.txt')
 
 ## Database
 
@@ -34,7 +35,7 @@ if os.path.exists('data.sqlite3'):
 
 ## Connect to database
 
-conn = sqlite3.connect('data.sqlite3')
+conn = sqlite3.connect('docs/data.sqlite3')
 cur = conn.cursor()
 
 ## Emplace core_rhymes
@@ -50,7 +51,7 @@ cur.execute('''
 	);
 	''')
 
-data_rhyme = pandas.read_csv('YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '聲調'])
+data_rhyme = pandas.read_csv('sync/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '聲調'])
 cur.executemany('INSERT INTO core_rhymes VALUES (?, ?)', zip(data_rhyme['#韻目'], data_rhyme['聲調']))
 
 ## Emplace TEMP core_small_rhyme_1
@@ -66,7 +67,7 @@ cur.execute('''
 	);
 	''')
 
-data_small_rhyme_1 = pandas.read_csv('SieuxYonh.txt', sep=' ', header=None, usecols=[0, 1, 2, 3, 4, 5], names=['SmallRhymeId', 'SmallRhyme', 'Initial', 'Rhyme1', 'Rhyme', 'Fanqie'])
+data_small_rhyme_1 = pandas.read_csv('sync/SieuxYonh.txt', sep=' ', header=None, usecols=[0, 1, 2, 3, 4, 5], names=['SmallRhymeId', 'SmallRhyme', 'Initial', 'Rhyme1', 'Rhyme', 'Fanqie'])
 cur.executemany('INSERT INTO core_small_rhyme_1 VALUES (?, ?, ?, ?, ?, ?)', zip(data_small_rhyme_1['SmallRhymeId'], data_small_rhyme_1['SmallRhyme'], data_small_rhyme_1['Initial'], data_small_rhyme_1['Rhyme1'], data_small_rhyme_1['Rhyme'], data_small_rhyme_1['Fanqie']))
 
 ## Emplace TEMP core_small_rhyme_2
@@ -85,7 +86,7 @@ cur.execute('''
 	);
 	''')
 
-data_small_rhyme_2 = pandas.read_csv('YonhMux.txt', sep=' ', na_filter=False, usecols=['#韻母', '等', '呼'])
+data_small_rhyme_2 = pandas.read_csv('sync/YonhMux.txt', sep=' ', na_filter=False, usecols=['#韻母', '等', '呼'])
 cur.executemany('INSERT INTO core_small_rhyme_2 VALUES (?, ?, ?, ?)', zip(repeat(None), data_small_rhyme_2['#韻母'], data_small_rhyme_2['等'], data_small_rhyme_2['呼']))
 
 ## Emplace core_small_rhymes
@@ -131,7 +132,7 @@ cur.execute('''
 	);
 	''')
 
-data_char_entity = pandas.read_csv('Dzih.txt', sep=' ', na_filter=False, header=None, names=['Name', 'SmallRhymeId', 'NumInSmallRhyme', 'Explanation'])
+data_char_entity = pandas.read_csv('sync/Dzih.txt', sep=' ', na_filter=False, header=None, names=['Name', 'SmallRhymeId', 'NumInSmallRhyme', 'Explanation'])
 cur.executemany('INSERT INTO core_char_entities VALUES (?, ?, ?, ?)', zip(data_char_entity['SmallRhymeId'], data_char_entity['NumInSmallRhyme'], data_char_entity['Name'], data_char_entity['Explanation']))
 
 cur.execute('CREATE INDEX idx_core_small_rhymes_upper_char on core_small_rhymes (upper_char);')
@@ -149,7 +150,7 @@ cur.execute('''
 	);
 	''')
 
-data_extd_rhyme = pandas.read_csv('subgroup.csv', na_filter=False)
+data_extd_rhyme = pandas.read_csv('sync/subgroup.csv', na_filter=False)
 cur.executemany('INSERT INTO extd_rhymes VALUES (?, ?)', zip(data_extd_rhyme['Rhyme'], data_extd_rhyme['Subgroup']))
 
 ## Emplace extd_subgroups
@@ -162,7 +163,7 @@ cur.execute('''
 	);
 	''')
 
-data_rhyme_group = pandas.read_csv('group.csv', na_filter=False)
+data_rhyme_group = pandas.read_csv('sync/group.csv', na_filter=False)
 cur.executemany('INSERT INTO extd_subgroups VALUES (?, ?)', zip(data_rhyme_group['Subgroup'], data_rhyme_group['Group']))
 
 ## Emplace extd_classes
@@ -175,7 +176,7 @@ cur.execute('''
 	);
 	''')
 
-data_class = pandas.read_csv('YonhGheh.txt', sep=' ', na_filter=False)
+data_class = pandas.read_csv('sync/YonhGheh.txt', sep=' ', na_filter=False)
 cur.executemany('INSERT INTO extd_classes VALUES (?, ?)', zip(data_class['#韻系'], data_class['攝']))
 
 ## Emplace extd_small_rhymes
@@ -191,8 +192,8 @@ cur.execute('''
 	);
 	''')
 
-data_extd_small_rhyme = pandas.read_csv('PrengQim.txt', sep=' ', keep_default_na=False, na_values=[''])  # https://stackoverflow.com/a/27173640
-data_extd_small_rhyme2 = pandas.read_csv('Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
+data_extd_small_rhyme = pandas.read_csv('sync/PrengQim.txt', sep=' ', keep_default_na=False, na_values=[''])  # https://stackoverflow.com/a/27173640
+data_extd_small_rhyme2 = pandas.read_csv('sync/Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
 cur.executemany('INSERT INTO extd_small_rhymes VALUES (?, ?, ?, ?, ?, ?)', zip(data_extd_small_rhyme['#序號'], data_extd_small_rhyme['古韻'], data_extd_small_rhyme['有女'], data_extd_small_rhyme['Baxter'], data_extd_small_rhyme2['推導中州音'], data_extd_small_rhyme2['推導普通話']))
 
 # Create views
