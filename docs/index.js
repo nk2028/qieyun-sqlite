@@ -67,7 +67,7 @@ let myCodeMirror;
 
 document.addEventListener('DOMContentLoaded', () => {
 	myCodeMirror = CodeMirror(customSqlInput, {
-		value: "-- SQLite statements go here\nSELECT * FROM sqlite_master WHERE type = 'view';\n",
+		value: "-- SQLite statements go here\nSELECT name, sql\nFROM sqlite_master\nWHERE type = 'view';\n",
 		mode: 'sql',
 		theme: 'blackboard-modified',
 		lineNumbers: true

@@ -37,7 +37,6 @@ input[type="submit"] {
 table {
 	border-collapse: collapse;
 	overflow-wrap: break-word;
-	white-space: pre-wrap;
 }
 
 th, td {
