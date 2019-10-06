@@ -23,4 +23,8 @@ See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed
 
 Code for building the data is distributed under MIT license.
 
+Web pages are distributed under MIT license.
+
+Codes from CodeMirror project (`docs/codemirror`) is distributed under MIT license.
+
 Dictionary data follows the original license.
