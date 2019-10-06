@@ -14,7 +14,7 @@ const mkTable = (xs, yss) => {
 		, mkTd = str => '<td>' + escapeHTML(str) + '</td>'
 		, mkTr = ys => '<tr>' + ys.map(mkTd).join('') + '</tr>'
 		, mkTbody = yss => '<tbody>' + yss.map(mkTr).join('') + '</tbody>';
-	return '<div class="table-wrapper"><table class="pure-table pure-table-bordered">'
+	return '<div class="table-wrapper"><table>'
 		+ mkThead(xs) + mkTbody(yss)
 		+ '</table></div>';
 }

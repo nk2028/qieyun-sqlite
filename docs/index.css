@@ -36,7 +36,7 @@ input[type="submit"] {
 
 table {
 	border-collapse: collapse;
-	margin: 2em 0;
+	white-space: pre;
 }
 
 th, td {
@@ -45,5 +45,7 @@ th, td {
 }
 
 #wrapperOutput {
+	margin: 2em 0;
+	max-height: 400px;
 	overflow: auto;
 }
