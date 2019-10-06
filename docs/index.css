@@ -12,7 +12,7 @@ body {
 	color: #ddd;
 	font-family: 'Segoe UI', 'Segoe UI-Web', 'Source Han Sans HC', 'Noto Sans HK', sans-serif;
 	margin: 0 auto;
-	max-width: 1000px;
+	max-width: 1050px;
 	padding: 2em 1em;
 }
 
@@ -36,11 +36,13 @@ input[type="submit"] {
 
 table {
 	border-collapse: collapse;
-	white-space: pre;
+	overflow-wrap: break-word;
+	white-space: pre-wrap;
 }
 
 th, td {
 	border: 1px solid #ddd;
+	max-width: 425px;
 	padding: 0.5em 1em;
 }
 
