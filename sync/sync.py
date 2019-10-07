@@ -231,7 +231,7 @@ FROM core_char_entities;
 
 cur.execute('''
 CREATE VIEW full_guangyun AS
-SELECT rhyme, tone, subgroup, rhyme_group, class, id as 'small_rhyme_id', small_rhyme
+SELECT rhyme, tone, subgroup, rhyme_group, class, id as 'small_rhyme_id', small_rhyme,
 initial, rounding, division, upper_char, lower_char, guyun, younu, baxter,
 zhongzhou, putonghua, num_in_small_rhyme, name, explanation
 FROM full_rhymes JOIN full_small_rhymes JOIN full_char_entities
