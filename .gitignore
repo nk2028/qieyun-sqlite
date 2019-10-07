@@ -3,3 +3,4 @@
 !/sync/group.csv
 !/sync/subgroup.csv
 *.sqlite3-journal
+.ipynb_checkpoints
