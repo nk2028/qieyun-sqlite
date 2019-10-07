@@ -41,11 +41,11 @@ table {
 
 th, td {
 	border: 1px solid #ddd;
-	max-width: 425px;
 	padding: 0.5em 1em;
 }
 
 #wrapperOutput {
+	border: 1px solid #ddd;
 	margin: 2em 0;
 	max-height: 400px;
 	overflow: auto;
