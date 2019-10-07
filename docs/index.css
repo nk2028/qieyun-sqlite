@@ -44,7 +44,7 @@ th, td {
 	padding: 0.5em 1em;
 }
 
-#wrapperOutput {
+#wrapperOutput:not(:empty) {
 	border: 1px solid #ddd;
 	margin: 2em 0;
 	max-height: 400px;
