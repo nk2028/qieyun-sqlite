@@ -4,16 +4,21 @@ _Guangyun_ (廣韻) SQLite database for Traditional Chinese Phonology
 
 ## Usage
 
-The database could be downloaded from [release page](https://github.com/sgalal/Guangyun/releases).
+The database could be downloaded from [release page](https://github.com/sgalal/Guangyun/releases), or access the [web interface](https://github.com/sgalal/Guangyun).
 
 ![Tables](tables.svg)
 
 See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed description.
 
+## Examples
+
+* [廣韻的例外](https://sgalal.github.io/Guangyun/notebook/廣韻的例外.html)
+* [廣韻音節表](https://sgalal.github.io/Guangyun/notebook/廣韻音節表.html)
+
 ## Featured Users
 
 * [sgalal/Ghehlien](https://github.com/sgalal/Ghehlien)
-* [sgalal/brogue](https://github.com/sgalal/brogue)
+* [sgalal/Brogue](https://github.com/sgalal/brogue)
 
 ## Acknowledgements
 
