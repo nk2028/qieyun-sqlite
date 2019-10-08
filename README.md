@@ -14,11 +14,13 @@ See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed
 
 * [廣韻的例外](https://sgalal.github.io/Guangyun/notebook/廣韻的例外.html)
 * [廣韻音節表](https://sgalal.github.io/Guangyun/notebook/廣韻音節表.html)
+* [廣韻反切上字表](https://sgalal.github.io/Guangyun/notebook/廣韻反切上字表.html)
+* [廣韻四聲相配表](https://sgalal.github.io/Guangyun/notebook/廣韻四聲相配表.html)
 
 ## Featured Users
 
 * [sgalal/Ghehlien](https://github.com/sgalal/Ghehlien)
-* [sgalal/Brogue](https://github.com/sgalal/brogue)
+* [sgalal/Brogue](https://github.com/sgalal/Brogue)
 
 ## Acknowledgements
 

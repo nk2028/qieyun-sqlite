@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>廣韻的例外</title>
+<title>廣韻反切上字表</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,7 +13116,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="&#24291;&#38907;&#30340;&#20363;&#22806;">&#24291;&#38907;&#30340;&#20363;&#22806;<a class="anchor-link" href="#&#24291;&#38907;&#30340;&#20363;&#22806;">&#182;</a></h1>
+<h1 id="&#24291;&#38907;&#21453;&#20999;&#19978;&#23383;&#34920;">&#24291;&#38907;&#21453;&#20999;&#19978;&#23383;&#34920;<a class="anchor-link" href="#&#24291;&#38907;&#21453;&#20999;&#19978;&#23383;&#34920;">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -13126,7 +13126,6 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">import</span> <span class="nn">sqlite3</span>
 </pre></div>
 
     </div>
@@ -13139,6 +13138,19 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;../data.sqlite3&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -13147,109 +13159,55 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#27794;&#26377;&#21453;&#20999;&#30340;&#23567;&#38907;">&#27794;&#26377;&#21453;&#20999;&#30340;&#23567;&#38907;<a class="anchor-link" href="#&#27794;&#26377;&#21453;&#20999;&#30340;&#23567;&#38907;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, upper_char, lower_char,</span>
-<span class="s1">GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE upper_char is null</span>
-<span class="s1">OR lower_char is null</span>
-<span class="s1">GROUP BY rhyme, tone, subgroup, rhyme_group, class,</span>
-<span class="s1">small_rhyme_id, small_rhyme, initial, rounding, division, upper_char, lower_char;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[3]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>small_rhyme_descr</th>
-      <th>upper_char</th>
-      <th>lower_char</th>
-      <th>names</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>章開三拯上</td>
-      <td>None</td>
-      <td>None</td>
-      <td>拯抍撜𨋬氶</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>影開二鑑去</td>
-      <td>None</td>
-      <td>None</td>
-      <td>𪒠</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#21516;&#19968;&#20491;&#23567;&#38907;&#20013;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;">&#21516;&#19968;&#20491;&#23567;&#38907;&#20013;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;<a class="anchor-link" href="#&#21516;&#19968;&#20491;&#23567;&#38907;&#20013;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;">&#182;</a></h2>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT name, small_rhyme_descr, fanqie,</span>
-<span class="s1">GROUP_CONCAT(num_in_small_rhyme) AS &#39;nums_in_small_rhyme&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT initial,</span>
+<span class="s1">REPLACE(GROUP_CONCAT(DISTINCT upper_char), &#39;,&#39;, &#39;&#39;) AS &#39;upper_chars&#39;</span>
 <span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY small_rhyme_id, name</span>
-<span class="s1">HAVING COUNT(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="s1">GROUP BY initial</span>
+<span class="s1">ORDER BY CASE initial</span>
+<span class="s1">WHEN &#39;見&#39; THEN 0</span>
+<span class="s1">WHEN &#39;溪&#39; THEN 1</span>
+<span class="s1">WHEN &#39;羣&#39; THEN 2</span>
+<span class="s1">WHEN &#39;疑&#39; THEN 3</span>
+<span class="s1">WHEN &#39;端&#39; THEN 4</span>
+<span class="s1">WHEN &#39;透&#39; THEN 5</span>
+<span class="s1">WHEN &#39;定&#39; THEN 6</span>
+<span class="s1">WHEN &#39;泥&#39; THEN 7</span>
+<span class="s1">WHEN &#39;知&#39; THEN 8</span>
+<span class="s1">WHEN &#39;徹&#39; THEN 9</span>
+<span class="s1">WHEN &#39;澄&#39; THEN 10</span>
+<span class="s1">WHEN &#39;孃&#39; THEN 11</span>
+<span class="s1">WHEN &#39;幫&#39; THEN 12</span>
+<span class="s1">WHEN &#39;滂&#39; THEN 13</span>
+<span class="s1">WHEN &#39;並&#39; THEN 14</span>
+<span class="s1">WHEN &#39;明&#39; THEN 15</span>
+<span class="s1">WHEN &#39;精&#39; THEN 16</span>
+<span class="s1">WHEN &#39;清&#39; THEN 17</span>
+<span class="s1">WHEN &#39;從&#39; THEN 18</span>
+<span class="s1">WHEN &#39;心&#39; THEN 19</span>
+<span class="s1">WHEN &#39;邪&#39; THEN 20</span>
+<span class="s1">WHEN &#39;莊&#39; THEN 21</span>
+<span class="s1">WHEN &#39;初&#39; THEN 22</span>
+<span class="s1">WHEN &#39;崇&#39; THEN 23</span>
+<span class="s1">WHEN &#39;生&#39; THEN 24</span>
+<span class="s1">WHEN &#39;俟&#39; THEN 25</span>
+<span class="s1">WHEN &#39;章&#39; THEN 26</span>
+<span class="s1">WHEN &#39;昌&#39; THEN 27</span>
+<span class="s1">WHEN &#39;船&#39; THEN 28</span>
+<span class="s1">WHEN &#39;書&#39; THEN 29</span>
+<span class="s1">WHEN &#39;常&#39; THEN 30</span>
+<span class="s1">WHEN &#39;影&#39; THEN 31</span>
+<span class="s1">WHEN &#39;曉&#39; THEN 32</span>
+<span class="s1">WHEN &#39;匣&#39; THEN 33</span>
+<span class="s1">WHEN &#39;云&#39; THEN 34</span>
+<span class="s1">WHEN &#39;以&#39; THEN 35</span>
+<span class="s1">WHEN &#39;來&#39; THEN 36</span>
+<span class="s1">WHEN &#39;日&#39; THEN 37</span>
+<span class="s1">END, small_rhyme_id;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13285,33 +13243,200 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>name</th>
-      <th>small_rhyme_descr</th>
-      <th>fanqie</th>
-      <th>nums_in_small_rhyme</th>
+      <th>initial</th>
+      <th>upper_chars</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>䱱</td>
-      <td>定開四齊平</td>
-      <td>杜奚切</td>
-      <td>29,38</td>
+      <td>見</td>
+      <td>居古九舉公過俱佳乖姑各兼詭規几吉紀格</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>縝</td>
-      <td>章開三軫上</td>
-      <td>章忍切</td>
-      <td>2,11</td>
+      <td>溪</td>
+      <td>去苦曲丘豈口可起乞客綺恪康墟袪羌驅弃空牽枯欽謙區窺卿詰傾楷</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>駛</td>
-      <td>生開三志去</td>
-      <td>踈吏切</td>
-      <td>1,2</td>
+      <td>羣</td>
+      <td>渠巨強其跪求曁狂奇具臼衢</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>疑</td>
+      <td>五魚牛語遇擬愚俄虞疑研宜危吾玉</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>端</td>
+      <td>德都當丁多得冬</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>透</td>
+      <td>他土吐託天湯通台</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>定</td>
+      <td>徒同杜度墜特堂唐田陀</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>泥</td>
+      <td>奴乃那諾内</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>知</td>
+      <td>陟都竹丁卓張中知豬珍追猪徵</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>徹</td>
+      <td>敕丑褚楮癡抽他恥</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>澄</td>
+      <td>直宅柱池丈持除治徒馳遟佇場</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>孃</td>
+      <td>女妳諾奴乃尼拏穠</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>幫</td>
+      <td>方府博彼甫邊布必北卑伯筆巴并補陂分兵晡畀封鄙百</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>滂</td>
+      <td>敷匹芳普撫孚滂披妃丕峯方譬拂</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>並</td>
+      <td>房薄符防部步扶附蒲縛皮白便浮裴傍毗平捕馮婢父弼</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>明</td>
+      <td>莫靡武無彌母亡文綿眉模謨明摸巫美望矛慕</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>精</td>
+      <td>子作即姊遵醉則祖臧將借兹𩛠資姉</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>清</td>
+      <td>倉七此取蒼醋千雌采親麁青麤遷</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>從</td>
+      <td>徂藏疾昨匠在才自慈秦漸情前</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>心</td>
+      <td>息蘇私相素先思須寫桑速斯胥悉雖司辛</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>邪</td>
+      <td>祥旬似詳夕徐隨辝辭寺</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>莊</td>
+      <td>側莊阻仄爭子鄒簪</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>初</td>
+      <td>楚測初創叉瘡芻廁</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>崇</td>
+      <td>鋤士仕崇鉏助牀鶵雛犲崱查査</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>生</td>
+      <td>所山疏數色史踈砂沙生</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>俟</td>
+      <td>俟牀</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>章</td>
+      <td>職章旨止諸正煑之占支脂征</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>昌</td>
+      <td>昌尺叱處叉赤充姝</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>船</td>
+      <td>食神實乗</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>書</td>
+      <td>書式傷失識施詩舒賞矢釋商試始</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>常</td>
+      <td>蜀是視市署成植常氏時承臣殖甞寔殊十</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>影</td>
+      <td>烏於握央憶哀乙謁一委挹安紆烟衣依鷖伊憂愛</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>曉</td>
+      <td>呼許香喜朽況荒火虚虎興花休况馨海羲呵</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>匣</td>
+      <td>戸下胡獲侯懷何乎黃</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>云</td>
+      <td>羽薳洧雨下爲王有于永韋榮云雲筠</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>以</td>
+      <td>以餘弋悅與羊翼余移夷于營</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>來</td>
+      <td>力盧呂里落郎賴魯縷勒良來洛連練離林</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>日</td>
+      <td>如而汝人儒耳兒仍</td>
     </tr>
   </tbody>
 </table>
@@ -13323,1095 +13448,10 @@ div#notebook {
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="(&#38907;,-&#38283;&#21512;,-&#31561;,-&#32882;&#27597;)-&#22235;&#20803;&#32068;&#19981;&#33021;&#30906;&#23450;&#19968;&#20491;&#23567;&#38907;">(&#38907;, &#38283;&#21512;, &#31561;, &#32882;&#27597;) &#22235;&#20803;&#32068;&#19981;&#33021;&#30906;&#23450;&#19968;&#20491;&#23567;&#38907;<a class="anchor-link" href="#(&#38907;,-&#38283;&#21512;,-&#31561;,-&#32882;&#27597;)-&#22235;&#20803;&#32068;&#19981;&#33021;&#30906;&#23450;&#19968;&#20491;&#23567;&#38907;">&#182;</a></h2>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT *</span>
-<span class="s1">FROM</span>
-<span class="s1">(SELECT rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id, GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id) AS A</span>
-<span class="s1">JOIN</span>
-<span class="s1">(SELECT rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id, GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id) AS B</span>
-<span class="s1">USING (rhyme, rounding, division, initial)</span>
-<span class="s1">WHERE A.small_rhyme_id &lt; B.small_rhyme_id;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>rhyme</th>
-      <th>rounding</th>
-      <th>division</th>
-      <th>initial</th>
-      <th>small_rhyme_id</th>
-      <th>names</th>
-      <th>small_rhyme_id</th>
-      <th>names</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>支</td>
-      <td>開</td>
-      <td>3</td>
-      <td>精</td>
-      <td>114</td>
-      <td>貲頿鴜𪕊鮆訾鄑㠿媊𨚖㰣鈭姕𦺱䖪觜</td>
-      <td>133</td>
-      <td>厜觜纗惢嫢㭰</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>支</td>
-      <td>合</td>
-      <td>3</td>
-      <td>精</td>
-      <td>135</td>
-      <td>劑㭰𦸺臇𤎱㷷</td>
-      <td>138</td>
-      <td>䮔</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>之</td>
-      <td>開</td>
-      <td>3</td>
-      <td>書</td>
-      <td>193</td>
-      <td>詩邿齝𪗪呞䀢</td>
-      <td>210</td>
-      <td>䀵</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>之</td>
-      <td>開</td>
-      <td>3</td>
-      <td>溪</td>
-      <td>195</td>
-      <td>欺娸䫥䫏𠐾魌僛𪅾𪀩䶞抾</td>
-      <td>209</td>
-      <td>抾</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>刪</td>
-      <td>開</td>
-      <td>2</td>
-      <td>溪</td>
-      <td>551</td>
-      <td>馯</td>
-      <td>552</td>
-      <td>豻鬜</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>麻</td>
-      <td>開</td>
-      <td>2</td>
-      <td>溪</td>
-      <td>798</td>
-      <td>䶗㤉𡤫</td>
-      <td>804</td>
-      <td>𣘟</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>耕</td>
-      <td>開</td>
-      <td>2</td>
-      <td>幫</td>
-      <td>892</td>
-      <td>浜捠</td>
-      <td>902</td>
-      <td>繃絣𢆸拼䑫</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>尤</td>
-      <td>開</td>
-      <td>3</td>
-      <td>溪</td>
-      <td>996</td>
-      <td>恘惆㲃</td>
-      <td>1002</td>
-      <td>丘丠蓲蚯邱訄</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>談</td>
-      <td>開</td>
-      <td>1</td>
-      <td>從</td>
-      <td>1094</td>
-      <td>慙慚鏨䳻㨻</td>
-      <td>1097</td>
-      <td>𩈻</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>腫</td>
-      <td>開</td>
-      <td>3</td>
-      <td>章</td>
-      <td>1171</td>
-      <td>腫種踵歱㣫喠</td>
-      <td>1191</td>
-      <td>𢃭𢃓</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>旨</td>
-      <td>開</td>
-      <td>3</td>
-      <td>章</td>
-      <td>1251</td>
-      <td>旨指恉祁䛗厎砥茋</td>
-      <td>1281</td>
-      <td>𧿲</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>海</td>
-      <td>開</td>
-      <td>1</td>
-      <td>滂</td>
-      <td>1452</td>
-      <td>啡</td>
-      <td>1458</td>
-      <td>俖朏</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>海</td>
-      <td>開</td>
-      <td>1</td>
-      <td>以</td>
-      <td>1460</td>
-      <td>佁</td>
-      <td>1464</td>
-      <td>䑂𦚪</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>準</td>
-      <td>合</td>
-      <td>3</td>
-      <td>日</td>
-      <td>1487</td>
-      <td>蝡</td>
-      <td>1492</td>
-      <td>𣯍</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>阮</td>
-      <td>開</td>
-      <td>3</td>
-      <td>疑</td>
-      <td>1521</td>
-      <td>𧥜巘𪗛屵</td>
-      <td>2609</td>
-      <td>𤬝鬳</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>旱</td>
-      <td>開</td>
-      <td>1</td>
-      <td>透</td>
-      <td>1552</td>
-      <td>坦䦔</td>
-      <td>2635</td>
-      <td>炭歎嘆湠𣁗㛶</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>小</td>
-      <td>開</td>
-      <td>3</td>
-      <td>章</td>
-      <td>1678</td>
-      <td>沼菬䈃</td>
-      <td>2769</td>
-      <td>照炤詔𨹸𠧙</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>馬</td>
-      <td>開</td>
-      <td>2</td>
-      <td>知</td>
-      <td>1789</td>
-      <td>觰</td>
-      <td>1792</td>
-      <td>䋾</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>養</td>
-      <td>開</td>
-      <td>3</td>
-      <td>初</td>
-      <td>1807</td>
-      <td>磢㼽𠞮搶漺愴</td>
-      <td>1831</td>
-      <td>䫪傸</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>養</td>
-      <td>合</td>
-      <td>3</td>
-      <td>見</td>
-      <td>1816</td>
-      <td>獷</td>
-      <td>1829</td>
-      <td>臩迋𠏤逛</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>有</td>
-      <td>開</td>
-      <td>3</td>
-      <td>滂</td>
-      <td>1950</td>
-      <td>㤱紑𩂆</td>
-      <td>1954</td>
-      <td>秠</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>豏</td>
-      <td>開</td>
-      <td>2</td>
-      <td>曉</td>
-      <td>2073</td>
-      <td>闞欦</td>
-      <td>2076</td>
-      <td>喊</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>至A</td>
-      <td>合</td>
-      <td>3</td>
-      <td>曉</td>
-      <td>2234</td>
-      <td>䁤婎睢</td>
-      <td>2245</td>
-      <td>侐</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>廢</td>
-      <td>合</td>
-      <td>3</td>
-      <td>曉</td>
-      <td>2421</td>
-      <td>䂕</td>
-      <td>2548</td>
-      <td>喙𤸁𣨶𧾣餯顪</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>泰</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2444</td>
-      <td>襊𨅎𥨒</td>
-      <td>2452</td>
-      <td>𦦣</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>卦</td>
-      <td>開</td>
-      <td>2</td>
-      <td>幫</td>
-      <td>2462</td>
-      <td>庍</td>
-      <td>2470</td>
-      <td>㠔</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>隊</td>
-      <td>合</td>
-      <td>1</td>
-      <td>匣</td>
-      <td>2520</td>
-      <td>潰迴繢嬇殨闠䔇螝詯膭僓䜋䛛</td>
-      <td>2527</td>
-      <td>蚚</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>願</td>
-      <td>合</td>
-      <td>3</td>
-      <td>滂</td>
-      <td>2601</td>
-      <td>嬔㽹𨠒𡗹𣀔㤆婏𡚪㪻汳</td>
-      <td>2607</td>
-      <td>𣀔</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>過</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2843</td>
-      <td>剉莝銼</td>
-      <td>2849</td>
-      <td>諎𢯽</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>過</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2843</td>
-      <td>剉莝銼</td>
-      <td>2855</td>
-      <td>磋</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>過</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2849</td>
-      <td>諎𢯽</td>
-      <td>2855</td>
-      <td>磋</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>㮇</td>
-      <td>開</td>
-      <td>4</td>
-      <td>見</td>
-      <td>3148</td>
-      <td>趝</td>
-      <td>3152</td>
-      <td>兼䱤</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>釅</td>
-      <td>開</td>
-      <td>3</td>
-      <td>溪</td>
-      <td>3157</td>
-      <td>㪁𤬯</td>
-      <td>3181</td>
-      <td>欠㐸</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>質</td>
-      <td>開</td>
-      <td>3</td>
-      <td>知</td>
-      <td>3300</td>
-      <td>窒挃庢銍秷𦤻㲳㗧𪗻𨖹螲𥎹</td>
-      <td>3321</td>
-      <td>蛭</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>櫛</td>
-      <td>開</td>
-      <td>3</td>
-      <td>崇</td>
-      <td>3312</td>
-      <td>𪗨</td>
-      <td>3339</td>
-      <td>𪗨</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>術</td>
-      <td>合</td>
-      <td>3</td>
-      <td>知</td>
-      <td>3318</td>
-      <td>茁</td>
-      <td>3331</td>
-      <td>㤕窋絀䂐㑁逫𡢑泏</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>沒</td>
-      <td>合</td>
-      <td>1</td>
-      <td>透</td>
-      <td>3373</td>
-      <td>𣅝</td>
-      <td>3377</td>
-      <td>宊棁𠫓𡿮㥆䠈</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>薛</td>
-      <td>合</td>
-      <td>3</td>
-      <td>昌</td>
-      <td>3513</td>
-      <td>歠啜</td>
-      <td>3534</td>
-      <td>啜</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>職</td>
-      <td>開</td>
-      <td>3</td>
-      <td>知</td>
-      <td>3698</td>
-      <td>陟稙</td>
-      <td>3722</td>
-      <td>𡮞𣮊𢕚</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>合</td>
-      <td>開</td>
-      <td>1</td>
-      <td>影</td>
-      <td>3787</td>
-      <td>姶𤸱罨罯媕㔩庵𨂁𩋊𩇠搕鞥佮</td>
-      <td>3792</td>
-      <td>唈</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>盍</td>
-      <td>開</td>
-      <td>1</td>
-      <td>見</td>
-      <td>3803</td>
-      <td>䫦𧪞嗑蓋閘鉀䗘𨜴</td>
-      <td>3807</td>
-      <td>砝𪁍</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>怗</td>
-      <td>開</td>
-      <td>4</td>
-      <td>心</td>
-      <td>3836</td>
-      <td>燮屧屟躞韘𤫉𤏻鞢徢𦔼𤗈蜨𧕊䕈𡞘𦩌</td>
-      <td>3842</td>
-      <td>䢡</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#26377;&#30456;&#21516;&#21453;&#20999;&#30340;&#23567;&#38907;">&#26377;&#30456;&#21516;&#21453;&#20999;&#30340;&#23567;&#38907;<a class="anchor-link" href="#&#26377;&#30456;&#21516;&#21453;&#20999;&#30340;&#23567;&#38907;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT upper_char || lower_char AS &#39;fanqie&#39;,</span>
-<span class="s1">GROUP_CONCAT(id || small_rhyme) AS &#39;small_rhymes&#39;</span>
-<span class="s1">FROM full_small_rhymes</span>
-<span class="s1">WHERE upper_char IS NOT NULL</span>
-<span class="s1">GROUP BY upper_char, lower_char</span>
-<span class="s1">HAVING COUNT(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[6]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>fanqie</th>
-      <th>small_rhymes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>丘弭</td>
-      <td>1241跬,1248企</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>之少</td>
-      <td>1678沼,2769照</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>古伯</td>
-      <td>3618格,3621虢</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>古賣</td>
-      <td>2453卦,2491夬</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>士免</td>
-      <td>1653撰,1663棧</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>居乙</td>
-      <td>3320曁,3352訖</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>烏浪</td>
-      <td>2928盎,2945汪</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>芳万</td>
-      <td>2601嬔,2607𣀔</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>苦蓋</td>
-      <td>2446磕,2534慨</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19978;&#23383;">&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19978;&#23383;<a class="anchor-link" href="#&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19978;&#23383;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT upper_char, small_rhyme_id, small_rhyme_descr, fanqie</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE upper_char NOT IN</span>
-<span class="s1">(SELECT name FROM full_char_entities)</span>
-<span class="s1">GROUP BY upper_char;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[7]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>upper_char</th>
-      <th>small_rhyme_id</th>
-      <th>small_rhyme_descr</th>
-      <th>fanqie</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>呂</td>
-      <td>76</td>
-      <td>來開二江平</td>
-      <td>呂江切</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>奇</td>
-      <td>2165</td>
-      <td>羣開三寘B去</td>
-      <td>奇寄切</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>妳</td>
-      <td>332</td>
-      <td>孃開二佳平</td>
-      <td>妳佳切</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>姉</td>
-      <td>3529</td>
-      <td>精開三薛入</td>
-      <td>姉列切</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>姊</td>
-      <td>133</td>
-      <td>精開三支平</td>
-      <td>姊移切</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>查</td>
-      <td>3464</td>
-      <td>崇開二黠入</td>
-      <td>查鎋切</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>犲</td>
-      <td>2507</td>
-      <td>崇開二夬去</td>
-      <td>犲夬切</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>疏</td>
-      <td>146</td>
-      <td>生開三脂平</td>
-      <td>疏夷切</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>青</td>
-      <td>2059</td>
-      <td>清開四忝上</td>
-      <td>青忝切</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19979;&#23383;">&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19979;&#23383;<a class="anchor-link" href="#&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19979;&#23383;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT lower_char, small_rhyme_id, small_rhyme_descr, fanqie</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE lower_char NOT IN</span>
-<span class="s1">(SELECT name FROM full_char_entities)</span>
-<span class="s1">GROUP BY lower_char;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>lower_char</th>
-      <th>small_rhyme_id</th>
-      <th>small_rhyme_descr</th>
-      <th>fanqie</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>候</td>
-      <td>3064</td>
-      <td>溪開一候去</td>
-      <td>苦候切</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>劒</td>
-      <td>3158</td>
-      <td>明合三范去</td>
-      <td>亡劒切</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>卧</td>
-      <td>2837</td>
-      <td>見合一過去</td>
-      <td>古卧切</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>奇</td>
-      <td>107</td>
-      <td>溪開三支B平</td>
-      <td>去奇切</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>姊</td>
-      <td>1255</td>
-      <td>邪開三旨上</td>
-      <td>徐姊切</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>彦</td>
-      <td>2753</td>
-      <td>來開三線去</td>
-      <td>連彦切</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>樣</td>
-      <td>2896</td>
-      <td>日開三漾去</td>
-      <td>人樣切</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>狶</td>
-      <td>1313</td>
-      <td>溪開三尾上</td>
-      <td>袪狶切</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>笑</td>
-      <td>2771</td>
-      <td>影開三笑A去</td>
-      <td>於笑切</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>耗</td>
-      <td>2817</td>
-      <td>幫開一号去</td>
-      <td>博耗切</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>葅</td>
-      <td>236</td>
-      <td>生開三魚平</td>
-      <td>所葅切</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>衛</td>
-      <td>2392</td>
-      <td>知合三祭去</td>
-      <td>陟衛切</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>賓</td>
-      <td>421</td>
-      <td>滂開三眞A平</td>
-      <td>匹賓切</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>賺</td>
-      <td>3167</td>
-      <td>孃開二陷去</td>
-      <td>尼賺切</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>閏</td>
-      <td>2574</td>
-      <td>章合三稕去</td>
-      <td>之閏切</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>顔</td>
-      <td>547</td>
-      <td>見開二刪平</td>
-      <td>古顔切</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>魂</td>
-      <td>500</td>
-      <td>滂合一魂平</td>
-      <td>普魂切</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#38263;&#24230;&#22823;&#26044;-1-&#30340;&#23383;">&#38263;&#24230;&#22823;&#26044; 1 &#30340;&#23383;<a class="anchor-link" href="#&#38263;&#24230;&#22823;&#26044;-1-&#30340;&#23383;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, num_in_small_rhyme, name, explanation</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE LENGTH(name) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[9]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>small_rhyme_descr</th>
-      <th>num_in_small_rhyme</th>
-      <th>name</th>
-      <th>explanation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>從開四先平</td>
-      <td>6</td>
-      <td>⿱𥫗瀸</td>
-      <td>上同</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>章開三靜上</td>
-      <td>2</td>
-      <td>⿱⿰来攵正</td>
-      <td>俗</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>溪開二覺入</td>
-      <td>15</td>
-      <td>⿰隺犬</td>
-      <td>至也髙也</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>清開三質入</td>
-      <td>7</td>
-      <td>⌸艹大雨</td>
-      <td>俗</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>孃開三葉入</td>
-      <td>4</td>
-      <td>⿱入疌</td>
-      <td>織⿱入?疌</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
