@@ -13188,13 +13188,7 @@ div#notebook {
 <span class="s1">WHEN &#39;2&#39; THEN &#39;二&#39;</span>
 <span class="s1">WHEN &#39;3&#39; THEN &#39;三&#39;</span>
 <span class="s1">ELSE &#39;四&#39;</span>
-<span class="s1">END ||</span>
-<span class="s1">CASE tone</span>
-<span class="s1">WHEN 1 THEN &#39;平&#39;</span>
-<span class="s1">WHEN 2 THEN &#39;上&#39;</span>
-<span class="s1">WHEN 3 THEN &#39;去&#39;</span>
-<span class="s1">ELSE &#39;入&#39;</span>
-<span class="s1">END AS &#39;small_rhymes&#39;, initial, MIN(name) as &#39;name&#39;</span>
+<span class="s1">END || tone AS &#39;small_rhymes&#39;, initial, MIN(name) as &#39;name&#39;</span>
 <span class="s1">FROM full_guangyun</span>
 <span class="s1">GROUP BY small_rhymes, initial</span>
 <span class="s1">ORDER BY small_rhyme_id;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>

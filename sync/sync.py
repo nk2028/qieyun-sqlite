@@ -41,18 +41,17 @@ cur = conn.cursor()
 ## Emplace core_rhymes
 
 cur.execute('''
-CREATE TABLE 'core_rhymes'        -- 韻
-( 'name' TEXT PRIMARY KEY         -- 韻
-, 'tone' INTEGER NOT NULL         -- 聲調（1-4）
+CREATE TABLE 'core_rhymes'     -- 韻
+( 'name' TEXT PRIMARY KEY      -- 韻
+, 'tone' TEXT NOT NULL         -- 聲調
 CHECK
-(   tone >= 1
-AND tone <= 4
+(   tone IN ('平', '上', '去', '入')
 )
 );
 ''')
 
 data_rhyme = pandas.read_csv('sync/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '聲調'])
-cur.executemany('INSERT INTO core_rhymes VALUES (?, ?)', zip(data_rhyme['#韻目'], data_rhyme['聲調']))
+cur.executemany('INSERT INTO core_rhymes VALUES (?, ?)', zip(data_rhyme['#韻目'], data_rhyme['聲調'].apply(lambda i: '平上去入'[i - 1])))
 
 ## Emplace TEMP core_small_rhyme_1
 
@@ -135,9 +134,6 @@ CREATE TABLE 'core_char_entities'                                       -- 字�
 data_char_entity = pandas.read_csv('sync/Dzih.txt', sep=' ', na_filter=False, header=None, names=['Name', 'SmallRhymeId', 'NumInSmallRhyme', 'Explanation'])
 cur.executemany('INSERT INTO core_char_entities VALUES (?, ?, ?, ?)', zip(data_char_entity['SmallRhymeId'], data_char_entity['NumInSmallRhyme'], data_char_entity['Name'], data_char_entity['Explanation']))
 
-cur.execute('CREATE INDEX idx_core_small_rhymes_upper_char on core_small_rhymes (upper_char);')
-cur.execute('CREATE INDEX idx_core_small_rhymes_lower_char on core_small_rhymes (lower_char);')
-
 # Emplace knowledge
 
 ## Emplace extd_rhymes
@@ -196,6 +192,50 @@ data_extd_small_rhyme = pandas.read_csv('sync/PrengQim.txt', sep=' ', keep_defau
 data_extd_small_rhyme2 = pandas.read_csv('sync/Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
 cur.executemany('INSERT INTO extd_small_rhymes VALUES (?, ?, ?, ?, ?, ?)', zip(data_extd_small_rhyme['#序號'], data_extd_small_rhyme['古韻'], data_extd_small_rhyme['有女'], data_extd_small_rhyme['Baxter'], data_extd_small_rhyme2['推導中州音'], data_extd_small_rhyme2['推導普通話']))
 
+## Emplace extd_initials
+
+cur.execute('''
+CREATE TABLE extd_initials
+AS SELECT 0 AS id, '見' AS initial UNION
+SELECT 1, '溪' UNION
+SELECT 2, '羣' UNION
+SELECT 3, '疑' UNION
+SELECT 4, '端' UNION
+SELECT 5, '透' UNION
+SELECT 6, '定' UNION
+SELECT 7, '泥' UNION
+SELECT 8, '知' UNION
+SELECT 9, '徹' UNION
+SELECT 10, '澄' UNION
+SELECT 11, '孃' UNION
+SELECT 12, '幫' UNION
+SELECT 13, '滂' UNION
+SELECT 14, '並' UNION
+SELECT 15, '明' UNION
+SELECT 16, '精' UNION
+SELECT 17, '清' UNION
+SELECT 18, '從' UNION
+SELECT 19, '心' UNION
+SELECT 20, '邪' UNION
+SELECT 21, '莊' UNION
+SELECT 22, '初' UNION
+SELECT 23, '崇' UNION
+SELECT 24, '生' UNION
+SELECT 25, '俟' UNION
+SELECT 26, '章' UNION
+SELECT 27, '昌' UNION
+SELECT 28, '船' UNION
+SELECT 29, '書' UNION
+SELECT 30, '常' UNION
+SELECT 31, '影' UNION
+SELECT 32, '曉' UNION
+SELECT 33, '匣' UNION
+SELECT 34, '云' UNION
+SELECT 35, '以' UNION
+SELECT 36, '來' UNION
+SELECT 37, '日';
+''')
+
 # Create views
 
 ## full_rhymes
@@ -213,10 +253,12 @@ AND rhyme_group = of_rhyme_group;
 
 cur.execute('''
 CREATE VIEW full_small_rhymes AS
-SELECT id, name AS small_rhyme, of_rhyme, initial, rounding, division,
+SELECT core_small_rhymes.id AS id, name AS small_rhyme, of_rhyme,
+extd_initials.id AS initial_id, core_small_rhymes.initial, rounding, division,
 upper_char, lower_char, guyun, younu, baxter, zhongzhou, putonghua
-FROM core_small_rhymes, extd_small_rhymes
-WHERE id = of_small_rhyme;
+FROM core_small_rhymes JOIN extd_small_rhymes JOIN extd_initials
+ON core_small_rhymes.id = of_small_rhyme
+AND core_small_rhymes.initial = extd_initials.initial;
 ''')
 
 ## full_char_entities
@@ -232,20 +274,14 @@ FROM core_char_entities;
 cur.execute('''
 CREATE VIEW full_guangyun AS
 SELECT rhyme, tone, subgroup, rhyme_group, class, id as 'small_rhyme_id', small_rhyme,
-initial, rounding, division, upper_char, lower_char, num_in_small_rhyme,
+initial_id, initial, rounding, division, upper_char, lower_char, num_in_small_rhyme,
 initial || rounding ||
 CASE division
 WHEN '1' THEN '一'
 WHEN '2' THEN '二'
 WHEN '3' THEN '三'
 ELSE '四'
-END || rhyme ||
-CASE tone
-WHEN 1 THEN '平'
-WHEN 2 THEN '上'
-WHEN 3 THEN '去'
-ELSE '入'
-END AS 'small_rhyme_descr',
+END || rhyme || tone AS 'small_rhyme_descr',
 upper_char || lower_char || '切' AS 'fanqie',
 name, explanation
 FROM full_rhymes JOIN full_small_rhymes JOIN full_char_entities
@@ -256,4 +292,5 @@ ON rhyme = of_rhyme AND id = of_small_rhyme;
 
 cur.close()
 conn.commit()
+conn.execute('VACUUM')
 conn.close()

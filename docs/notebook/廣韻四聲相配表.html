@@ -13180,13 +13180,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT rhyme_group,</span>
-<span class="s1">CASE tone</span>
-<span class="s1">WHEN 1 THEN &#39;平&#39;</span>
-<span class="s1">WHEN 2 THEN &#39;上&#39;</span>
-<span class="s1">WHEN 3 THEN &#39;去&#39;</span>
-<span class="s1">WHEN 4 THEN &#39;入&#39;</span>
-<span class="s1">END AS tone, rhyme</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT rhyme_group, tone, rhyme</span>
 <span class="s1">FROM full_guangyun;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
