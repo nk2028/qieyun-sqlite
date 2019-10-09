@@ -281,7 +281,7 @@ WHEN '1' THEN '一'
 WHEN '2' THEN '二'
 WHEN '3' THEN '三'
 ELSE '四'
-END || rhyme || tone AS 'small_rhyme_descr',
+END || rhyme AS 'small_rhyme_descr',
 upper_char || lower_char || '切' AS 'fanqie',
 name, explanation
 FROM full_rhymes JOIN full_small_rhymes JOIN full_char_entities

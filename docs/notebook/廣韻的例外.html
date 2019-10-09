@@ -13210,14 +13210,14 @@ div#notebook {
   <tbody>
     <tr>
       <th>0</th>
-      <td>章開三拯上</td>
+      <td>章開三拯</td>
       <td>None</td>
       <td>None</td>
       <td>拯抍撜𨋬氶</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>影開二鑑去</td>
+      <td>影開二鑑</td>
       <td>None</td>
       <td>None</td>
       <td>𪒠</td>
@@ -13295,21 +13295,21 @@ div#notebook {
     <tr>
       <th>0</th>
       <td>䱱</td>
-      <td>定開四齊平</td>
+      <td>定開四齊</td>
       <td>杜奚切</td>
       <td>29,38</td>
     </tr>
     <tr>
       <th>1</th>
       <td>縝</td>
-      <td>章開三軫上</td>
+      <td>章開三軫</td>
       <td>章忍切</td>
       <td>2,11</td>
     </tr>
     <tr>
       <th>2</th>
       <td>駛</td>
-      <td>生開三志去</td>
+      <td>生開三志</td>
       <td>踈吏切</td>
       <td>1,2</td>
     </tr>
@@ -13336,21 +13336,13 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT *</span>
-<span class="s1">FROM</span>
-<span class="s1">(SELECT rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id, GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, GROUP_CONCAT(small_rhyme_id || names) AS &#39;small_rhymes&#39;</span>
+<span class="s1">FROM (SELECT small_rhyme_descr, small_rhyme_id, GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
 <span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id) AS A</span>
-<span class="s1">JOIN</span>
-<span class="s1">(SELECT rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id, GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY rhyme, rounding, division,</span>
-<span class="s1">initial, small_rhyme_id) AS B</span>
-<span class="s1">USING (rhyme, rounding, division, initial)</span>
-<span class="s1">WHERE A.small_rhyme_id &lt; B.small_rhyme_id;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="s1">GROUP BY small_rhyme_descr, small_rhyme_id)</span>
+<span class="s1">GROUP BY small_rhyme_descr</span>
+<span class="s1">HAVING COUNT(*) &gt; 1</span>
+<span class="s1">ORDER BY small_rhyme_id;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13386,478 +13378,210 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>rhyme</th>
-      <th>rounding</th>
-      <th>division</th>
-      <th>initial</th>
-      <th>small_rhyme_id</th>
-      <th>names</th>
-      <th>small_rhyme_id</th>
-      <th>names</th>
+      <th>small_rhyme_descr</th>
+      <th>small_rhymes</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>支</td>
-      <td>開</td>
-      <td>3</td>
-      <td>精</td>
-      <td>114</td>
-      <td>貲頿鴜𪕊鮆訾鄑㠿媊𨚖㰣鈭姕𦺱䖪觜</td>
-      <td>133</td>
-      <td>厜觜纗惢嫢㭰</td>
+      <td>精開三支</td>
+      <td>114貲頿鴜𪕊鮆訾鄑㠿媊𨚖㰣鈭姕𦺱䖪觜,133厜觜纗惢嫢㭰</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>支</td>
-      <td>合</td>
-      <td>3</td>
-      <td>精</td>
-      <td>135</td>
-      <td>劑㭰𦸺臇𤎱㷷</td>
-      <td>138</td>
-      <td>䮔</td>
+      <td>精合三支</td>
+      <td>135劑㭰𦸺臇𤎱㷷,138䮔</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>之</td>
-      <td>開</td>
-      <td>3</td>
-      <td>書</td>
-      <td>193</td>
-      <td>詩邿齝𪗪呞䀢</td>
-      <td>210</td>
-      <td>䀵</td>
+      <td>書開三之</td>
+      <td>193詩邿齝𪗪呞䀢,210䀵</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>之</td>
-      <td>開</td>
-      <td>3</td>
-      <td>溪</td>
-      <td>195</td>
-      <td>欺娸䫥䫏𠐾魌僛𪅾𪀩䶞抾</td>
-      <td>209</td>
-      <td>抾</td>
+      <td>溪開三之</td>
+      <td>195欺娸䫥䫏𠐾魌僛𪅾𪀩䶞抾,209抾</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>刪</td>
-      <td>開</td>
-      <td>2</td>
-      <td>溪</td>
-      <td>551</td>
-      <td>馯</td>
-      <td>552</td>
-      <td>豻鬜</td>
+      <td>溪開二刪</td>
+      <td>551馯,552豻鬜</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>麻</td>
-      <td>開</td>
-      <td>2</td>
-      <td>溪</td>
-      <td>798</td>
-      <td>䶗㤉𡤫</td>
-      <td>804</td>
-      <td>𣘟</td>
+      <td>溪開二麻</td>
+      <td>798䶗㤉𡤫,804𣘟</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>耕</td>
-      <td>開</td>
-      <td>2</td>
-      <td>幫</td>
-      <td>892</td>
-      <td>浜捠</td>
-      <td>902</td>
-      <td>繃絣𢆸拼䑫</td>
+      <td>幫開二耕</td>
+      <td>892浜捠,902繃絣𢆸拼䑫</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>尤</td>
-      <td>開</td>
-      <td>3</td>
-      <td>溪</td>
-      <td>996</td>
-      <td>恘惆㲃</td>
-      <td>1002</td>
-      <td>丘丠蓲蚯邱訄</td>
+      <td>溪開三尤</td>
+      <td>996恘惆㲃,1002丘丠蓲蚯邱訄</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>談</td>
-      <td>開</td>
-      <td>1</td>
-      <td>從</td>
-      <td>1094</td>
-      <td>慙慚鏨䳻㨻</td>
-      <td>1097</td>
-      <td>𩈻</td>
+      <td>從開一談</td>
+      <td>1094慙慚鏨䳻㨻,1097𩈻</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>腫</td>
-      <td>開</td>
-      <td>3</td>
-      <td>章</td>
-      <td>1171</td>
-      <td>腫種踵歱㣫喠</td>
-      <td>1191</td>
-      <td>𢃭𢃓</td>
+      <td>章開三腫</td>
+      <td>1171腫種踵歱㣫喠,1191𢃭𢃓</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>旨</td>
-      <td>開</td>
-      <td>3</td>
-      <td>章</td>
-      <td>1251</td>
-      <td>旨指恉祁䛗厎砥茋</td>
-      <td>1281</td>
-      <td>𧿲</td>
+      <td>章開三旨</td>
+      <td>1251旨指恉祁䛗厎砥茋,1281𧿲</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>海</td>
-      <td>開</td>
-      <td>1</td>
-      <td>滂</td>
-      <td>1452</td>
-      <td>啡</td>
-      <td>1458</td>
-      <td>俖朏</td>
+      <td>滂開一海</td>
+      <td>1452啡,1458俖朏</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>海</td>
-      <td>開</td>
-      <td>1</td>
-      <td>以</td>
-      <td>1460</td>
-      <td>佁</td>
-      <td>1464</td>
-      <td>䑂𦚪</td>
+      <td>以開一海</td>
+      <td>1460佁,1464䑂𦚪</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>準</td>
-      <td>合</td>
-      <td>3</td>
-      <td>日</td>
-      <td>1487</td>
-      <td>蝡</td>
-      <td>1492</td>
-      <td>𣯍</td>
+      <td>日合三準</td>
+      <td>1487蝡,1492𣯍</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>阮</td>
-      <td>開</td>
-      <td>3</td>
-      <td>疑</td>
-      <td>1521</td>
-      <td>𧥜巘𪗛屵</td>
-      <td>2609</td>
-      <td>𤬝鬳</td>
+      <td>疑開三阮</td>
+      <td>1521𧥜巘𪗛屵,2609𤬝鬳</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>旱</td>
-      <td>開</td>
-      <td>1</td>
-      <td>透</td>
-      <td>1552</td>
-      <td>坦䦔</td>
-      <td>2635</td>
-      <td>炭歎嘆湠𣁗㛶</td>
+      <td>透開一旱</td>
+      <td>1552坦䦔,2635炭歎嘆湠𣁗㛶</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>小</td>
-      <td>開</td>
-      <td>3</td>
-      <td>章</td>
-      <td>1678</td>
-      <td>沼菬䈃</td>
-      <td>2769</td>
-      <td>照炤詔𨹸𠧙</td>
+      <td>章開三小</td>
+      <td>1678沼菬䈃,2769照炤詔𨹸𠧙</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>馬</td>
-      <td>開</td>
-      <td>2</td>
-      <td>知</td>
-      <td>1789</td>
-      <td>觰</td>
-      <td>1792</td>
-      <td>䋾</td>
+      <td>知開二馬</td>
+      <td>1789觰,1792䋾</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>養</td>
-      <td>開</td>
-      <td>3</td>
-      <td>初</td>
-      <td>1807</td>
-      <td>磢㼽𠞮搶漺愴</td>
-      <td>1831</td>
-      <td>䫪傸</td>
+      <td>初開三養</td>
+      <td>1807磢㼽𠞮搶漺愴,1831䫪傸</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>養</td>
-      <td>合</td>
-      <td>3</td>
-      <td>見</td>
-      <td>1816</td>
-      <td>獷</td>
-      <td>1829</td>
-      <td>臩迋𠏤逛</td>
+      <td>見合三養</td>
+      <td>1816獷,1829臩迋𠏤逛</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>有</td>
-      <td>開</td>
-      <td>3</td>
-      <td>滂</td>
-      <td>1950</td>
-      <td>㤱紑𩂆</td>
-      <td>1954</td>
-      <td>秠</td>
+      <td>滂開三有</td>
+      <td>1950㤱紑𩂆,1954秠</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>豏</td>
-      <td>開</td>
-      <td>2</td>
-      <td>曉</td>
-      <td>2073</td>
-      <td>闞欦</td>
-      <td>2076</td>
-      <td>喊</td>
+      <td>曉開二豏</td>
+      <td>2073闞欦,2076喊</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>至A</td>
-      <td>合</td>
-      <td>3</td>
-      <td>曉</td>
-      <td>2234</td>
-      <td>䁤婎睢</td>
-      <td>2245</td>
-      <td>侐</td>
+      <td>曉合三至A</td>
+      <td>2234䁤婎睢,2245侐</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>廢</td>
-      <td>合</td>
-      <td>3</td>
-      <td>曉</td>
-      <td>2421</td>
-      <td>䂕</td>
-      <td>2548</td>
-      <td>喙𤸁𣨶𧾣餯顪</td>
+      <td>曉合三廢</td>
+      <td>2421䂕,2548喙𤸁𣨶𧾣餯顪</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>泰</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2444</td>
-      <td>襊𨅎𥨒</td>
-      <td>2452</td>
-      <td>𦦣</td>
+      <td>清合一泰</td>
+      <td>2444襊𨅎𥨒,2452𦦣</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>卦</td>
-      <td>開</td>
-      <td>2</td>
-      <td>幫</td>
-      <td>2462</td>
-      <td>庍</td>
-      <td>2470</td>
-      <td>㠔</td>
+      <td>幫開二卦</td>
+      <td>2462庍,2470㠔</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>隊</td>
-      <td>合</td>
-      <td>1</td>
-      <td>匣</td>
-      <td>2520</td>
-      <td>潰迴繢嬇殨闠䔇螝詯膭僓䜋䛛</td>
-      <td>2527</td>
-      <td>蚚</td>
+      <td>匣合一隊</td>
+      <td>2520潰迴繢嬇殨闠䔇螝詯膭僓䜋䛛,2527蚚</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>願</td>
-      <td>合</td>
-      <td>3</td>
-      <td>滂</td>
-      <td>2601</td>
-      <td>嬔㽹𨠒𡗹𣀔㤆婏𡚪㪻汳</td>
-      <td>2607</td>
-      <td>𣀔</td>
+      <td>滂合三願</td>
+      <td>2601嬔㽹𨠒𡗹𣀔㤆婏𡚪㪻汳,2607𣀔</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>過</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2843</td>
-      <td>剉莝銼</td>
-      <td>2849</td>
-      <td>諎𢯽</td>
+      <td>清合一過</td>
+      <td>2843剉莝銼,2849諎𢯽,2855磋</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>過</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2843</td>
-      <td>剉莝銼</td>
-      <td>2855</td>
-      <td>磋</td>
+      <td>見開四㮇</td>
+      <td>3148趝,3152兼䱤</td>
     </tr>
     <tr>
       <th>30</th>
-      <td>過</td>
-      <td>合</td>
-      <td>1</td>
-      <td>清</td>
-      <td>2849</td>
-      <td>諎𢯽</td>
-      <td>2855</td>
-      <td>磋</td>
+      <td>溪開三釅</td>
+      <td>3157㪁𤬯,3181欠㐸</td>
     </tr>
     <tr>
       <th>31</th>
-      <td>㮇</td>
-      <td>開</td>
-      <td>4</td>
-      <td>見</td>
-      <td>3148</td>
-      <td>趝</td>
-      <td>3152</td>
-      <td>兼䱤</td>
+      <td>知開三質</td>
+      <td>3300窒挃庢銍秷𦤻㲳㗧𪗻𨖹螲𥎹,3321蛭</td>
     </tr>
     <tr>
       <th>32</th>
-      <td>釅</td>
-      <td>開</td>
-      <td>3</td>
-      <td>溪</td>
-      <td>3157</td>
-      <td>㪁𤬯</td>
-      <td>3181</td>
-      <td>欠㐸</td>
+      <td>崇開三櫛</td>
+      <td>3312𪗨,3339𪗨</td>
     </tr>
     <tr>
       <th>33</th>
-      <td>質</td>
-      <td>開</td>
-      <td>3</td>
-      <td>知</td>
-      <td>3300</td>
-      <td>窒挃庢銍秷𦤻㲳㗧𪗻𨖹螲𥎹</td>
-      <td>3321</td>
-      <td>蛭</td>
+      <td>知合三術</td>
+      <td>3318茁,3331㤕窋絀䂐㑁逫𡢑泏</td>
     </tr>
     <tr>
       <th>34</th>
-      <td>櫛</td>
-      <td>開</td>
-      <td>3</td>
-      <td>崇</td>
-      <td>3312</td>
-      <td>𪗨</td>
-      <td>3339</td>
-      <td>𪗨</td>
+      <td>透合一沒</td>
+      <td>3373𣅝,3377宊棁𠫓𡿮㥆䠈</td>
     </tr>
     <tr>
       <th>35</th>
-      <td>術</td>
-      <td>合</td>
-      <td>3</td>
-      <td>知</td>
-      <td>3318</td>
-      <td>茁</td>
-      <td>3331</td>
-      <td>㤕窋絀䂐㑁逫𡢑泏</td>
+      <td>昌合三薛</td>
+      <td>3513歠啜,3534啜</td>
     </tr>
     <tr>
       <th>36</th>
-      <td>沒</td>
-      <td>合</td>
-      <td>1</td>
-      <td>透</td>
-      <td>3373</td>
-      <td>𣅝</td>
-      <td>3377</td>
-      <td>宊棁𠫓𡿮㥆䠈</td>
+      <td>知開三職</td>
+      <td>3698陟稙,3722𡮞𣮊𢕚</td>
     </tr>
     <tr>
       <th>37</th>
-      <td>薛</td>
-      <td>合</td>
-      <td>3</td>
-      <td>昌</td>
-      <td>3513</td>
-      <td>歠啜</td>
-      <td>3534</td>
-      <td>啜</td>
+      <td>影開一合</td>
+      <td>3787姶𤸱罨罯媕㔩庵𨂁𩋊𩇠搕鞥佮,3792唈</td>
     </tr>
     <tr>
       <th>38</th>
-      <td>職</td>
-      <td>開</td>
-      <td>3</td>
-      <td>知</td>
-      <td>3698</td>
-      <td>陟稙</td>
-      <td>3722</td>
-      <td>𡮞𣮊𢕚</td>
+      <td>見開一盍</td>
+      <td>3803䫦𧪞嗑蓋閘鉀䗘𨜴,3807砝𪁍</td>
     </tr>
     <tr>
       <th>39</th>
-      <td>合</td>
-      <td>開</td>
-      <td>1</td>
-      <td>影</td>
-      <td>3787</td>
-      <td>姶𤸱罨罯媕㔩庵𨂁𩋊𩇠搕鞥佮</td>
-      <td>3792</td>
-      <td>唈</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>盍</td>
-      <td>開</td>
-      <td>1</td>
-      <td>見</td>
-      <td>3803</td>
-      <td>䫦𧪞嗑蓋閘鉀䗘𨜴</td>
-      <td>3807</td>
-      <td>砝𪁍</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>怗</td>
-      <td>開</td>
-      <td>4</td>
-      <td>心</td>
-      <td>3836</td>
-      <td>燮屧屟躞韘𤫉𤏻鞢徢𦔼𤗈蜨𧕊䕈𡞘𦩌</td>
-      <td>3842</td>
-      <td>䢡</td>
+      <td>心開四怗</td>
+      <td>3836燮屧屟躞韘𤫉𤏻鞢徢𦔼𤗈蜨𧕊䕈𡞘𦩌,3842䢡</td>
     </tr>
   </tbody>
 </table>
@@ -14047,63 +13771,63 @@ div#notebook {
       <th>0</th>
       <td>呂</td>
       <td>76</td>
-      <td>來開二江平</td>
+      <td>來開二江</td>
       <td>呂江切</td>
     </tr>
     <tr>
       <th>1</th>
       <td>奇</td>
       <td>2165</td>
-      <td>羣開三寘B去</td>
+      <td>羣開三寘B</td>
       <td>奇寄切</td>
     </tr>
     <tr>
       <th>2</th>
       <td>妳</td>
       <td>332</td>
-      <td>孃開二佳平</td>
+      <td>孃開二佳</td>
       <td>妳佳切</td>
     </tr>
     <tr>
       <th>3</th>
       <td>姉</td>
       <td>3529</td>
-      <td>精開三薛入</td>
+      <td>精開三薛</td>
       <td>姉列切</td>
     </tr>
     <tr>
       <th>4</th>
       <td>姊</td>
       <td>133</td>
-      <td>精開三支平</td>
+      <td>精開三支</td>
       <td>姊移切</td>
     </tr>
     <tr>
       <th>5</th>
       <td>查</td>
       <td>3464</td>
-      <td>崇開二黠入</td>
+      <td>崇開二黠</td>
       <td>查鎋切</td>
     </tr>
     <tr>
       <th>6</th>
       <td>犲</td>
       <td>2507</td>
-      <td>崇開二夬去</td>
+      <td>崇開二夬</td>
       <td>犲夬切</td>
     </tr>
     <tr>
       <th>7</th>
       <td>疏</td>
       <td>146</td>
-      <td>生開三脂平</td>
+      <td>生開三脂</td>
       <td>疏夷切</td>
     </tr>
     <tr>
       <th>8</th>
       <td>青</td>
       <td>2059</td>
-      <td>清開四忝上</td>
+      <td>清開四忝</td>
       <td>青忝切</td>
     </tr>
   </tbody>
@@ -14180,119 +13904,119 @@ div#notebook {
       <th>0</th>
       <td>候</td>
       <td>3064</td>
-      <td>溪開一候去</td>
+      <td>溪開一候</td>
       <td>苦候切</td>
     </tr>
     <tr>
       <th>1</th>
       <td>劒</td>
       <td>3158</td>
-      <td>明合三范去</td>
+      <td>明合三范</td>
       <td>亡劒切</td>
     </tr>
     <tr>
       <th>2</th>
       <td>卧</td>
       <td>2837</td>
-      <td>見合一過去</td>
+      <td>見合一過</td>
       <td>古卧切</td>
     </tr>
     <tr>
       <th>3</th>
       <td>奇</td>
       <td>107</td>
-      <td>溪開三支B平</td>
+      <td>溪開三支B</td>
       <td>去奇切</td>
     </tr>
     <tr>
       <th>4</th>
       <td>姊</td>
       <td>1255</td>
-      <td>邪開三旨上</td>
+      <td>邪開三旨</td>
       <td>徐姊切</td>
     </tr>
     <tr>
       <th>5</th>
       <td>彦</td>
       <td>2753</td>
-      <td>來開三線去</td>
+      <td>來開三線</td>
       <td>連彦切</td>
     </tr>
     <tr>
       <th>6</th>
       <td>樣</td>
       <td>2896</td>
-      <td>日開三漾去</td>
+      <td>日開三漾</td>
       <td>人樣切</td>
     </tr>
     <tr>
       <th>7</th>
       <td>狶</td>
       <td>1313</td>
-      <td>溪開三尾上</td>
+      <td>溪開三尾</td>
       <td>袪狶切</td>
     </tr>
     <tr>
       <th>8</th>
       <td>笑</td>
       <td>2771</td>
-      <td>影開三笑A去</td>
+      <td>影開三笑A</td>
       <td>於笑切</td>
     </tr>
     <tr>
       <th>9</th>
       <td>耗</td>
       <td>2817</td>
-      <td>幫開一号去</td>
+      <td>幫開一号</td>
       <td>博耗切</td>
     </tr>
     <tr>
       <th>10</th>
       <td>葅</td>
       <td>236</td>
-      <td>生開三魚平</td>
+      <td>生開三魚</td>
       <td>所葅切</td>
     </tr>
     <tr>
       <th>11</th>
       <td>衛</td>
       <td>2392</td>
-      <td>知合三祭去</td>
+      <td>知合三祭</td>
       <td>陟衛切</td>
     </tr>
     <tr>
       <th>12</th>
       <td>賓</td>
       <td>421</td>
-      <td>滂開三眞A平</td>
+      <td>滂開三眞A</td>
       <td>匹賓切</td>
     </tr>
     <tr>
       <th>13</th>
       <td>賺</td>
       <td>3167</td>
-      <td>孃開二陷去</td>
+      <td>孃開二陷</td>
       <td>尼賺切</td>
     </tr>
     <tr>
       <th>14</th>
       <td>閏</td>
       <td>2574</td>
-      <td>章合三稕去</td>
+      <td>章合三稕</td>
       <td>之閏切</td>
     </tr>
     <tr>
       <th>15</th>
       <td>顔</td>
       <td>547</td>
-      <td>見開二刪平</td>
+      <td>見開二刪</td>
       <td>古顔切</td>
     </tr>
     <tr>
       <th>16</th>
       <td>魂</td>
       <td>500</td>
-      <td>滂合一魂平</td>
+      <td>滂合一魂</td>
       <td>普魂切</td>
     </tr>
   </tbody>
@@ -14365,35 +14089,35 @@ div#notebook {
   <tbody>
     <tr>
       <th>0</th>
-      <td>從開四先平</td>
+      <td>從開四先</td>
       <td>6</td>
       <td>⿱𥫗瀸</td>
       <td>上同</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>章開三靜上</td>
+      <td>章開三靜</td>
       <td>2</td>
       <td>⿱⿰来攵正</td>
       <td>俗</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>溪開二覺入</td>
+      <td>溪開二覺</td>
       <td>15</td>
       <td>⿰隺犬</td>
       <td>至也髙也</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>清開三質入</td>
+      <td>清開三質</td>
       <td>7</td>
       <td>⌸艹大雨</td>
       <td>俗</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>孃開三葉入</td>
+      <td>孃開三葉</td>
       <td>4</td>
       <td>⿱入疌</td>
       <td>織⿱入?疌</td>
