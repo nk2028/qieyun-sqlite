@@ -9,7 +9,7 @@ import urllib.request
 
 # Prepare files
 
-def download_file_if_not_exist(name, download_prefix='https://raw.githubusercontent.com/sgalal/ytenx/patch-1/ytenx/sync/kyonh/'):
+def download_file_if_not_exist(name, download_prefix='https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/'):
 	if not os.path.exists(name):
 		urllib.request.urlretrieve(download_prefix + name, name)
 
