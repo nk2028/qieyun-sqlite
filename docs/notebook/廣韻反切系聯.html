@@ -13125,7 +13125,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
 </pre></div>
 
     </div>
@@ -13138,7 +13138,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 </pre></div>
 
     </div>
@@ -13151,7 +13151,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
 </pre></div>
 
     </div>
@@ -13164,32 +13164,6 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;../data.sqlite3&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -13200,7 +13174,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
@@ -13220,7 +13194,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
@@ -13233,7 +13207,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT upper_chars.upper_char, upper_chars_of_upper_chars.upper_char</span>
@@ -13250,7 +13224,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
@@ -13271,28 +13245,346 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>德多得
-時湯余煑識陀鄒食須堂珍當試除卓速祖簪墜羊池遵遟始匠矢慈直恥通臣成癡即悉胥將商殊寺褚釋吐視敕斯翼以阻先兹實漸場情張唐豬思疾傷諸特職土桑詳氏仄楮支辝同賞丈𩛠植夕資莊中章醉台詩託辛陟都徵丑舒竹子乗夷冬司爭辭脂甞息正徒秦神知之相蘇治素殖抽雖度承營悅市施追止杜隨馳側借征柱宅十則似移旨臧猪書持占自寔祥私田佇式常他與作徐天寫弋署是旬餘失蜀丁
-鷖紆羲乞委去具強羌臼况愛央狂虚俱牀曁伊挹鶵哀求墟休驅吉詰衢安弃九丘士握崇窺興鋤憶況依雛仕俟紀乙崱傾烏鉏跪袪於綺巨査區衣烟香謁一憂居豈助規其曲几朽渠許起喜欽舉卿
-儒如魚語疑危兒穠牛俄吾五擬耳宜遇尼汝玉女拏而人虞愚仍研
-洧雲永爲羽有于薳雨韋云王榮筠
-母模莫慕摸矛謨
-白皮弼房父卑方鄙蒲府附彼兵陂平便浮縛分薄毗防捕筆扶符必甫部婢傍馮并畀步封裴
-芳披撫丕拂敷峯孚普滂譬妃匹
-處尺充叱赤姝昌
-縷力呂里離魯林郎練連良
-乖公客過兼康謙詭枯姑口格各可恪牽古空楷苦佳
-來盧落勒洛賴
-乎獲胡黃懷何侯戸下
-在徂昨藏前才
-千醋取七蒼麁麤倉親采遷
-火呼馨荒呵花虎海
-奴乃内諾那
-創初測芻廁叉楚瘡
-伯晡巴百布北邊補博
-山生沙數史砂踈所色
-亡綿靡武文無彌望明眉巫美
-此雌
+<pre>多得德
+珍徒馳是隨徐自征情抽堂他時冬作則斯桑植氏爭陟佇雖即除託丈祥直詳天旨傷十都徵漸通失舒治臣翼楮借蜀詩以弋職司資神殊阻實柱同矢蘇乗相承台側正食仄持猪慈視特悉須池杜釋施營辝醉辛先度胥中寔將思田諸敕餘卓簪移當書場私匠秦素張之署丑式占子臧羊賞竹與寫余常吐夕追鄒止寺遟辭試宅湯煑息恥疾陀褚章祖旬脂癡商識兹豬知遵速𩛠唐市莊土甞夷悅成支始殖丁墜似
+几雛綺卿興鋤渠朽依欽詰助央羲起愛吉謁紆九士烟乞虚窺弃臼委丘一去喜傾俟狂安紀挹牀豈驅仕俱況區許乙跪崇規巨具曲鷖休曁鉏握強墟求羌於伊袪况崱憶衢香舉居憂査烏鶵衣其哀
+兒耳遇人研牛玉仍擬危五語愚吾如穠而疑拏尼宜儒魚汝虞俄女
+雲羽永有雨王榮筠洧韋云薳爲于
+模母謨摸矛慕莫
+鄙卑裴薄毗扶浮縛房捕方甫馮傍必附分防符蒲婢府筆部平白兵畀便并父彼陂步封弼皮
+普丕撫披妃匹滂敷譬孚芳峯拂
+處赤姝尺叱昌充
+連呂力里良魯縷練林郎離
+楷詭兼空枯客恪姑佳各可康乖苦牽格口公謙古過
+落洛賴來勒盧
+胡獲何戸乎黃侯下懷
+徂昨才前在藏
+倉取七蒼千麁遷采麤醋親
+火花呵荒馨海虎呼
+那内奴諾乃
+叉廁創測瘡初芻楚
+百巴邊晡補伯北布博
+所沙史砂數生踈色山
+無武美文靡亡巫眉彌綿望明
+雌此
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21453;&#20999;&#19979;&#23383;">&#21453;&#20999;&#19979;&#23383;<a class="anchor-link" href="#&#21453;&#20999;&#19979;&#23383;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">rhyme</span><span class="p">,</span> <span class="n">lower_char</span><span class="p">,</span> <span class="n">lower_char_of_lower_char</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT lower_chars.rhyme, lower_chars.lower_char, lower_chars_of_lower_chars.lower_char</span>
+<span class="s1">FROM full_guangyun AS lower_chars</span>
+<span class="s1">INNER JOIN full_guangyun AS lower_chars_of_lower_chars</span>
+<span class="s1">ON lower_chars.lower_char = lower_chars_of_lower_chars.name</span>
+<span class="s1">WHERE lower_chars.rhyme = lower_chars_of_lower_chars.rhyme</span>
+<span class="s1">AND lower_chars.lower_char &lt;&gt; lower_chars_of_lower_chars.lower_char</span>
+<span class="s1">ORDER BY lower_chars.small_rhyme_id;&#39;&#39;&#39;</span><span class="p">):</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">rhyme</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">lower_char</span><span class="p">,</span> <span class="n">lower_char_of_lower_char</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">rhyme</span><span class="p">,</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rhyme</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="n">G</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>東	宮戎弓終融中, 公東紅空
+冬	宗冬
+鍾	庸容凶恭封鍾
+江	江雙
+支	吹移知支垂爲離
+支A	隋規
+支B	羈宜
+脂	隹遺追綏, 夷脂私資尼
+脂B	悲眉, 夷肌
+之	之持而兹其甾
+微	微歸韋非, 希衣依
+魚	余魚居諸
+虞	俞誅輸隅朱芻俱逾于, 無夫
+模	吾胡烏姑乎吳都孤
+齊	圭攜, 雞稽迷兮低奚臡
+佳	膎佳, 緺媧蛙
+皆	皆諧, 淮乖懷
+灰	杯恢回灰
+咍	開哀來, 才哉
+眞	眞人珍鄰
+眞B	巾銀
+諄	勻遵旬綸迍倫脣
+臻	詵臻
+文	云文分
+欣	斤欣
+元	元煩袁, 軒言
+魂	奔尊昆渾
+痕	根痕恩
+寒	寒安干
+桓	官潘丸端
+刪	關還頑班, 姦顔
+山	鰥頑, 閒閑山
+先	堅賢田顚年, 煙先前, 玄涓
+仙	宣泉全緣川專, 仙然連延, 員攣
+仙B	權員, 焉乾
+蕭	幺堯彫蕭聊
+宵	遙昭招, 宵邀焦消
+宵B	嚻瀌喬嬌
+肴	肴茅交嘲
+豪	毛袍襃, 刀遭牢勞曹
+歌	俄歌何河
+戈	伽迦, 婆和禾戈波, 𩨷𦚢靴
+麻	瓜華花, 奢賒嗟邪遮車, 加牙霞巴
+陽	張方陽良章王莊羊
+唐	郎當岡剛, 黃光旁
+庚	卿驚京, 行盲橫庚, 兵明榮
+耕	宏萌莖耕
+清	成貞征情盈, 傾營
+清A	并盈
+青	刑靈經丁, 螢扃
+蒸	陵升乗仍冰膺兢矜蒸
+登	朋棱滕增恒登崩, 肱弘
+尤	謀浮, 由周鳩尤州求流秋
+侯	婁侯鉤
+幽	幽虯彪烋
+侵	林任尋心, 針深淫, 簪吟
+侵B	金吟
+覃	含南男
+談	三甘酣談
+鹽	廉炎占鹽
+鹽B	淹炎
+添	兼甜
+咸	咸讒
+銜	監銜
+嚴	𩏩嚴
+凡	咸凡
+董	董揔蠓孔動
+腫	宂冢勇隴踵奉, 拱悚
+湩	湩𪁪
+講	項講慃
+紙	委累捶髓, 紙氏是爾帋豸此侈
+紙B	委詭毀靡綺彼倚
+紙A	弭俾婢
+旨	壘軌誄水, 几履雉, 矢視
+旨B	鄙美, 几履, 洧軌
+旨A	癸誄
+止	史士里擬己理紀, 止市
+尾	豈狶, 偉鬼, 尾匪
+語	吕与渚與許舉巨
+麌	武甫羽矩雨禹, 主庾
+姥	杜魯古戸補
+薺	弟米禮啓
+蟹	𦫳蟹買夥
+駭	楷駭
+賄	罪賄猥
+海	改宰乃在紿亥愷
+軫	軫紖引忍
+準	允尹準
+吻	粉吻
+隱	隱謹
+阮	晚阮遠, 堰幰偃
+混	忖本損衮
+很	墾很
+旱	笴旱但
+緩	滿旱伴纂緩管
+潸	板綰赧鯇
+產	簡限
+銑	畎泫, 殄繭峴典
+獮	轉兖, 翦展淺善演
+獮B	蹇輦辨免
+獮A	緬兖
+篠	皎皛鳥了
+小	沼少, 小兆
+小B	夭表兆嬌
+巧	絞巧爪飽
+晧	抱老晧浩早道
+哿	我可
+果	果火
+馬	也姐者野冶, 雅賈疋下, 寡瓦
+養	養掌往昉㢡网兩丈
+蕩	朗黨, 廣晃
+梗	礦䁝幸猛, 影永憬丙景, 杏梗, 打冷
+耿	耿幸
+靜	井郢靜整
+迥	挺醒鼎剄迥涬頂
+拯	庱拯
+等	等肯
+有	九婦酉否久柳有
+厚	口后苟斗厚垢
+黝	糾黝
+寑	枕稔荏朕甚凜, 㾕錦
+寑B	飲錦
+感	唵禫感
+敢	覽敢
+琰	染冉漸琰
+琰B	險儉檢奄
+忝	忝簟玷
+儼	掩广
+豏	減斬豏
+檻	黤檻
+梵	范錽犯
+送	衆仲, 送凍鳳弄貢
+宋	宋統綜
+用	頌用
+絳	降巷絳
+寘	累睡僞瑞, 豉賜義智
+寘B	義寄, 睡僞
+寘A	避恚義, 企智
+至	至利四二自, 遂萃醉類
+至B	媚備祕, 位愧, 冀器利兾
+至A	季悸, 二寐
+志	置志記吏
+未	畏胃貴, 沸味未, 旣豙
+御	倨慮據助去御, 預恕署洳
+遇	注遇戍句具
+暮	暮路祚故誤
+霽	詣戾計, 惠桂
+祭	芮稅銳歲, 例制
+祭A	蔽袂𡚁祭
+祭B	例罽憩
+廢	吠穢肺廢
+泰	會最外, 貝蓋艾太帶大
+卦	賣卦懈隘
+怪	介界怪壞拜戒
+夬	邁夬賣快話, 犗喝
+隊	對内繢隊, 佩輩昧妹
+代	代耐槩愛漑
+震	晉振刃遴
+震B	覲遴
+震A	印刃
+稕	閏峻順
+問	運問
+焮	焮靳
+願	怨万願販建
+慁	悶困寸
+恨	艮恨
+翰	賛旰案按
+換	換喚玩段貫亂筭, 半慢
+諫	鴈晏諫澗, 慣患
+襇	幻辨莧襇
+霰	麵佃縣練見電甸
+線	賤箭碾線, 戰扇膳, 囀戀卷, 釧絹
+線B	倦變眷卷
+線A	面箭
+嘯	弔嘯叫
+笑B	廟召
+笑A	笑要妙
+笑	照召, 肖妙
+效	稍敎孝皃
+号	到導, 報耗
+箇	佐邏賀个箇
+過	貨臥, 過卧唾
+禡	亞㕦罵霸駕訝嫁化, 謝夜
+漾	況樣讓亮訪向, 妄放
+宕	宕浪, 曠謗
+映	病命, 孟更橫, 敬慶
+諍	迸諍
+勁	姓盛鄭政正
+徑	徑定佞
+證	𩜁應甑孕證
+嶝	鄧亘隥贈
+宥	就僦, 溜又副富救呪祐
+候	候漏豆奏遘
+幼	幼謬
+沁	禁鴆任, 蔭譖
+沁B	禁蔭
+勘	暗紺
+闞	瞰𣊟濫暫蹔
+豔	豔贍
+豔B	窆驗
+㮇	念店
+釅	劒欠釅
+陷	陷韽
+鑑	鑒懺鑑
+范	梵泛
+屋	禄谷, 木卜, 逐竹匊宿福菊六
+沃	沃篤毒酷
+燭	玉曲欲蜀足録
+覺	角岳覺
+質	質日栗, 吉悉七
+質A	質吉必畢
+質B	密筆乙畢
+術	卹聿律
+櫛	櫛瑟
+物	弗物勿
+迄	乙訖迄
+月	厥月, 歇訐竭謁, 越發伐
+沒	没勃, 忽骨
+曷	達割葛曷
+末	活括栝, 末撥
+鎋	八拔黠滑
+黠	䫄刮, 鎋瞎轄
+屑	結蔑屑, 決穴
+薛	劣爇輟, 辥列熱, 絕悅雪
+薛B	列竭
+薛A	滅列
+藥	勺藥若灼爵約略雀虐, 籰縛钁
+鐸	郭落穫各博
+陌	格白陌虢伯擭, 戟郤劇逆
+麥	責摘戹核革厄, 麥摑獲
+昔	益亦易, 積迹昔, 役隻炙石
+昔A	益昔辟
+錫	狊鶪闃, 歷狄擊激
+職	力側逼即極直, 翼職
+德	黑墨北, 德勒得則, 國或
+緝	立戢入執汁
+緝B	汲立急及
+合	閤沓荅合
+盍	盍臘榼
+葉	接涉攝葉輒
+怗	頰愜協牒
+洽	夾㘝洽
+狎	狎甲
+業	業劫怯
+乏	乏法
 </pre>
 </div>
 </div>
@@ -13303,7 +13595,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
