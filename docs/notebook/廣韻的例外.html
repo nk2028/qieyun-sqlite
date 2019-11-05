@@ -13155,6 +13155,21 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">pandas</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">pandas</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_colwidth</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13164,7 +13179,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, upper_char, lower_char,</span>
@@ -13186,7 +13201,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -13250,7 +13265,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT name, small_rhyme_descr, fanqie,</span>
@@ -13270,7 +13285,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -13341,7 +13356,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, GROUP_CONCAT(small_rhyme_id || names) AS &#39;small_rhymes&#39;</span>
@@ -13363,7 +13378,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -13621,7 +13636,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT upper_char || lower_char AS &#39;fanqie&#39;,</span>
@@ -13642,7 +13657,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -13729,13 +13744,875 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21517;&#23383;&#30456;&#21516;&#30340;&#23567;&#38907;">&#21517;&#23383;&#30456;&#21516;&#30340;&#23567;&#38907;<a class="anchor-link" href="#&#21517;&#23383;&#30456;&#21516;&#30340;&#23567;&#38907;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme, GROUP_CONCAT(id)</span>
+<span class="s1">FROM full_small_rhymes</span>
+<span class="s1">GROUP BY small_rhyme</span>
+<span class="s1">HAVING COUNT(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>small_rhyme</th>
+      <th>GROUP_CONCAT(id)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>㓼</td>
+      <td>1307,3302</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>㔌</td>
+      <td>1030,3080</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>㛂</td>
+      <td>1752,1755</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>㟅</td>
+      <td>33,85</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>㪁</td>
+      <td>1154,3157</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>㱡</td>
+      <td>964,1922</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>䀴</td>
+      <td>1918,3854</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>䁤</td>
+      <td>1282,2234</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>䃔</td>
+      <td>40,2123</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>䆀</td>
+      <td>1456,2530</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>䟽</td>
+      <td>236,2300</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>䫲</td>
+      <td>2019,3116</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>䰖</td>
+      <td>1560,3411</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>三</td>
+      <td>1090,3127</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>且</td>
+      <td>245,1776</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>中</td>
+      <td>3,2112</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>些</td>
+      <td>801,2834</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>企</td>
+      <td>1248,2176</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>作</td>
+      <td>2360,3574</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>侃</td>
+      <td>1558,2641</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>便</td>
+      <td>615,2751</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>倗</td>
+      <td>1924,3028</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>倚</td>
+      <td>1212,2172</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>傍</td>
+      <td>856,2931</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>儑</td>
+      <td>3112,3801</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>兼</td>
+      <td>1129,3152</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>凝</td>
+      <td>960,3017</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>凭</td>
+      <td>951,3015</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>出</td>
+      <td>2243,3333</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>分</td>
+      <td>459,2589</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>剸</td>
+      <td>1651,2755</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>卒</td>
+      <td>3327,3391</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>吟</td>
+      <td>1063,3098</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>吹</td>
+      <td>98,2174</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>和</td>
+      <td>753,2838</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>啜</td>
+      <td>2414,3534</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>啞</td>
+      <td>1770,3611</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>喊</td>
+      <td>2030,2076</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>圈</td>
+      <td>1646,2610</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>埯</td>
+      <td>2031,2064</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>堲</td>
+      <td>3304,3721</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>增</td>
+      <td>973,3030</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>奔</td>
+      <td>496,2627</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>女</td>
+      <td>1335,2311</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>奻</td>
+      <td>549,2682</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>妠</td>
+      <td>3114,3461</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>嬽</td>
+      <td>567,644</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>孨</td>
+      <td>2742,3770</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>少</td>
+      <td>1681,2785</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>屯</td>
+      <td>442,492</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>崽</td>
+      <td>335,358</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>巉</td>
+      <td>1144,2085</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>巋</td>
+      <td>183,1285</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>巢</td>
+      <td>689,2807</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>差</td>
+      <td>120,348,2459</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>從</td>
+      <td>57,2139</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>徵</td>
+      <td>958,1288</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>恐</td>
+      <td>1181,2138</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>扮</td>
+      <td>1422,2692</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>掣</td>
+      <td>2401,3537</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>撰</td>
+      <td>1591,1653</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>操</td>
+      <td>723,2815</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>擔</td>
+      <td>1089,3126</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>攤</td>
+      <td>1576,2644</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>敗</td>
+      <td>2495,2505</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>敲</td>
+      <td>696,2795</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>暴</td>
+      <td>2816,3196</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>朓</td>
+      <td>1668,2786</td>
+    </tr>
+    <tr>
+      <th>68</th>
+      <td>枕</td>
+      <td>1985,3089</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>棧</td>
+      <td>1597,1663</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>楚</td>
+      <td>1339,2312</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>榜</td>
+      <td>1835,2962</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>殑</td>
+      <td>963,1921,3020</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>毀</td>
+      <td>1205,2183</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>汪</td>
+      <td>849,2945</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>沈</td>
+      <td>1050,1986</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>泥</td>
+      <td>314,2382</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>浜</td>
+      <td>892,1867</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>淙</td>
+      <td>86,2149</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>深</td>
+      <td>1054,3103</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>湩</td>
+      <td>1187,2131</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>湫</td>
+      <td>1675,1936</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>潛</td>
+      <td>1117,3141</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>灑</td>
+      <td>1418,1769</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>烘</td>
+      <td>32,2118</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>焌</td>
+      <td>2629,3334</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>爲</td>
+      <td>89,2157</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>爹</td>
+      <td>802,1735</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>牝</td>
+      <td>1264,1476</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>狂</td>
+      <td>836,2923</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>猭</td>
+      <td>635,2734</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>瓦</td>
+      <td>1786,2891</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>甚</td>
+      <td>1988,3101</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>生</td>
+      <td>884,2964</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>省</td>
+      <td>1859,1895</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>瞢</td>
+      <td>13,974</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>稱</td>
+      <td>962,3016</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>稴</td>
+      <td>2057,3154</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>積</td>
+      <td>2155,3650</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>窒</td>
+      <td>3300,3489</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>等</td>
+      <td>1455,1923</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>精</td>
+      <td>910,2992</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>絮</td>
+      <td>2304,2314</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>綰</td>
+      <td>1579,2674</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>縛</td>
+      <td>2852,3559</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>縱</td>
+      <td>61,2132</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>翹</td>
+      <td>684,2788</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>聱</td>
+      <td>697,1042</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>能</td>
+      <td>397,980,1926</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>脅</td>
+      <td>3156,3863</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>脞</td>
+      <td>762,1762</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>興</td>
+      <td>961,3011</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>若</td>
+      <td>800,1787,3545</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>茁</td>
+      <td>3318,3445,3527</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>荒</td>
+      <td>844,2943</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>華</td>
+      <td>773,775</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>著</td>
+      <td>2298,3564</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>蓄</td>
+      <td>3215,3226</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>蕝</td>
+      <td>2418,3504</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>藏</td>
+      <td>858,2932</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>虚</td>
+      <td>237,246</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>虥</td>
+      <td>559,574</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>虺</td>
+      <td>349,1319</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>螼</td>
+      <td>1494,2572</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>行</td>
+      <td>887,2957</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>衰</td>
+      <td>136,165</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>要</td>
+      <td>676,2771</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>見</td>
+      <td>2702,2705</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>覘</td>
+      <td>1112,3138</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>親</td>
+      <td>408,2571</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>詑</td>
+      <td>129,748</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>論</td>
+      <td>497,2626</td>
+    </tr>
+    <tr>
+      <th>132</th>
+      <td>諵</td>
+      <td>1140,3167</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>豻</td>
+      <td>508,552</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>跪</td>
+      <td>1207,1244</td>
+    </tr>
+    <tr>
+      <th>135</th>
+      <td>蹱</td>
+      <td>58,2133</td>
+    </tr>
+    <tr>
+      <th>136</th>
+      <td>載</td>
+      <td>2529,2542</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>輕</td>
+      <td>920,2990</td>
+    </tr>
+    <tr>
+      <th>138</th>
+      <td>轟</td>
+      <td>901,2974</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>迎</td>
+      <td>886,2965</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>近</td>
+      <td>1511,2592</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>遠</td>
+      <td>1516,2608</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>選</td>
+      <td>1652,2740</td>
+    </tr>
+    <tr>
+      <th>143</th>
+      <td>邅</td>
+      <td>606,1662,2752</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>重</td>
+      <td>56,1176,2136</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>野</td>
+      <td>1348,1766</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>長</td>
+      <td>815,1826</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>闞</td>
+      <td>2073,3118</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>頸</td>
+      <td>929,1889</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>飯</td>
+      <td>1529,2600</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>餧</td>
+      <td>1438,2181</td>
+    </tr>
+    <tr>
+      <th>151</th>
+      <td>饒</td>
+      <td>666,2789</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>鰥</td>
+      <td>555,2693</td>
+    </tr>
+    <tr>
+      <th>153</th>
+      <td>𠊧</td>
+      <td>1880,2971</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>𡰝</td>
+      <td>570,646</td>
+    </tr>
+    <tr>
+      <th>155</th>
+      <td>𤣆</td>
+      <td>402,572</td>
+    </tr>
+    <tr>
+      <th>156</th>
+      <td>𥄎</td>
+      <td>3524,3671</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>𪉦</td>
+      <td>3121,3166</td>
+    </tr>
+    <tr>
+      <th>158</th>
+      <td>𪗨</td>
+      <td>3312,3339</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19978;&#23383;">&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19978;&#23383;<a class="anchor-link" href="#&#26410;&#25910;&#37636;&#30340;&#21453;&#20999;&#19978;&#23383;">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT upper_char, small_rhyme_id, small_rhyme_descr, fanqie</span>
@@ -13755,7 +14632,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -13868,7 +14745,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT lower_char, small_rhyme_id, small_rhyme_descr, fanqie</span>
@@ -13888,7 +14765,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[8]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -14057,7 +14934,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, num_in_small_rhyme, name, explanation</span>
@@ -14075,7 +14952,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -14153,7 +15030,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
