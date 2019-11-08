@@ -7,6 +7,10 @@
 	box-sizing: border-box;
 }
 
+html {
+	scrollbar-color: #393b3e #1c1e1f;
+}
+
 body {
 	background-color: #222;
 	color: #ddd;
