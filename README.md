@@ -16,6 +16,8 @@ The database could be downloaded from [release page](https://github.com/sgalal/G
 
 ![Tables](tables.svg)
 
+**TODO FIXME: this image is not up to date.**
+
 See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed description.
 
 ## Featured Users
