@@ -20,9 +20,11 @@ The database could be downloaded from [release page](https://github.com/sgalal/G
 
 See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed description.
 
-## Featured Users
+## Build
 
-* [sgalal/Brogue](https://github.com/sgalal/Brogue): Chinese dialect generator based on the Middle Chinese phonological system
+```sh
+$ python sync/sync.py
+```
 
 ## Acknowledgements
 

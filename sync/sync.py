@@ -5,26 +5,33 @@ from itertools import repeat
 import os
 import pandas
 import sqlite3
-import urllib.request
+import sys
+import urllib
 
 # Prepare files
 
-def download_file_if_not_exist(name, download_prefix='https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/'):
-	if not os.path.exists(name):
-		urllib.request.urlretrieve(download_prefix + name, name)
+def download_file_if_not_exist(name):
+	url = 'https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/' + name
+	local_name = 'sync/' + name
+	try:
+		if not os.path.exists(local_name):
+			urllib.request.urlretrieve(url, local_name)
+	except urllib.error.HTTPError as e:
+		print(name, e)
+		sys.exit(0)
 
 ## Data files
 
-download_file_if_not_exist('sync/YonhMiuk.txt')
-download_file_if_not_exist('sync/SieuxYonh.txt')
-download_file_if_not_exist('sync/Yonhmux.txt')
-download_file_if_not_exist('sync/Dzih.txt')
+download_file_if_not_exist('YonhMiuk.txt')
+download_file_if_not_exist('SieuxYonh.txt')
+download_file_if_not_exist('YonhMux.txt')
+download_file_if_not_exist('Dzih.txt')
 
 ## Knowledge files
 
-download_file_if_not_exist('sync/YonhGheh.txt')
-download_file_if_not_exist('sync/PrengQim.txt')
-download_file_if_not_exist('sync/Dauh.txt')
+download_file_if_not_exist('YonhGheh.txt')
+download_file_if_not_exist('PrengQim.txt')
+download_file_if_not_exist('Dauh.txt')
 
 ## Database
 
@@ -273,8 +280,16 @@ FROM core_char_entities;
 
 cur.execute('''
 CREATE VIEW full_guangyun AS
-SELECT rhyme, tone, subgroup, rhyme_group, class, id as 'small_rhyme_id', small_rhyme,
-initial_id, initial, rounding, division, upper_char, lower_char, num_in_small_rhyme,
+SELECT rhyme, tone, subgroup, rhyme_group, class, id AS 'small_rhyme_id', small_rhyme,
+initial_id, initial, rounding, division,
+CASE division
+WHEN '1' THEN '一'
+WHEN '2' THEN '二'
+WHEN '3' THEN '三'
+ELSE '四'
+END AS division_zh,
+upper_char, lower_char,
+upper_char || lower_char AS 'fanqie',
 initial || rounding ||
 CASE division
 WHEN '1' THEN '一'
@@ -282,8 +297,9 @@ WHEN '2' THEN '二'
 WHEN '3' THEN '三'
 ELSE '四'
 END || rhyme AS 'small_rhyme_descr',
-upper_char || lower_char || '切' AS 'fanqie',
-name, explanation
+num_in_small_rhyme, name,
+explanation,
+guyun, younu, baxter, zhongzhou, putonghua
 FROM full_rhymes JOIN full_small_rhymes JOIN full_char_entities
 ON rhyme = of_rhyme AND id = of_small_rhyme;
 ''')
