@@ -38,7 +38,8 @@ with open('docs/example/yonhdo.html', 'w') as f:
   p { text-indent: 2em; }
   a { text-decoration: none; }
   table { border-collapse: collapse; }
-  th, td { border: 1px solid black; vertical-align: top; }
+  th, td { border: 1px solid black; text-align: left; vertical-align: top; }
+  td:empty::before { content: "◯"; }
   </style>
   <!-- GitHub Corner from http://tholman.com/github-corners/ -->
   <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -62,7 +63,7 @@ with open('docs/example/yonhdo.html', 'w') as f:
 					f.write(f'<td>{等到漢字(等)}</td>')  # 等
 					for 母 in '幫滂並明端透定泥知徹澄孃精清從心邪莊初崇生俟章昌船書常見溪羣疑影曉匣云以來日':
 						f.write('<td>')
-						f.write((lambda d: '◯' if d is None else (lambda d: '◯' if d is None else (lambda d: '◯' if d is None else (lambda d: '◯' if d is None else (lambda x: '◯' if x is None else 格式化小韻小韻號(*x))(d.get(母)))(d.get(等)))(d.get(開合)))(d.get(聲)))(d.get(韻)))
+						f.write((lambda d: '' if d is None else (lambda d: '' if d is None else (lambda d: '' if d is None else (lambda d: '' if d is None else (lambda x: '' if x is None else 格式化小韻小韻號(*x))(d.get(母)))(d.get(等)))(d.get(開合)))(d.get(聲)))(d.get(韻)))
 						f.write('</td>')
 					f.write('</tr>\n')
 					韻printed = True
