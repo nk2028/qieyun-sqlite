@@ -9,6 +9,7 @@ _Guangyun_ (廣韻) SQLite database for Traditional Chinese Phonology
 * [廣韻反切上字表](https://sgalal.github.io/Guangyun/notebook/廣韻反切上字表.html)
 * [廣韻四聲相配表](https://sgalal.github.io/Guangyun/notebook/廣韻四聲相配表.html)
 * [廣韻反切系聯](https://sgalal.github.io/Guangyun/notebook/廣韻反切系聯.html)
+* [現代廣韻等韻圖](https://sgalal.github.io/Guangyun/example/yonhdo.html)
 
 ## Usage
 
