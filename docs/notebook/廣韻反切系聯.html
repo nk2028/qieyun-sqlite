@@ -13218,11 +13218,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT upper_chars.upper_char, upper_chars_of_upper_chars.upper_char</span>
-<span class="s1">FROM full_guangyun AS upper_chars</span>
-<span class="s1">INNER JOIN full_guangyun AS upper_chars_of_upper_chars</span>
-<span class="s1">ON upper_chars.upper_char = upper_chars_of_upper_chars.name</span>
-<span class="s1">WHERE upper_chars.upper_char &lt;&gt; upper_chars_of_upper_chars.upper_char;&#39;&#39;&#39;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT 廣韻小韻.上字, 廣韻字頭全.上字</span>
+<span class="s1">FROM 廣韻小韻 INNER JOIN 廣韻字頭全</span>
+<span class="s1">ON 廣韻小韻.上字 = 廣韻字頭全.字頭</span>
+<span class="s1">WHERE 廣韻小韻.上字 &lt;&gt; 廣韻字頭全.上字;&#39;&#39;&#39;</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13253,28 +13252,28 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>多得德
-珍徒馳是隨徐自征情抽堂他時冬作則斯桑植氏爭陟佇雖即除託丈祥直詳天旨傷十都徵漸通失舒治臣翼楮借蜀詩以弋職司資神殊阻實柱同矢蘇乗相承台側正食仄持猪慈視特悉須池杜釋施營辝醉辛先度胥中寔將思田諸敕餘卓簪移當書場私匠秦素張之署丑式占子臧羊賞竹與寫余常吐夕追鄒止寺遟辭試宅湯煑息恥疾陀褚章祖旬脂癡商識兹豬知遵速𩛠唐市莊土甞夷悅成支始殖丁墜似
-几雛綺卿興鋤渠朽依欽詰助央羲起愛吉謁紆九士烟乞虚窺弃臼委丘一去喜傾俟狂安紀挹牀豈驅仕俱況區許乙跪崇規巨具曲鷖休曁鉏握強墟求羌於伊袪况崱憶衢香舉居憂査烏鶵衣其哀
-兒耳遇人研牛玉仍擬危五語愚吾如穠而疑拏尼宜儒魚汝虞俄女
-雲羽永有雨王榮筠洧韋云薳爲于
-模母謨摸矛慕莫
-鄙卑裴薄毗扶浮縛房捕方甫馮傍必附分防符蒲婢府筆部平白兵畀便并父彼陂步封弼皮
-普丕撫披妃匹滂敷譬孚芳峯拂
-處赤姝尺叱昌充
-連呂力里良魯縷練林郎離
-楷詭兼空枯客恪姑佳各可康乖苦牽格口公謙古過
-落洛賴來勒盧
-胡獲何戸乎黃侯下懷
-徂昨才前在藏
-倉取七蒼千麁遷采麤醋親
-火花呵荒馨海虎呼
-那内奴諾乃
-叉廁創測瘡初芻楚
-百巴邊晡補伯北布博
-所沙史砂數生踈色山
-無武美文靡亡巫眉彌綿望明
+<pre>資寫悉悅自特承鄒通將池相書旬夕徐豬市職猪託乗臣癡脂都持先私墜支是司陟遟營中署即丈堂夷他度舒徒商祥殊卓雖餘祖仄台式恥直食蘇胥追疾以田隨始矢寔息兹徵氏甞諸旨佇敕唐寺褚除則詳醉借冬知斯情失十辭羊側陀弋慈爭余宅杜征辝丑土似抽桑丁占場神竹珍思馳翼施成試楮賞吐之天同蜀遵𩛠須張速移臧作子與簪視煑莊當實漸柱阻素正識時詩植殖治傷釋止秦匠辛常湯章
+吉曲几央士烏衢臼朽査丘虚崇羲俱羌求規強紀興卿袪愛鶵狂綺於挹紆鋤其弃渠雛詰安乙伊香委乞跪憶居助况曁去哀烟握墟窺仕豈依九欽崱俟鷖況鉏喜休具驅區謁衣許一憂巨傾牀起舉
+平婢彼并浮卑馮白畀陂鄙蒲扶必分房兵父傍封毗符甫捕府防附部便縛皮弼方裴步薄筆
+尺姝處充叱赤昌
+姑古過各兼格詭枯苦公乖佳客牽可空恪康楷口謙
+汝儒女虞魚耳宜擬人仍拏如愚語而研穠吾玉五遇疑牛尼俄危兒
+丕普拂撫滂峯孚披匹妃敷芳譬
+王爲韋云有筠薳洧雲雨于永榮羽
+離林呂力良縷魯里郎練連
+無美巫明望彌靡武綿文亡眉
 雌此
+楚廁瘡叉測初芻創
+色所山數踈砂生沙史
+摸慕母矛謨莫模
+獲胡乎懷下戸黃侯何
+諾那奴乃内
+呵花火呼馨虎海荒
+盧勒落洛來賴
+昨藏在才前徂
+北布巴邊百補晡伯博
+麤麁倉取遷七醋千蒼采親
+德得多
 </pre>
 </div>
 </div>
@@ -13308,13 +13307,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">rhyme</span><span class="p">,</span> <span class="n">lower_char</span><span class="p">,</span> <span class="n">lower_char_of_lower_char</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT lower_chars.rhyme, lower_chars.lower_char, lower_chars_of_lower_chars.lower_char</span>
-<span class="s1">FROM full_guangyun AS lower_chars</span>
-<span class="s1">INNER JOIN full_guangyun AS lower_chars_of_lower_chars</span>
-<span class="s1">ON lower_chars.lower_char = lower_chars_of_lower_chars.name</span>
-<span class="s1">WHERE lower_chars.rhyme = lower_chars_of_lower_chars.rhyme</span>
-<span class="s1">AND lower_chars.lower_char &lt;&gt; lower_chars_of_lower_chars.lower_char</span>
-<span class="s1">ORDER BY lower_chars.small_rhyme_id;&#39;&#39;&#39;</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">rhyme</span><span class="p">,</span> <span class="n">lower_char</span><span class="p">,</span> <span class="n">lower_char_of_lower_char</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT DISTINCT 廣韻小韻.韻, 廣韻小韻.下字, 廣韻字頭全.下字</span>
+<span class="s1">FROM 廣韻小韻 INNER JOIN 廣韻字頭全</span>
+<span class="s1">ON 廣韻小韻.下字 = 廣韻字頭全.字頭</span>
+<span class="s1">WHERE 廣韻小韻.韻 = 廣韻字頭全.韻</span>
+<span class="s1">AND 廣韻小韻.下字 &lt;&gt; 廣韻字頭全.下字</span>
+<span class="s1">ORDER BY 廣韻小韻.小韻號;&#39;&#39;&#39;</span><span class="p">):</span>
     <span class="n">d</span><span class="p">[</span><span class="n">rhyme</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">lower_char</span><span class="p">,</span> <span class="n">lower_char_of_lower_char</span><span class="p">))</span>
 </pre></div>
 
@@ -13348,251 +13346,251 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>東	宮戎弓終融中, 公東紅空
+<pre>東	融弓終宮中戎, 東紅公空
 冬	宗冬
-鍾	庸容凶恭封鍾
+鍾	容庸鍾凶封恭
 江	江雙
-支	吹移知支垂爲離
-支A	隋規
+支	離垂爲吹支移知
+支A	規隋
 支B	羈宜
-脂	隹遺追綏, 夷脂私資尼
-脂B	悲眉, 夷肌
-之	之持而兹其甾
-微	微歸韋非, 希衣依
-魚	余魚居諸
-虞	俞誅輸隅朱芻俱逾于, 無夫
-模	吾胡烏姑乎吳都孤
-齊	圭攜, 雞稽迷兮低奚臡
-佳	膎佳, 緺媧蛙
-皆	皆諧, 淮乖懷
-灰	杯恢回灰
-咍	開哀來, 才哉
-眞	眞人珍鄰
+脂	資脂私夷尼, 綏隹遺追
+脂B	夷肌, 悲眉
+之	其兹之持甾而
+微	微非韋歸, 希依衣
+魚	余諸居魚
+虞	無夫, 逾朱俞誅隅于輸俱芻
+模	吾胡姑乎孤吳都烏
+齊	圭攜, 低雞迷兮臡奚稽
+佳	佳膎, 緺媧蛙
+皆	皆諧, 懷淮乖
+灰	恢灰回杯
+咍	開哀來, 哉才
+眞	鄰珍人眞
 眞B	巾銀
-諄	勻遵旬綸迍倫脣
-臻	詵臻
-文	云文分
-欣	斤欣
-元	元煩袁, 軒言
-魂	奔尊昆渾
-痕	根痕恩
-寒	寒安干
+諄	脣迍倫遵綸勻旬
+臻	臻詵
+文	文分云
+欣	欣斤
+元	袁元煩, 軒言
+魂	尊奔昆渾
+痕	恩痕根
+寒	安寒干
 桓	官潘丸端
-刪	關還頑班, 姦顔
-山	鰥頑, 閒閑山
-先	堅賢田顚年, 煙先前, 玄涓
-仙	宣泉全緣川專, 仙然連延, 員攣
-仙B	權員, 焉乾
-蕭	幺堯彫蕭聊
-宵	遙昭招, 宵邀焦消
-宵B	嚻瀌喬嬌
-肴	肴茅交嘲
-豪	毛袍襃, 刀遭牢勞曹
-歌	俄歌何河
-戈	伽迦, 婆和禾戈波, 𩨷𦚢靴
-麻	瓜華花, 奢賒嗟邪遮車, 加牙霞巴
-陽	張方陽良章王莊羊
-唐	郎當岡剛, 黃光旁
-庚	卿驚京, 行盲橫庚, 兵明榮
-耕	宏萌莖耕
-清	成貞征情盈, 傾營
-清A	并盈
-青	刑靈經丁, 螢扃
-蒸	陵升乗仍冰膺兢矜蒸
-登	朋棱滕增恒登崩, 肱弘
-尤	謀浮, 由周鳩尤州求流秋
-侯	婁侯鉤
-幽	幽虯彪烋
-侵	林任尋心, 針深淫, 簪吟
+刪	姦顔, 頑關班還
+山	閑閒山, 頑鰥
+先	涓玄, 前煙先, 年田賢堅顚
+仙	員攣, 川全緣專泉宣, 延連然仙
+仙B	乾焉, 權員
+蕭	幺彫堯聊蕭
+宵	宵消焦邀, 遙招昭
+宵B	嬌嚻瀌喬
+肴	肴交嘲茅
+豪	袍襃毛, 遭刀勞牢曹
+歌	歌河何俄
+戈	𦚢靴𩨷, 迦伽, 波禾和戈婆
+麻	奢賒邪車嗟遮, 加霞牙巴, 花瓜華
+陽	王良莊陽方羊張章
+唐	郎岡當剛, 旁光黃
+庚	盲庚橫行, 明榮兵, 驚京卿
+耕	耕宏莖萌
+清	成盈情征貞, 營傾
+清A	盈并
+青	經刑靈丁, 扃螢
+蒸	蒸膺冰仍陵矜乗升兢
+登	恒棱朋滕增登崩, 弘肱
+尤	謀浮, 鳩周州秋流尤由求
+侯	鉤婁侯
+幽	彪幽烋虯
+侵	深淫針, 簪吟, 林尋心任
 侵B	金吟
-覃	含南男
-談	三甘酣談
-鹽	廉炎占鹽
+覃	男南含
+談	三酣甘談
+鹽	炎鹽占廉
 鹽B	淹炎
-添	兼甜
+添	甜兼
 咸	咸讒
 銜	監銜
 嚴	𩏩嚴
 凡	咸凡
-董	董揔蠓孔動
-腫	宂冢勇隴踵奉, 拱悚
+董	蠓揔孔董動
+腫	踵隴奉冢宂勇, 拱悚
 湩	湩𪁪
-講	項講慃
-紙	委累捶髓, 紙氏是爾帋豸此侈
-紙B	委詭毀靡綺彼倚
-紙A	弭俾婢
-旨	壘軌誄水, 几履雉, 矢視
-旨B	鄙美, 几履, 洧軌
+講	項慃講
+紙	氏此侈豸是帋爾紙, 捶累髓委
+紙B	彼委綺靡詭倚毀
+紙A	婢弭俾
+旨	水壘軌誄, 視矢, 雉履几
+旨B	鄙美, 履几, 軌洧
 旨A	癸誄
-止	史士里擬己理紀, 止市
-尾	豈狶, 偉鬼, 尾匪
-語	吕与渚與許舉巨
-麌	武甫羽矩雨禹, 主庾
-姥	杜魯古戸補
-薺	弟米禮啓
-蟹	𦫳蟹買夥
+止	止市, 擬紀理里士己史
+尾	匪尾, 狶豈, 鬼偉
+語	吕巨与與許舉渚
+麌	主庾, 甫武矩雨羽禹
+姥	古戸杜魯補
+薺	啓米禮弟
+蟹	夥𦫳蟹買
 駭	楷駭
 賄	罪賄猥
-海	改宰乃在紿亥愷
-軫	軫紖引忍
-準	允尹準
+海	亥宰愷在改乃紿
+軫	忍引紖軫
+準	允準尹
 吻	粉吻
 隱	隱謹
-阮	晚阮遠, 堰幰偃
-混	忖本損衮
-很	墾很
+阮	晚阮遠, 幰偃
+混	損忖本衮
+很	很墾
 旱	笴旱但
-緩	滿旱伴纂緩管
-潸	板綰赧鯇
-產	簡限
-銑	畎泫, 殄繭峴典
-獮	轉兖, 翦展淺善演
-獮B	蹇輦辨免
+緩	滿纂管旱伴緩
+潸	綰赧鯇板
+產	限簡
+銑	繭殄峴典, 泫畎
+獮	善演淺翦展, 轉兖
+獮B	輦蹇免辨
 獮A	緬兖
-篠	皎皛鳥了
-小	沼少, 小兆
-小B	夭表兆嬌
-巧	絞巧爪飽
-晧	抱老晧浩早道
-哿	我可
+篠	皛了鳥皎
+小	沼少, 兆小
+小B	嬌表夭兆
+巧	絞爪巧飽
+晧	老抱浩晧道早
+哿	可我
 果	果火
-馬	也姐者野冶, 雅賈疋下, 寡瓦
-養	養掌往昉㢡网兩丈
+馬	下疋賈雅, 野姐者冶也, 寡瓦
+養	网昉往兩掌丈㢡養
 蕩	朗黨, 廣晃
-梗	礦䁝幸猛, 影永憬丙景, 杏梗, 打冷
-耿	耿幸
-靜	井郢靜整
-迥	挺醒鼎剄迥涬頂
+梗	影丙永憬景, 打冷, 幸䁝礦猛, 杏梗
+耿	幸耿
+靜	整井郢靜
+迥	頂挺迥鼎剄涬醒
 拯	庱拯
 等	等肯
-有	九婦酉否久柳有
-厚	口后苟斗厚垢
+有	有否柳九酉婦久
+厚	后垢苟口斗厚
 黝	糾黝
-寑	枕稔荏朕甚凜, 㾕錦
+寑	稔荏甚朕凜枕, 㾕錦
 寑B	飲錦
-感	唵禫感
-敢	覽敢
-琰	染冉漸琰
-琰B	險儉檢奄
+感	感禫唵
+敢	敢覽
+琰	琰冉染漸
+琰B	儉險檢奄
 忝	忝簟玷
-儼	掩广
-豏	減斬豏
-檻	黤檻
-梵	范錽犯
-送	衆仲, 送凍鳳弄貢
+儼	广掩
+豏	減豏斬
+檻	檻黤
+梵	錽范犯
+送	鳳弄送凍貢, 衆仲
 宋	宋統綜
-用	頌用
-絳	降巷絳
-寘	累睡僞瑞, 豉賜義智
-寘B	義寄, 睡僞
-寘A	避恚義, 企智
-至	至利四二自, 遂萃醉類
-至B	媚備祕, 位愧, 冀器利兾
-至A	季悸, 二寐
-志	置志記吏
-未	畏胃貴, 沸味未, 旣豙
-御	倨慮據助去御, 預恕署洳
-遇	注遇戍句具
-暮	暮路祚故誤
-霽	詣戾計, 惠桂
-祭	芮稅銳歲, 例制
-祭A	蔽袂𡚁祭
+用	用頌
+絳	巷降絳
+寘	賜豉智義, 僞瑞睡累
+寘B	寄義, 僞睡
+寘A	避義恚, 智企
+至	萃類遂醉, 至四自二利
+至B	器兾冀利, 愧位, 媚祕備
+至A	寐二, 季悸
+志	吏記志置
+未	貴畏胃, 旣豙, 未味沸
+御	預署恕洳, 倨助御去慮據
+遇	句注遇戍具
+暮	祚暮故路誤
+霽	惠桂, 詣計戾
+祭	例制, 銳芮歲稅
+祭A	蔽𡚁祭袂
 祭B	例罽憩
-廢	吠穢肺廢
-泰	會最外, 貝蓋艾太帶大
-卦	賣卦懈隘
-怪	介界怪壞拜戒
-夬	邁夬賣快話, 犗喝
-隊	對内繢隊, 佩輩昧妹
-代	代耐槩愛漑
-震	晉振刃遴
-震B	覲遴
-震A	印刃
-稕	閏峻順
+廢	吠廢穢肺
+泰	大帶艾蓋太貝, 外會最
+卦	賣隘卦懈
+怪	拜界介怪戒壞
+夬	喝犗, 賣夬快話邁
+隊	内隊繢對, 佩昧妹輩
+代	耐槩代漑愛
+震	晉遴刃振
+震B	遴覲
+震A	刃印
+稕	順峻閏
 問	運問
-焮	焮靳
-願	怨万願販建
-慁	悶困寸
-恨	艮恨
-翰	賛旰案按
-換	換喚玩段貫亂筭, 半慢
-諫	鴈晏諫澗, 慣患
-襇	幻辨莧襇
-霰	麵佃縣練見電甸
-線	賤箭碾線, 戰扇膳, 囀戀卷, 釧絹
-線B	倦變眷卷
-線A	面箭
+焮	靳焮
+願	建万願怨堰販
+慁	困悶寸
+恨	恨艮
+翰	案旰旦按賛
+換	筭亂段貫玩喚換, 半慢
+諫	諫澗晏鴈, 患慣
+襇	莧襇幻辨
+霰	電甸縣佃練見麵
+線	扇戰膳, 賤箭碾線, 卷囀戀, 絹釧
+線B	卷倦變眷
+線A	箭面
 嘯	弔嘯叫
-笑B	廟召
-笑A	笑要妙
-笑	照召, 肖妙
-效	稍敎孝皃
-号	到導, 報耗
-箇	佐邏賀个箇
-過	貨臥, 過卧唾
-禡	亞㕦罵霸駕訝嫁化, 謝夜
-漾	況樣讓亮訪向, 妄放
-宕	宕浪, 曠謗
-映	病命, 孟更橫, 敬慶
+笑	召照少, 妙肖
+笑B	召廟
+笑A	妙要笑
+效	皃敎孝稍
+号	到導, 耗報
+箇	个箇邏賀佐
+過	唾過卧, 貨臥
+禡	駕霸㕦亞化訝罵嫁, 夜謝
+漾	放妄, 況亮樣訪向讓
+宕	曠謗, 浪宕
+映	更孟橫, 敬慶, 命病
 諍	迸諍
-勁	姓盛鄭政正
-徑	徑定佞
-證	𩜁應甑孕證
-嶝	鄧亘隥贈
-宥	就僦, 溜又副富救呪祐
-候	候漏豆奏遘
+勁	鄭正盛政姓
+徑	徑佞定
+證	應證𩜁孕甑
+嶝	亘隥鄧贈
+宥	副救溜富又呪祐, 僦就
+候	遘奏漏豆候
 幼	幼謬
-沁	禁鴆任, 蔭譖
-沁B	禁蔭
-勘	暗紺
-闞	瞰𣊟濫暫蹔
-豔	豔贍
-豔B	窆驗
+沁	鴆禁任, 蔭譖
+沁B	蔭禁
+勘	紺暗
+闞	蹔暫瞰濫𣊟
+豔	贍豔
+豔B	驗窆
 㮇	念店
-釅	劒欠釅
+釅	釅欠劒
 陷	陷韽
-鑑	鑒懺鑑
-范	梵泛
-屋	禄谷, 木卜, 逐竹匊宿福菊六
-沃	沃篤毒酷
-燭	玉曲欲蜀足録
-覺	角岳覺
-質	質日栗, 吉悉七
-質A	質吉必畢
-質B	密筆乙畢
-術	卹聿律
-櫛	櫛瑟
-物	弗物勿
-迄	乙訖迄
-月	厥月, 歇訐竭謁, 越發伐
-沒	没勃, 忽骨
-曷	達割葛曷
-末	活括栝, 末撥
-鎋	八拔黠滑
-黠	䫄刮, 鎋瞎轄
-屑	結蔑屑, 決穴
-薛	劣爇輟, 辥列熱, 絕悅雪
-薛B	列竭
+鑑	鑑鑒懺
+范	泛梵
+屋	福宿匊逐菊六竹, 谷禄, 木卜
+沃	毒篤沃酷
+燭	曲足録欲玉蜀
+覺	岳覺角
+質	日栗質, 七吉悉
+質A	吉必質畢
+質B	筆乙畢密
+術	卹律聿
+櫛	瑟櫛
+物	勿物弗
+迄	訖迄乙
+月	發越伐, 竭訐歇謁, 厥月
+沒	忽骨, 勃没
+曷	達葛割曷
+末	栝括活, 末撥
+鎋	黠八拔滑
+黠	轄瞎鎋, 䫄刮
+屑	蔑屑結, 穴決
+薛	絕雪悅, 輟爇劣, 熱辥列
+薛B	竭列
 薛A	滅列
-藥	勺藥若灼爵約略雀虐, 籰縛钁
-鐸	郭落穫各博
-陌	格白陌虢伯擭, 戟郤劇逆
-麥	責摘戹核革厄, 麥摑獲
-昔	益亦易, 積迹昔, 役隻炙石
+藥	縛籰钁, 雀藥略若勺爵虐灼約
+鐸	郭各穫落博
+陌	擭虢白陌格伯, 劇逆戟郤
+麥	厄核責戹革摘, 麥獲摑
+昔	益易亦, 役隻炙石, 積迹昔
 昔A	益昔辟
-錫	狊鶪闃, 歷狄擊激
-職	力側逼即極直, 翼職
-德	黑墨北, 德勒得則, 國或
-緝	立戢入執汁
-緝B	汲立急及
-合	閤沓荅合
-盍	盍臘榼
-葉	接涉攝葉輒
-怗	頰愜協牒
+錫	激擊狄歷, 鶪闃狊
+職	極逼力即直側, 職翼
+德	北墨黑, 或國, 德則勒得
+緝	入執戢立汁
+緝B	汲及急立
+合	荅沓閤合
+盍	榼盍臘
+葉	輒接涉攝葉
+怗	頰協愜牒
 洽	夾㘝洽
 狎	狎甲
 業	業劫怯
-乏	乏法
+乏	法乏
 </pre>
 </div>
 </div>

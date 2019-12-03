@@ -13172,11 +13172,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT initial,</span>
-<span class="s1">REPLACE(GROUP_CONCAT(DISTINCT upper_char), &#39;,&#39;, &#39;&#39;) AS &#39;upper_chars&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY initial</span>
-<span class="s1">ORDER BY initial_id, small_rhyme_id;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 母,</span>
+<span class="s1">replace(group_concat(DISTINCT 上字), &#39;,&#39;, &#39;&#39;) AS 上字</span>
+<span class="s1">FROM 廣韻小韻全</span>
+<span class="s1">GROUP BY 母</span>
+<span class="s1">ORDER BY 母號, 小韻號;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13212,30 +13212,30 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>initial</th>
-      <th>upper_chars</th>
+      <th>母</th>
+      <th>上字</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>見</td>
-      <td>居古九舉公過俱佳乖姑各兼詭規几吉紀格</td>
+      <td>幫</td>
+      <td>方府博彼甫邊布必北卑伯筆巴并補陂分兵晡畀封鄙百</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>溪</td>
-      <td>去苦曲丘豈口可起乞客綺恪康墟袪羌驅弃空牽枯欽謙區窺卿詰傾楷</td>
+      <td>滂</td>
+      <td>敷匹芳普撫孚滂披妃丕峯方譬拂</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>羣</td>
-      <td>渠巨強其跪求曁狂奇具臼衢</td>
+      <td>並</td>
+      <td>房薄符防部步扶附蒲縛皮白便浮裴傍毗平捕馮婢父弼</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>疑</td>
-      <td>五魚牛語遇擬愚俄虞疑研宜危吾玉</td>
+      <td>明</td>
+      <td>莫靡武無彌母亡文綿眉模謨明摸巫美望矛慕</td>
     </tr>
     <tr>
       <th>4</th>
@@ -13279,98 +13279,98 @@ div#notebook {
     </tr>
     <tr>
       <th>12</th>
-      <td>幫</td>
-      <td>方府博彼甫邊布必北卑伯筆巴并補陂分兵晡畀封鄙百</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>滂</td>
-      <td>敷匹芳普撫孚滂披妃丕峯方譬拂</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>並</td>
-      <td>房薄符防部步扶附蒲縛皮白便浮裴傍毗平捕馮婢父弼</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>明</td>
-      <td>莫靡武無彌母亡文綿眉模謨明摸巫美望矛慕</td>
-    </tr>
-    <tr>
-      <th>16</th>
       <td>精</td>
       <td>子作即姊遵醉則祖臧將借兹𩛠資姉</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>13</th>
       <td>清</td>
       <td>倉七此取蒼醋千雌采親麁青麤遷</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>14</th>
       <td>從</td>
       <td>徂藏疾昨匠在才自慈秦漸情前</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>15</th>
       <td>心</td>
       <td>息蘇私相素先思須寫桑速斯胥悉雖司辛</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>16</th>
       <td>邪</td>
       <td>祥旬似詳夕徐隨辝辭寺</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>17</th>
       <td>莊</td>
       <td>側莊阻仄爭子鄒簪</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>18</th>
       <td>初</td>
       <td>楚測初創叉瘡芻廁</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>19</th>
       <td>崇</td>
       <td>鋤士仕崇鉏助牀鶵雛犲崱查査</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>20</th>
       <td>生</td>
       <td>所山疏數色史踈砂沙生</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>21</th>
       <td>俟</td>
       <td>俟牀</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>22</th>
       <td>章</td>
       <td>職章旨止諸正煑之占支脂征</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>23</th>
       <td>昌</td>
       <td>昌尺叱處叉赤充姝</td>
     </tr>
     <tr>
-      <th>28</th>
+      <th>24</th>
       <td>船</td>
       <td>食神實乗</td>
     </tr>
     <tr>
-      <th>29</th>
+      <th>25</th>
       <td>書</td>
       <td>書式傷失識施詩舒賞矢釋商試始</td>
     </tr>
     <tr>
-      <th>30</th>
+      <th>26</th>
       <td>常</td>
       <td>蜀是視市署成植常氏時承臣殖甞寔殊十</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>見</td>
+      <td>居古九舉公過俱佳乖姑各兼詭規几吉紀格</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>溪</td>
+      <td>去苦曲丘豈口可起乞客綺恪康墟袪羌驅弃空牽枯欽謙區窺卿詰傾楷</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>羣</td>
+      <td>渠巨強其跪求曁狂奇具臼衢</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>疑</td>
+      <td>五魚牛語遇擬愚俄虞疑研宜危吾玉</td>
     </tr>
     <tr>
       <th>31</th>

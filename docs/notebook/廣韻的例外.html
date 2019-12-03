@@ -13182,13 +13182,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, upper_char, lower_char,</span>
-<span class="s1">GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE upper_char is null</span>
-<span class="s1">OR lower_char is null</span>
-<span class="s1">GROUP BY rhyme, tone, subgroup, rhyme_group, class,</span>
-<span class="s1">small_rhyme_id, small_rhyme, initial, rounding, division, upper_char, lower_char;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 小韻號, 音韻地位, 上字, 下字,</span>
+<span class="s1">GROUP_CONCAT(字頭, &#39;&#39;) AS 字頭</span>
+<span class="s1">FROM 廣韻字頭全</span>
+<span class="s1">WHERE 上字 IS NULL</span>
+<span class="s1">OR 上字 IS NULL</span>
+<span class="s1">GROUP BY 小韻號;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13224,23 +13223,26 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>small_rhyme_descr</th>
-      <th>upper_char</th>
-      <th>lower_char</th>
-      <th>names</th>
+      <th>小韻號</th>
+      <th>音韻地位</th>
+      <th>上字</th>
+      <th>下字</th>
+      <th>字頭</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>章開三拯</td>
+      <td>1919</td>
+      <td>章開三蒸上</td>
       <td>None</td>
       <td>None</td>
       <td>拯抍撜𨋬氶</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>影開二鑑</td>
+      <td>3177</td>
+      <td>影開二銜去</td>
       <td>None</td>
       <td>None</td>
       <td>𪒠</td>
@@ -13259,7 +13261,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#21516;&#19968;&#20491;&#23567;&#38907;&#20013;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;">&#21516;&#19968;&#20491;&#23567;&#38907;&#20013;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;<a class="anchor-link" href="#&#21516;&#19968;&#20491;&#23567;&#38907;&#20013;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;">&#182;</a></h2>
+<h2 id="&#20855;&#26377;&#30456;&#21516;&#38899;&#38907;&#22320;&#20301;&#30340;&#23567;&#38907;">&#20855;&#26377;&#30456;&#21516;&#38899;&#38907;&#22320;&#20301;&#30340;&#23567;&#38907;<a class="anchor-link" href="#&#20855;&#26377;&#30456;&#21516;&#38899;&#38907;&#22320;&#20301;&#30340;&#23567;&#38907;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13268,11 +13270,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT name, small_rhyme_descr, fanqie,</span>
-<span class="s1">GROUP_CONCAT(num_in_small_rhyme) AS &#39;nums_in_small_rhyme&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY small_rhyme_id, name</span>
-<span class="s1">HAVING COUNT(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 音韻地位,</span>
+<span class="s1">group_concat(小韻全名) AS 小韻全名</span>
+<span class="s1">FROM 廣韻小韻全</span>
+<span class="s1">GROUP BY 音韻地位</span>
+<span class="s1">HAVING count(*) &gt; 1</span>
+<span class="s1">ORDER BY 小韻號;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13308,33 +13311,195 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>name</th>
-      <th>small_rhyme_descr</th>
-      <th>fanqie</th>
-      <th>nums_in_small_rhyme</th>
+      <th>音韻地位</th>
+      <th>小韻全名</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>䱱</td>
-      <td>定開四齊</td>
-      <td>杜奚切</td>
-      <td>29,38</td>
+      <td>精開三支平</td>
+      <td>114貲小韻,133厜小韻</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>縝</td>
-      <td>章開三軫</td>
-      <td>章忍切</td>
-      <td>2,11</td>
+      <td>精合三支平</td>
+      <td>135劑小韻,138䮔小韻</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>駛</td>
-      <td>生開三志</td>
-      <td>踈吏切</td>
-      <td>1,2</td>
+      <td>書開三之平</td>
+      <td>193詩小韻,210䀵小韻</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>溪開三之平</td>
+      <td>195欺小韻,209抾小韻</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>溪開二刪平</td>
+      <td>551馯小韻,552豻小韻</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>溪開二麻平</td>
+      <td>798䶗小韻,804𣘟小韻</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>幫開二耕平</td>
+      <td>892浜小韻,902繃小韻</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>溪開三尤平</td>
+      <td>996恘小韻,1002丘小韻</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>從開一談平</td>
+      <td>1094慙小韻,1097𩈻小韻</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>章開三鍾上</td>
+      <td>1171腫小韻,1191𢃭小韻</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>章開三脂上</td>
+      <td>1251旨小韻,1281𧿲小韻</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>滂開一咍上</td>
+      <td>1452啡小韻,1458俖小韻</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>以開一咍上</td>
+      <td>1460佁小韻,1464䑂小韻</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>日合三諄上</td>
+      <td>1487蝡小韻,1492𣯍小韻</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>知開二麻上</td>
+      <td>1789觰小韻,1792䋾小韻</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>初開三陽上</td>
+      <td>1807磢小韻,1831䫪小韻</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>見合三陽上</td>
+      <td>1816獷小韻,1829臩小韻</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>滂開三尤上</td>
+      <td>1950㤱小韻,1954秠小韻</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>曉開二咸上</td>
+      <td>2073闞小韻,2076喊小韻</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>曉合三脂A去</td>
+      <td>2234䁤小韻,2245侐小韻</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>曉合三廢去</td>
+      <td>2421䂕小韻,2548喙小韻</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>清合一泰去</td>
+      <td>2444襊小韻,2452𦦣小韻</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>幫開二佳去</td>
+      <td>2462庍小韻,2470㠔小韻</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>匣合一灰去</td>
+      <td>2520潰小韻,2527蚚小韻</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>滂合三元去</td>
+      <td>2601嬔小韻,2607𣀔小韻</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>清合一戈去</td>
+      <td>2843剉小韻,2849諎小韻,2855磋小韻</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>見開四添去</td>
+      <td>3148趝小韻,3152兼小韻</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>溪開三嚴去</td>
+      <td>3157㪁小韻,3181欠小韻</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>知開三眞入</td>
+      <td>3300窒小韻,3321蛭小韻</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>崇開三臻入</td>
+      <td>3312𪗨小韻,3339𪗨小韻</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>知合三諄入</td>
+      <td>3318茁小韻,3331㤕小韻</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>透合一魂入</td>
+      <td>3373𣅝小韻,3377宊小韻</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>昌合三仙入</td>
+      <td>3513歠小韻,3534啜小韻</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>知開三蒸入</td>
+      <td>3698陟小韻,3722𡮞小韻</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>影開一覃入</td>
+      <td>3787姶小韻,3792唈小韻</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>見開一談入</td>
+      <td>3803䫦小韻,3807砝小韻</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>心開四添入</td>
+      <td>3836燮小韻,3842䢡小韻</td>
     </tr>
   </tbody>
 </table>
@@ -13350,7 +13515,17 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="(&#38907;,-&#38283;&#21512;,-&#31561;,-&#32882;&#27597;)-&#22235;&#20803;&#32068;&#19981;&#33021;&#30906;&#23450;&#19968;&#20491;&#23567;&#38907;">(&#38907;, &#38283;&#21512;, &#31561;, &#32882;&#27597;) &#22235;&#20803;&#32068;&#19981;&#33021;&#30906;&#23450;&#19968;&#20491;&#23567;&#38907;<a class="anchor-link" href="#(&#38907;,-&#38283;&#21512;,-&#31561;,-&#32882;&#27597;)-&#22235;&#20803;&#32068;&#19981;&#33021;&#30906;&#23450;&#19968;&#20491;&#23567;&#38907;">&#182;</a></h2>
+<p>BYVoid<a href="https://www.byvoid.com/blog/kuangx-yonh-dryung-nriux">《廣韻中的重紐與重紐歸類問題》</a></p>
+<blockquote><p>除了上述的重紐現象外，廣韻中還有一些「後增字」。如《廣韻》中有小韻「辟」必益切，又有小韻「碧」彼役切。根據系聯兩個小韻的聲韻地位完全相同，理應歸類爲一個小韻纔對。這種情況不同於重紐，因爲在《刊謬補缺切韻》中，沒有「碧」這個字，而在《唐韻》殘卷中，有「碧色也說文石文美者方彳反一加」，可見「碧」這個字是 <strong>後世新加入的</strong>。由於「碧」所用反切和「辟」不同，《廣韻》編輯者就把「碧」放在了相同韻目的最後，這樣就重出了一個小韻。這種現象的特點是，重複的小韻在前世韻書中沒有出現，且一般只附在《廣韻》一個韻目的最後，零星而不成系統。</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#21516;&#19968;&#20491;&#38899;&#38907;&#22320;&#20301;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;">&#21516;&#19968;&#20491;&#38899;&#38907;&#22320;&#20301;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;<a class="anchor-link" href="#&#21516;&#19968;&#20491;&#38899;&#38907;&#22320;&#20301;&#23384;&#22312;&#20841;&#20491;&#19968;&#27171;&#30340;&#23383;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13359,13 +13534,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, GROUP_CONCAT(small_rhyme_id || names) AS &#39;small_rhymes&#39;</span>
-<span class="s1">FROM (SELECT small_rhyme_descr, small_rhyme_id, GROUP_CONCAT(name, &#39;&#39;) AS &#39;names&#39;</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">GROUP BY small_rhyme_descr, small_rhyme_id)</span>
-<span class="s1">GROUP BY small_rhyme_descr</span>
-<span class="s1">HAVING COUNT(*) &gt; 1</span>
-<span class="s1">ORDER BY small_rhyme_id;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 字頭, 音韻地位,</span>
+<span class="s1">group_concat(小韻號 || &#39;-&#39; || 小韻內字序) AS &#39;小韻號-小韻內字序&#39;</span>
+<span class="s1">FROM 廣韻字頭全</span>
+<span class="s1">GROUP BY 音韻地位, 字頭</span>
+<span class="s1">HAVING count(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13401,210 +13574,59 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>small_rhyme_descr</th>
-      <th>small_rhymes</th>
+      <th>字頭</th>
+      <th>音韻地位</th>
+      <th>小韻號-小韻內字序</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>精開三支</td>
-      <td>114貲頿鴜𪕊鮆訾鄑㠿媊𨚖㰣鈭姕𦺱䖪觜,133厜觜纗惢嫢㭰</td>
+      <td>䱱</td>
+      <td>定開四齊平</td>
+      <td>301-29,301-38</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>精合三支</td>
-      <td>135劑㭰𦸺臇𤎱㷷,138䮔</td>
+      <td>𪗨</td>
+      <td>崇開三臻入</td>
+      <td>3312-1,3339-1</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>書開三之</td>
-      <td>193詩邿齝𪗪呞䀢,210䀵</td>
+      <td>啜</td>
+      <td>昌合三仙入</td>
+      <td>3513-2,3534-1</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>溪開三之</td>
-      <td>195欺娸䫥䫏𠐾魌僛𪅾𪀩䶞抾,209抾</td>
+      <td>抾</td>
+      <td>溪開三之平</td>
+      <td>195-11,209-1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>溪開二刪</td>
-      <td>551馯,552豻鬜</td>
+      <td>𣀔</td>
+      <td>滂合三元去</td>
+      <td>2601-5,2607-1</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>溪開二麻</td>
-      <td>798䶗㤉𡤫,804𣘟</td>
+      <td>駛</td>
+      <td>生開三之去</td>
+      <td>2262-1,2262-2</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>幫開二耕</td>
-      <td>892浜捠,902繃絣𢆸拼䑫</td>
+      <td>縝</td>
+      <td>章開三眞上</td>
+      <td>1466-2,1466-11</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>溪開三尤</td>
-      <td>996恘惆㲃,1002丘丠蓲蚯邱訄</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>從開一談</td>
-      <td>1094慙慚鏨䳻㨻,1097𩈻</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>章開三腫</td>
-      <td>1171腫種踵歱㣫喠,1191𢃭𢃓</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>章開三旨</td>
-      <td>1251旨指恉祁䛗厎砥茋,1281𧿲</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>滂開一海</td>
-      <td>1452啡,1458俖朏</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>以開一海</td>
-      <td>1460佁,1464䑂𦚪</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>日合三準</td>
-      <td>1487蝡,1492𣯍</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>疑開三阮</td>
-      <td>1521𧥜巘𪗛屵,2609𤬝鬳</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>透開一旱</td>
-      <td>1552坦䦔,2635炭歎嘆湠𣁗㛶</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>章開三小</td>
-      <td>1678沼菬䈃,2769照炤詔𨹸𠧙</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>知開二馬</td>
-      <td>1789觰,1792䋾</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>初開三養</td>
-      <td>1807磢㼽𠞮搶漺愴,1831䫪傸</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>見合三養</td>
-      <td>1816獷,1829臩迋𠏤逛</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>滂開三有</td>
-      <td>1950㤱紑𩂆,1954秠</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>曉開二豏</td>
-      <td>2073闞欦,2076喊</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>曉合三至A</td>
-      <td>2234䁤婎睢,2245侐</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>曉合三廢</td>
-      <td>2421䂕,2548喙𤸁𣨶𧾣餯顪</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>清合一泰</td>
-      <td>2444襊𨅎𥨒,2452𦦣</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>幫開二卦</td>
-      <td>2462庍,2470㠔</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>匣合一隊</td>
-      <td>2520潰迴繢嬇殨闠䔇螝詯膭僓䜋䛛,2527蚚</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>滂合三願</td>
-      <td>2601嬔㽹𨠒𡗹𣀔㤆婏𡚪㪻汳,2607𣀔</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>清合一過</td>
-      <td>2843剉莝銼,2849諎𢯽,2855磋</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>見開四㮇</td>
-      <td>3148趝,3152兼䱤</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>溪開三釅</td>
-      <td>3157㪁𤬯,3181欠㐸</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>知開三質</td>
-      <td>3300窒挃庢銍秷𦤻㲳㗧𪗻𨖹螲𥎹,3321蛭</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>崇開三櫛</td>
-      <td>3312𪗨,3339𪗨</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>知合三術</td>
-      <td>3318茁,3331㤕窋絀䂐㑁逫𡢑泏</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>透合一沒</td>
-      <td>3373𣅝,3377宊棁𠫓𡿮㥆䠈</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>昌合三薛</td>
-      <td>3513歠啜,3534啜</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>知開三職</td>
-      <td>3698陟稙,3722𡮞𣮊𢕚</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>影開一合</td>
-      <td>3787姶𤸱罨罯媕㔩庵𨂁𩋊𩇠搕鞥佮,3792唈</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>見開一盍</td>
-      <td>3803䫦𧪞嗑蓋閘鉀䗘𨜴,3807砝𪁍</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>心開四怗</td>
-      <td>3836燮屧屟躞韘𤫉𤏻鞢徢𦔼𤗈蜨𧕊䕈𡞘𦩌,3842䢡</td>
+      <td>觜</td>
+      <td>精開三支平</td>
+      <td>114-16,133-2</td>
     </tr>
   </tbody>
 </table>
@@ -13620,16 +13642,6 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>BYVoid<a href="https://www.byvoid.com/blog/kuangx-yonh-dryung-nriux">《廣韻中的重紐與重紐歸類問題》</a></p>
-<blockquote><p>除了上述的重紐現象外，廣韻中還有一些「後增字」。如《廣韻》中有小韻「辟」必益切，又有小韻「碧」彼役切。根據系聯兩個小韻的聲韻地位完全相同，理應歸類爲一個小韻纔對。這種情況不同於重紐，因爲在《刊謬補缺切韻》中，沒有「碧」這個字，而在《唐韻》殘卷中，有「碧色也說文石文美者方彳反一加」，可見「碧」這個字是 <strong>後世新加入的</strong>。由於「碧」所用反切和「辟」不同，《廣韻》編輯者就把「碧」放在了相同韻目的最後，這樣就重出了一個小韻。這種現象的特點是，重複的小韻在前世韻書中沒有出現，且一般只附在《廣韻》一個韻目的最後，零星而不成系統。</p>
-</blockquote>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="&#26377;&#30456;&#21516;&#21453;&#20999;&#30340;&#23567;&#38907;">&#26377;&#30456;&#21516;&#21453;&#20999;&#30340;&#23567;&#38907;<a class="anchor-link" href="#&#26377;&#30456;&#21516;&#21453;&#20999;&#30340;&#23567;&#38907;">&#182;</a></h2>
 </div>
 </div>
@@ -13639,12 +13651,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT upper_char || lower_char AS &#39;fanqie&#39;,</span>
-<span class="s1">GROUP_CONCAT(id || small_rhyme) AS &#39;small_rhymes&#39;</span>
-<span class="s1">FROM full_small_rhymes</span>
-<span class="s1">WHERE upper_char IS NOT NULL</span>
-<span class="s1">GROUP BY upper_char, lower_char</span>
-<span class="s1">HAVING COUNT(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 上字 || 下字 || &#39;切&#39; AS 反切,</span>
+<span class="s1">group_concat(小韻全名) AS 小韻全名</span>
+<span class="s1">FROM 廣韻小韻全</span>
+<span class="s1">WHERE 上字 IS NOT NULL</span>
+<span class="s1">GROUP BY 上字, 下字</span>
+<span class="s1">HAVING count(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13680,55 +13692,55 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>fanqie</th>
-      <th>small_rhymes</th>
+      <th>反切</th>
+      <th>小韻全名</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>丘弭</td>
-      <td>1241跬,1248企</td>
+      <td>丘弭切</td>
+      <td>1241跬小韻,1248企小韻</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>之少</td>
-      <td>1678沼,2769照</td>
+      <td>之少切</td>
+      <td>1678沼小韻,2769照小韻</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>古伯</td>
-      <td>3618格,3621虢</td>
+      <td>古伯切</td>
+      <td>3618格小韻,3621虢小韻</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>古賣</td>
-      <td>2453卦,2491夬</td>
+      <td>古賣切</td>
+      <td>2453卦小韻,2491夬小韻</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>士免</td>
-      <td>1653撰,1663棧</td>
+      <td>士免切</td>
+      <td>1653撰小韻,1663棧小韻</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>居乙</td>
-      <td>3320曁,3352訖</td>
+      <td>居乙切</td>
+      <td>3320曁小韻,3352訖小韻</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>烏浪</td>
-      <td>2928盎,2945汪</td>
+      <td>烏浪切</td>
+      <td>2928盎小韻,2945汪小韻</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>芳万</td>
-      <td>2601嬔,2607𣀔</td>
+      <td>芳万切</td>
+      <td>2601嬔小韻,2607𣀔小韻</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>苦蓋</td>
-      <td>2446磕,2534慨</td>
+      <td>苦蓋切</td>
+      <td>2446磕小韻,2534慨小韻</td>
     </tr>
   </tbody>
 </table>
@@ -13753,10 +13765,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme, GROUP_CONCAT(id)</span>
-<span class="s1">FROM full_small_rhymes</span>
-<span class="s1">GROUP BY small_rhyme</span>
-<span class="s1">HAVING COUNT(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 小韻, 小韻全名</span>
+<span class="s1">FROM 廣韻小韻全</span>
+<span class="s1">GROUP BY 小韻</span>
+<span class="s1">HAVING count(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13792,805 +13804,805 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>small_rhyme</th>
-      <th>GROUP_CONCAT(id)</th>
+      <th>小韻</th>
+      <th>小韻全名</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>㓼</td>
-      <td>1307,3302</td>
+      <td>1307㓼小韻</td>
     </tr>
     <tr>
       <th>1</th>
       <td>㔌</td>
-      <td>1030,3080</td>
+      <td>1030㔌小韻</td>
     </tr>
     <tr>
       <th>2</th>
       <td>㛂</td>
-      <td>1752,1755</td>
+      <td>1752㛂小韻</td>
     </tr>
     <tr>
       <th>3</th>
       <td>㟅</td>
-      <td>33,85</td>
+      <td>33㟅小韻</td>
     </tr>
     <tr>
       <th>4</th>
       <td>㪁</td>
-      <td>1154,3157</td>
+      <td>1154㪁小韻</td>
     </tr>
     <tr>
       <th>5</th>
       <td>㱡</td>
-      <td>964,1922</td>
+      <td>964㱡小韻</td>
     </tr>
     <tr>
       <th>6</th>
       <td>䀴</td>
-      <td>1918,3854</td>
+      <td>1918䀴小韻</td>
     </tr>
     <tr>
       <th>7</th>
       <td>䁤</td>
-      <td>1282,2234</td>
+      <td>1282䁤小韻</td>
     </tr>
     <tr>
       <th>8</th>
       <td>䃔</td>
-      <td>40,2123</td>
+      <td>40䃔小韻</td>
     </tr>
     <tr>
       <th>9</th>
       <td>䆀</td>
-      <td>1456,2530</td>
+      <td>1456䆀小韻</td>
     </tr>
     <tr>
       <th>10</th>
       <td>䟽</td>
-      <td>236,2300</td>
+      <td>236䟽小韻</td>
     </tr>
     <tr>
       <th>11</th>
       <td>䫲</td>
-      <td>2019,3116</td>
+      <td>2019䫲小韻</td>
     </tr>
     <tr>
       <th>12</th>
       <td>䰖</td>
-      <td>1560,3411</td>
+      <td>1560䰖小韻</td>
     </tr>
     <tr>
       <th>13</th>
       <td>三</td>
-      <td>1090,3127</td>
+      <td>1090三小韻</td>
     </tr>
     <tr>
       <th>14</th>
       <td>且</td>
-      <td>245,1776</td>
+      <td>245且小韻</td>
     </tr>
     <tr>
       <th>15</th>
       <td>中</td>
-      <td>3,2112</td>
+      <td>3中小韻</td>
     </tr>
     <tr>
       <th>16</th>
       <td>些</td>
-      <td>801,2834</td>
+      <td>801些小韻</td>
     </tr>
     <tr>
       <th>17</th>
       <td>企</td>
-      <td>1248,2176</td>
+      <td>1248企小韻</td>
     </tr>
     <tr>
       <th>18</th>
       <td>作</td>
-      <td>2360,3574</td>
+      <td>2360作小韻</td>
     </tr>
     <tr>
       <th>19</th>
       <td>侃</td>
-      <td>1558,2641</td>
+      <td>1558侃小韻</td>
     </tr>
     <tr>
       <th>20</th>
       <td>便</td>
-      <td>615,2751</td>
+      <td>615便小韻</td>
     </tr>
     <tr>
       <th>21</th>
       <td>倗</td>
-      <td>1924,3028</td>
+      <td>1924倗小韻</td>
     </tr>
     <tr>
       <th>22</th>
       <td>倚</td>
-      <td>1212,2172</td>
+      <td>1212倚小韻</td>
     </tr>
     <tr>
       <th>23</th>
       <td>傍</td>
-      <td>856,2931</td>
+      <td>856傍小韻</td>
     </tr>
     <tr>
       <th>24</th>
       <td>儑</td>
-      <td>3112,3801</td>
+      <td>3112儑小韻</td>
     </tr>
     <tr>
       <th>25</th>
       <td>兼</td>
-      <td>1129,3152</td>
+      <td>1129兼小韻</td>
     </tr>
     <tr>
       <th>26</th>
       <td>凝</td>
-      <td>960,3017</td>
+      <td>960凝小韻</td>
     </tr>
     <tr>
       <th>27</th>
       <td>凭</td>
-      <td>951,3015</td>
+      <td>951凭小韻</td>
     </tr>
     <tr>
       <th>28</th>
       <td>出</td>
-      <td>2243,3333</td>
+      <td>2243出小韻</td>
     </tr>
     <tr>
       <th>29</th>
       <td>分</td>
-      <td>459,2589</td>
+      <td>459分小韻</td>
     </tr>
     <tr>
       <th>30</th>
       <td>剸</td>
-      <td>1651,2755</td>
+      <td>1651剸小韻</td>
     </tr>
     <tr>
       <th>31</th>
       <td>卒</td>
-      <td>3327,3391</td>
+      <td>3327卒小韻</td>
     </tr>
     <tr>
       <th>32</th>
       <td>吟</td>
-      <td>1063,3098</td>
+      <td>1063吟小韻</td>
     </tr>
     <tr>
       <th>33</th>
       <td>吹</td>
-      <td>98,2174</td>
+      <td>98吹小韻</td>
     </tr>
     <tr>
       <th>34</th>
       <td>和</td>
-      <td>753,2838</td>
+      <td>753和小韻</td>
     </tr>
     <tr>
       <th>35</th>
       <td>啜</td>
-      <td>2414,3534</td>
+      <td>2414啜小韻</td>
     </tr>
     <tr>
       <th>36</th>
       <td>啞</td>
-      <td>1770,3611</td>
+      <td>1770啞小韻</td>
     </tr>
     <tr>
       <th>37</th>
       <td>喊</td>
-      <td>2030,2076</td>
+      <td>2030喊小韻</td>
     </tr>
     <tr>
       <th>38</th>
       <td>圈</td>
-      <td>1646,2610</td>
+      <td>1646圈小韻</td>
     </tr>
     <tr>
       <th>39</th>
       <td>埯</td>
-      <td>2031,2064</td>
+      <td>2031埯小韻</td>
     </tr>
     <tr>
       <th>40</th>
       <td>堲</td>
-      <td>3304,3721</td>
+      <td>3304堲小韻</td>
     </tr>
     <tr>
       <th>41</th>
       <td>增</td>
-      <td>973,3030</td>
+      <td>973增小韻</td>
     </tr>
     <tr>
       <th>42</th>
       <td>奔</td>
-      <td>496,2627</td>
+      <td>496奔小韻</td>
     </tr>
     <tr>
       <th>43</th>
       <td>女</td>
-      <td>1335,2311</td>
+      <td>1335女小韻</td>
     </tr>
     <tr>
       <th>44</th>
       <td>奻</td>
-      <td>549,2682</td>
+      <td>549奻小韻</td>
     </tr>
     <tr>
       <th>45</th>
       <td>妠</td>
-      <td>3114,3461</td>
+      <td>3114妠小韻</td>
     </tr>
     <tr>
       <th>46</th>
       <td>嬽</td>
-      <td>567,644</td>
+      <td>567嬽小韻</td>
     </tr>
     <tr>
       <th>47</th>
       <td>孨</td>
-      <td>2742,3770</td>
+      <td>2742孨小韻</td>
     </tr>
     <tr>
       <th>48</th>
       <td>少</td>
-      <td>1681,2785</td>
+      <td>1681少小韻</td>
     </tr>
     <tr>
       <th>49</th>
       <td>屯</td>
-      <td>442,492</td>
+      <td>442屯小韻</td>
     </tr>
     <tr>
       <th>50</th>
       <td>崽</td>
-      <td>335,358</td>
+      <td>335崽小韻</td>
     </tr>
     <tr>
       <th>51</th>
       <td>巉</td>
-      <td>1144,2085</td>
+      <td>1144巉小韻</td>
     </tr>
     <tr>
       <th>52</th>
       <td>巋</td>
-      <td>183,1285</td>
+      <td>183巋小韻</td>
     </tr>
     <tr>
       <th>53</th>
       <td>巢</td>
-      <td>689,2807</td>
+      <td>689巢小韻</td>
     </tr>
     <tr>
       <th>54</th>
       <td>差</td>
-      <td>120,348,2459</td>
+      <td>120差小韻</td>
     </tr>
     <tr>
       <th>55</th>
       <td>從</td>
-      <td>57,2139</td>
+      <td>57從小韻</td>
     </tr>
     <tr>
       <th>56</th>
       <td>徵</td>
-      <td>958,1288</td>
+      <td>958徵小韻</td>
     </tr>
     <tr>
       <th>57</th>
       <td>恐</td>
-      <td>1181,2138</td>
+      <td>1181恐小韻</td>
     </tr>
     <tr>
       <th>58</th>
       <td>扮</td>
-      <td>1422,2692</td>
+      <td>1422扮小韻</td>
     </tr>
     <tr>
       <th>59</th>
       <td>掣</td>
-      <td>2401,3537</td>
+      <td>2401掣小韻</td>
     </tr>
     <tr>
       <th>60</th>
       <td>撰</td>
-      <td>1591,1653</td>
+      <td>1591撰小韻</td>
     </tr>
     <tr>
       <th>61</th>
       <td>操</td>
-      <td>723,2815</td>
+      <td>723操小韻</td>
     </tr>
     <tr>
       <th>62</th>
       <td>擔</td>
-      <td>1089,3126</td>
+      <td>1089擔小韻</td>
     </tr>
     <tr>
       <th>63</th>
       <td>攤</td>
-      <td>1576,2644</td>
+      <td>1576攤小韻</td>
     </tr>
     <tr>
       <th>64</th>
       <td>敗</td>
-      <td>2495,2505</td>
+      <td>2495敗小韻</td>
     </tr>
     <tr>
       <th>65</th>
       <td>敲</td>
-      <td>696,2795</td>
+      <td>696敲小韻</td>
     </tr>
     <tr>
       <th>66</th>
       <td>暴</td>
-      <td>2816,3196</td>
+      <td>2816暴小韻</td>
     </tr>
     <tr>
       <th>67</th>
       <td>朓</td>
-      <td>1668,2786</td>
+      <td>1668朓小韻</td>
     </tr>
     <tr>
       <th>68</th>
       <td>枕</td>
-      <td>1985,3089</td>
+      <td>1985枕小韻</td>
     </tr>
     <tr>
       <th>69</th>
       <td>棧</td>
-      <td>1597,1663</td>
+      <td>1597棧小韻</td>
     </tr>
     <tr>
       <th>70</th>
       <td>楚</td>
-      <td>1339,2312</td>
+      <td>1339楚小韻</td>
     </tr>
     <tr>
       <th>71</th>
       <td>榜</td>
-      <td>1835,2962</td>
+      <td>1835榜小韻</td>
     </tr>
     <tr>
       <th>72</th>
       <td>殑</td>
-      <td>963,1921,3020</td>
+      <td>963殑小韻</td>
     </tr>
     <tr>
       <th>73</th>
       <td>毀</td>
-      <td>1205,2183</td>
+      <td>1205毀小韻</td>
     </tr>
     <tr>
       <th>74</th>
       <td>汪</td>
-      <td>849,2945</td>
+      <td>849汪小韻</td>
     </tr>
     <tr>
       <th>75</th>
       <td>沈</td>
-      <td>1050,1986</td>
+      <td>1050沈小韻</td>
     </tr>
     <tr>
       <th>76</th>
       <td>泥</td>
-      <td>314,2382</td>
+      <td>314泥小韻</td>
     </tr>
     <tr>
       <th>77</th>
       <td>浜</td>
-      <td>892,1867</td>
+      <td>892浜小韻</td>
     </tr>
     <tr>
       <th>78</th>
       <td>淙</td>
-      <td>86,2149</td>
+      <td>86淙小韻</td>
     </tr>
     <tr>
       <th>79</th>
       <td>深</td>
-      <td>1054,3103</td>
+      <td>1054深小韻</td>
     </tr>
     <tr>
       <th>80</th>
       <td>湩</td>
-      <td>1187,2131</td>
+      <td>1187湩小韻</td>
     </tr>
     <tr>
       <th>81</th>
       <td>湫</td>
-      <td>1675,1936</td>
+      <td>1675湫小韻</td>
     </tr>
     <tr>
       <th>82</th>
       <td>潛</td>
-      <td>1117,3141</td>
+      <td>1117潛小韻</td>
     </tr>
     <tr>
       <th>83</th>
       <td>灑</td>
-      <td>1418,1769</td>
+      <td>1418灑小韻</td>
     </tr>
     <tr>
       <th>84</th>
       <td>烘</td>
-      <td>32,2118</td>
+      <td>32烘小韻</td>
     </tr>
     <tr>
       <th>85</th>
       <td>焌</td>
-      <td>2629,3334</td>
+      <td>2629焌小韻</td>
     </tr>
     <tr>
       <th>86</th>
       <td>爲</td>
-      <td>89,2157</td>
+      <td>89爲小韻</td>
     </tr>
     <tr>
       <th>87</th>
       <td>爹</td>
-      <td>802,1735</td>
+      <td>802爹小韻</td>
     </tr>
     <tr>
       <th>88</th>
       <td>牝</td>
-      <td>1264,1476</td>
+      <td>1264牝小韻</td>
     </tr>
     <tr>
       <th>89</th>
       <td>狂</td>
-      <td>836,2923</td>
+      <td>836狂小韻</td>
     </tr>
     <tr>
       <th>90</th>
       <td>猭</td>
-      <td>635,2734</td>
+      <td>635猭小韻</td>
     </tr>
     <tr>
       <th>91</th>
       <td>瓦</td>
-      <td>1786,2891</td>
+      <td>1786瓦小韻</td>
     </tr>
     <tr>
       <th>92</th>
       <td>甚</td>
-      <td>1988,3101</td>
+      <td>1988甚小韻</td>
     </tr>
     <tr>
       <th>93</th>
       <td>生</td>
-      <td>884,2964</td>
+      <td>884生小韻</td>
     </tr>
     <tr>
       <th>94</th>
       <td>省</td>
-      <td>1859,1895</td>
+      <td>1859省小韻</td>
     </tr>
     <tr>
       <th>95</th>
       <td>瞢</td>
-      <td>13,974</td>
+      <td>13瞢小韻</td>
     </tr>
     <tr>
       <th>96</th>
       <td>稱</td>
-      <td>962,3016</td>
+      <td>962稱小韻</td>
     </tr>
     <tr>
       <th>97</th>
       <td>稴</td>
-      <td>2057,3154</td>
+      <td>2057稴小韻</td>
     </tr>
     <tr>
       <th>98</th>
       <td>積</td>
-      <td>2155,3650</td>
+      <td>2155積小韻</td>
     </tr>
     <tr>
       <th>99</th>
       <td>窒</td>
-      <td>3300,3489</td>
+      <td>3300窒小韻</td>
     </tr>
     <tr>
       <th>100</th>
       <td>等</td>
-      <td>1455,1923</td>
+      <td>1455等小韻</td>
     </tr>
     <tr>
       <th>101</th>
       <td>精</td>
-      <td>910,2992</td>
+      <td>910精小韻</td>
     </tr>
     <tr>
       <th>102</th>
       <td>絮</td>
-      <td>2304,2314</td>
+      <td>2304絮小韻</td>
     </tr>
     <tr>
       <th>103</th>
       <td>綰</td>
-      <td>1579,2674</td>
+      <td>1579綰小韻</td>
     </tr>
     <tr>
       <th>104</th>
       <td>縛</td>
-      <td>2852,3559</td>
+      <td>2852縛小韻</td>
     </tr>
     <tr>
       <th>105</th>
       <td>縱</td>
-      <td>61,2132</td>
+      <td>61縱小韻</td>
     </tr>
     <tr>
       <th>106</th>
       <td>翹</td>
-      <td>684,2788</td>
+      <td>684翹小韻</td>
     </tr>
     <tr>
       <th>107</th>
       <td>聱</td>
-      <td>697,1042</td>
+      <td>697聱小韻</td>
     </tr>
     <tr>
       <th>108</th>
       <td>能</td>
-      <td>397,980,1926</td>
+      <td>397能小韻</td>
     </tr>
     <tr>
       <th>109</th>
       <td>脅</td>
-      <td>3156,3863</td>
+      <td>3156脅小韻</td>
     </tr>
     <tr>
       <th>110</th>
       <td>脞</td>
-      <td>762,1762</td>
+      <td>762脞小韻</td>
     </tr>
     <tr>
       <th>111</th>
       <td>興</td>
-      <td>961,3011</td>
+      <td>961興小韻</td>
     </tr>
     <tr>
       <th>112</th>
       <td>若</td>
-      <td>800,1787,3545</td>
+      <td>800若小韻</td>
     </tr>
     <tr>
       <th>113</th>
       <td>茁</td>
-      <td>3318,3445,3527</td>
+      <td>3318茁小韻</td>
     </tr>
     <tr>
       <th>114</th>
       <td>荒</td>
-      <td>844,2943</td>
+      <td>844荒小韻</td>
     </tr>
     <tr>
       <th>115</th>
       <td>華</td>
-      <td>773,775</td>
+      <td>773華小韻</td>
     </tr>
     <tr>
       <th>116</th>
       <td>著</td>
-      <td>2298,3564</td>
+      <td>2298著小韻</td>
     </tr>
     <tr>
       <th>117</th>
       <td>蓄</td>
-      <td>3215,3226</td>
+      <td>3215蓄小韻</td>
     </tr>
     <tr>
       <th>118</th>
       <td>蕝</td>
-      <td>2418,3504</td>
+      <td>2418蕝小韻</td>
     </tr>
     <tr>
       <th>119</th>
       <td>藏</td>
-      <td>858,2932</td>
+      <td>858藏小韻</td>
     </tr>
     <tr>
       <th>120</th>
       <td>虚</td>
-      <td>237,246</td>
+      <td>237虚小韻</td>
     </tr>
     <tr>
       <th>121</th>
       <td>虥</td>
-      <td>559,574</td>
+      <td>559虥小韻</td>
     </tr>
     <tr>
       <th>122</th>
       <td>虺</td>
-      <td>349,1319</td>
+      <td>349虺小韻</td>
     </tr>
     <tr>
       <th>123</th>
       <td>螼</td>
-      <td>1494,2572</td>
+      <td>1494螼小韻</td>
     </tr>
     <tr>
       <th>124</th>
       <td>行</td>
-      <td>887,2957</td>
+      <td>887行小韻</td>
     </tr>
     <tr>
       <th>125</th>
       <td>衰</td>
-      <td>136,165</td>
+      <td>136衰小韻</td>
     </tr>
     <tr>
       <th>126</th>
       <td>要</td>
-      <td>676,2771</td>
+      <td>676要小韻</td>
     </tr>
     <tr>
       <th>127</th>
       <td>見</td>
-      <td>2702,2705</td>
+      <td>2702見小韻</td>
     </tr>
     <tr>
       <th>128</th>
       <td>覘</td>
-      <td>1112,3138</td>
+      <td>1112覘小韻</td>
     </tr>
     <tr>
       <th>129</th>
       <td>親</td>
-      <td>408,2571</td>
+      <td>408親小韻</td>
     </tr>
     <tr>
       <th>130</th>
       <td>詑</td>
-      <td>129,748</td>
+      <td>129詑小韻</td>
     </tr>
     <tr>
       <th>131</th>
       <td>論</td>
-      <td>497,2626</td>
+      <td>497論小韻</td>
     </tr>
     <tr>
       <th>132</th>
       <td>諵</td>
-      <td>1140,3167</td>
+      <td>1140諵小韻</td>
     </tr>
     <tr>
       <th>133</th>
       <td>豻</td>
-      <td>508,552</td>
+      <td>508豻小韻</td>
     </tr>
     <tr>
       <th>134</th>
       <td>跪</td>
-      <td>1207,1244</td>
+      <td>1207跪小韻</td>
     </tr>
     <tr>
       <th>135</th>
       <td>蹱</td>
-      <td>58,2133</td>
+      <td>58蹱小韻</td>
     </tr>
     <tr>
       <th>136</th>
       <td>載</td>
-      <td>2529,2542</td>
+      <td>2529載小韻</td>
     </tr>
     <tr>
       <th>137</th>
       <td>輕</td>
-      <td>920,2990</td>
+      <td>920輕小韻</td>
     </tr>
     <tr>
       <th>138</th>
       <td>轟</td>
-      <td>901,2974</td>
+      <td>901轟小韻</td>
     </tr>
     <tr>
       <th>139</th>
       <td>迎</td>
-      <td>886,2965</td>
+      <td>886迎小韻</td>
     </tr>
     <tr>
       <th>140</th>
       <td>近</td>
-      <td>1511,2592</td>
+      <td>1511近小韻</td>
     </tr>
     <tr>
       <th>141</th>
       <td>遠</td>
-      <td>1516,2608</td>
+      <td>1516遠小韻</td>
     </tr>
     <tr>
       <th>142</th>
       <td>選</td>
-      <td>1652,2740</td>
+      <td>1652選小韻</td>
     </tr>
     <tr>
       <th>143</th>
       <td>邅</td>
-      <td>606,1662,2752</td>
+      <td>606邅小韻</td>
     </tr>
     <tr>
       <th>144</th>
       <td>重</td>
-      <td>56,1176,2136</td>
+      <td>56重小韻</td>
     </tr>
     <tr>
       <th>145</th>
       <td>野</td>
-      <td>1348,1766</td>
+      <td>1348野小韻</td>
     </tr>
     <tr>
       <th>146</th>
       <td>長</td>
-      <td>815,1826</td>
+      <td>815長小韻</td>
     </tr>
     <tr>
       <th>147</th>
       <td>闞</td>
-      <td>2073,3118</td>
+      <td>2073闞小韻</td>
     </tr>
     <tr>
       <th>148</th>
       <td>頸</td>
-      <td>929,1889</td>
+      <td>929頸小韻</td>
     </tr>
     <tr>
       <th>149</th>
       <td>飯</td>
-      <td>1529,2600</td>
+      <td>1529飯小韻</td>
     </tr>
     <tr>
       <th>150</th>
       <td>餧</td>
-      <td>1438,2181</td>
+      <td>1438餧小韻</td>
     </tr>
     <tr>
       <th>151</th>
       <td>饒</td>
-      <td>666,2789</td>
+      <td>666饒小韻</td>
     </tr>
     <tr>
       <th>152</th>
       <td>鰥</td>
-      <td>555,2693</td>
+      <td>555鰥小韻</td>
     </tr>
     <tr>
       <th>153</th>
       <td>𠊧</td>
-      <td>1880,2971</td>
+      <td>1880𠊧小韻</td>
     </tr>
     <tr>
       <th>154</th>
       <td>𡰝</td>
-      <td>570,646</td>
+      <td>570𡰝小韻</td>
     </tr>
     <tr>
       <th>155</th>
       <td>𤣆</td>
-      <td>402,572</td>
+      <td>402𤣆小韻</td>
     </tr>
     <tr>
       <th>156</th>
       <td>𥄎</td>
-      <td>3524,3671</td>
+      <td>3524𥄎小韻</td>
     </tr>
     <tr>
       <th>157</th>
       <td>𪉦</td>
-      <td>3121,3166</td>
+      <td>3121𪉦小韻</td>
     </tr>
     <tr>
       <th>158</th>
       <td>𪗨</td>
-      <td>3312,3339</td>
+      <td>3312𪗨小韻</td>
     </tr>
   </tbody>
 </table>
@@ -14615,11 +14627,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT upper_char, small_rhyme_id, small_rhyme_descr, fanqie</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE upper_char NOT IN</span>
-<span class="s1">(SELECT name FROM full_char_entities)</span>
-<span class="s1">GROUP BY upper_char;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 上字, 小韻號, 音韻地位, 上字 || 下字 || &#39;切&#39; AS 反切</span>
+<span class="s1">FROM 廣韻小韻全</span>
+<span class="s1">WHERE 上字 NOT IN</span>
+<span class="s1">(SELECT 字頭 FROM 廣韻字頭)</span>
+<span class="s1">GROUP BY 上字;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14655,10 +14667,10 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>upper_char</th>
-      <th>small_rhyme_id</th>
-      <th>small_rhyme_descr</th>
-      <th>fanqie</th>
+      <th>上字</th>
+      <th>小韻號</th>
+      <th>音韻地位</th>
+      <th>反切</th>
     </tr>
   </thead>
   <tbody>
@@ -14666,63 +14678,63 @@ div#notebook {
       <th>0</th>
       <td>呂</td>
       <td>76</td>
-      <td>來開二江</td>
+      <td>來開二江平</td>
       <td>呂江切</td>
     </tr>
     <tr>
       <th>1</th>
       <td>奇</td>
       <td>2165</td>
-      <td>羣開三寘B</td>
+      <td>羣開三支B去</td>
       <td>奇寄切</td>
     </tr>
     <tr>
       <th>2</th>
       <td>妳</td>
       <td>332</td>
-      <td>孃開二佳</td>
+      <td>孃開二佳平</td>
       <td>妳佳切</td>
     </tr>
     <tr>
       <th>3</th>
       <td>姉</td>
       <td>3529</td>
-      <td>精開三薛</td>
+      <td>精開三仙入</td>
       <td>姉列切</td>
     </tr>
     <tr>
       <th>4</th>
       <td>姊</td>
       <td>133</td>
-      <td>精開三支</td>
+      <td>精開三支平</td>
       <td>姊移切</td>
     </tr>
     <tr>
       <th>5</th>
       <td>查</td>
       <td>3464</td>
-      <td>崇開二黠</td>
+      <td>崇開二刪入</td>
       <td>查鎋切</td>
     </tr>
     <tr>
       <th>6</th>
       <td>犲</td>
       <td>2507</td>
-      <td>崇開二夬</td>
+      <td>崇開二夬去</td>
       <td>犲夬切</td>
     </tr>
     <tr>
       <th>7</th>
       <td>疏</td>
       <td>146</td>
-      <td>生開三脂</td>
+      <td>生開三脂平</td>
       <td>疏夷切</td>
     </tr>
     <tr>
       <th>8</th>
       <td>青</td>
       <td>2059</td>
-      <td>清開四忝</td>
+      <td>清開四添上</td>
       <td>青忝切</td>
     </tr>
   </tbody>
@@ -14748,11 +14760,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT lower_char, small_rhyme_id, small_rhyme_descr, fanqie</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE lower_char NOT IN</span>
-<span class="s1">(SELECT name FROM full_char_entities)</span>
-<span class="s1">GROUP BY lower_char;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 下字, 小韻號, 音韻地位, 上字 || 下字 || &#39;切&#39; AS 反切</span>
+<span class="s1">FROM 廣韻小韻全</span>
+<span class="s1">WHERE 下字 NOT IN</span>
+<span class="s1">(SELECT 字頭 FROM 廣韻字頭)</span>
+<span class="s1">GROUP BY 下字;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14788,10 +14800,10 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>lower_char</th>
-      <th>small_rhyme_id</th>
-      <th>small_rhyme_descr</th>
-      <th>fanqie</th>
+      <th>下字</th>
+      <th>小韻號</th>
+      <th>音韻地位</th>
+      <th>反切</th>
     </tr>
   </thead>
   <tbody>
@@ -14799,119 +14811,119 @@ div#notebook {
       <th>0</th>
       <td>候</td>
       <td>3064</td>
-      <td>溪開一候</td>
+      <td>溪開一侯去</td>
       <td>苦候切</td>
     </tr>
     <tr>
       <th>1</th>
       <td>劒</td>
       <td>3158</td>
-      <td>明合三范</td>
+      <td>明合三凡去</td>
       <td>亡劒切</td>
     </tr>
     <tr>
       <th>2</th>
       <td>卧</td>
       <td>2837</td>
-      <td>見合一過</td>
+      <td>見合一戈去</td>
       <td>古卧切</td>
     </tr>
     <tr>
       <th>3</th>
       <td>奇</td>
       <td>107</td>
-      <td>溪開三支B</td>
+      <td>溪開三支B平</td>
       <td>去奇切</td>
     </tr>
     <tr>
       <th>4</th>
       <td>姊</td>
       <td>1255</td>
-      <td>邪開三旨</td>
+      <td>邪開三脂上</td>
       <td>徐姊切</td>
     </tr>
     <tr>
       <th>5</th>
       <td>彦</td>
       <td>2753</td>
-      <td>來開三線</td>
+      <td>來開三仙去</td>
       <td>連彦切</td>
     </tr>
     <tr>
       <th>6</th>
       <td>樣</td>
       <td>2896</td>
-      <td>日開三漾</td>
+      <td>日開三陽去</td>
       <td>人樣切</td>
     </tr>
     <tr>
       <th>7</th>
       <td>狶</td>
       <td>1313</td>
-      <td>溪開三尾</td>
+      <td>溪開三微上</td>
       <td>袪狶切</td>
     </tr>
     <tr>
       <th>8</th>
       <td>笑</td>
       <td>2771</td>
-      <td>影開三笑A</td>
+      <td>影開三宵A去</td>
       <td>於笑切</td>
     </tr>
     <tr>
       <th>9</th>
       <td>耗</td>
       <td>2817</td>
-      <td>幫開一号</td>
+      <td>幫開一豪去</td>
       <td>博耗切</td>
     </tr>
     <tr>
       <th>10</th>
       <td>葅</td>
       <td>236</td>
-      <td>生開三魚</td>
+      <td>生開三魚平</td>
       <td>所葅切</td>
     </tr>
     <tr>
       <th>11</th>
       <td>衛</td>
       <td>2392</td>
-      <td>知合三祭</td>
+      <td>知合三祭去</td>
       <td>陟衛切</td>
     </tr>
     <tr>
       <th>12</th>
       <td>賓</td>
       <td>421</td>
-      <td>滂開三眞A</td>
+      <td>滂開三眞A平</td>
       <td>匹賓切</td>
     </tr>
     <tr>
       <th>13</th>
       <td>賺</td>
       <td>3167</td>
-      <td>孃開二陷</td>
+      <td>孃開二咸去</td>
       <td>尼賺切</td>
     </tr>
     <tr>
       <th>14</th>
       <td>閏</td>
       <td>2574</td>
-      <td>章合三稕</td>
+      <td>章合三諄去</td>
       <td>之閏切</td>
     </tr>
     <tr>
       <th>15</th>
       <td>顔</td>
       <td>547</td>
-      <td>見開二刪</td>
+      <td>見開二刪平</td>
       <td>古顔切</td>
     </tr>
     <tr>
       <th>16</th>
       <td>魂</td>
       <td>500</td>
-      <td>滂合一魂</td>
+      <td>滂合一魂平</td>
       <td>普魂切</td>
     </tr>
   </tbody>
@@ -14937,9 +14949,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT small_rhyme_descr, num_in_small_rhyme, name, explanation</span>
-<span class="s1">FROM full_guangyun</span>
-<span class="s1">WHERE LENGTH(name) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 字頭, 解釋, 小韻全名,</span>
+<span class="s1">音韻地位, 小韻內字序</span>
+<span class="s1">FROM 廣韻字頭全</span>
+<span class="s1">WHERE length(字頭) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14975,47 +14988,53 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>small_rhyme_descr</th>
-      <th>num_in_small_rhyme</th>
-      <th>name</th>
-      <th>explanation</th>
+      <th>字頭</th>
+      <th>解釋</th>
+      <th>小韻全名</th>
+      <th>音韻地位</th>
+      <th>小韻內字序</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>從開四先</td>
-      <td>6</td>
       <td>⿱𥫗瀸</td>
       <td>上同</td>
+      <td>576前小韻</td>
+      <td>從開四先平</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>章開三靜</td>
-      <td>2</td>
       <td>⿱⿰来攵正</td>
       <td>俗</td>
+      <td>1883整小韻</td>
+      <td>章開三清上</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>溪開二覺</td>
-      <td>15</td>
       <td>⿰隺犬</td>
       <td>至也髙也</td>
+      <td>3276㱿小韻</td>
+      <td>溪開二江入</td>
+      <td>15</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>清開三質</td>
-      <td>7</td>
       <td>⌸艹大雨</td>
       <td>俗</td>
+      <td>3291七小韻</td>
+      <td>清開三眞入</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>孃開三葉</td>
-      <td>4</td>
       <td>⿱入疌</td>
       <td>織⿱入?疌</td>
+      <td>3817聶小韻</td>
+      <td>孃開三鹽入</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
