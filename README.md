@@ -15,21 +15,11 @@ _Guangyun_ (廣韻) SQLite database for Traditional Chinese Phonology
 
 The database could be downloaded from [release page](https://github.com/sgalal/Guangyun/releases), or access the [web interface](https://github.com/sgalal/Guangyun).
 
-![Tables](tables.svg)
-
-**TODO FIXME: this image is not up to date.**
-
-See [_Guangyun_](https://sgalal.github.io/Ghehlien/guangyun.html) for a detailed description.
-
 ## Build
 
 ```sh
 $ python sync/sync.py
 ```
-
-## Acknowledgements
-
-* [YonhTenxMyangx](https://github.com/BYVoid/ytenx) - Source of _Guangyun_ data
 
 ## License
 
@@ -37,6 +27,6 @@ Code for building the data is distributed under MIT license.
 
 Web pages are distributed under MIT license.
 
-Codes from CodeMirror project (`docs/codemirror`) is distributed under MIT license.
+Codes from the CodeMirror project (`/docs/codemirror`) is distributed under MIT license.
 
-Dictionary data follows the original license.
+Dictionary data from the [YonhTenxMyangx](https://github.com/BYVoid/ytenx) project (see `/sync/.gitignore`) follows the original license.
