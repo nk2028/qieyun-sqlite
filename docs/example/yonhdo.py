@@ -10,20 +10,10 @@ cur = conn.cursor()
 
 d = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(dict))))
 
-for 韻, 聲, 開合, 等, 母, 小韻, 小韻號 in cur.execute('''
-SELECT rhyme_group, tone, rounding,
-division, initial, small_rhyme, id
-FROM core_rhymes AS A
-INNER JOIN full_small_rhymes AS B
-INNER JOIN extd_rhymes AS C
-INNER JOIN extd_subgroups AS D
-ON A.name = B.of_rhyme
-AND B.of_rhyme = C.of_rhyme
-AND C.subgroup = D.of_subgroup;'''):
+for 韻, 聲, 開合, 等, 母, 小韻, 小韻號 in cur.execute('SELECT 韻賅上去入, 聲, 開合, 等漢字, 母, 小韻, 小韻號 FROM 廣韻小韻全;'):
 	d[韻][聲][開合][等][母] = 小韻, 小韻號
 
 格式化小韻小韻號 = lambda 小韻, 小韻號: f'<a href="https://ytenx.org/kyonh/sieux/{小韻號}/">{小韻}</a>'
-等到漢字 = lambda 等: '一' if 等 == 1 else '二' if 等 == 2 else '三' if 等 == 3 else '四'
 
 with open('docs/example/yonhdo.html', 'w') as f:
 	f.write('''<!DOCTYPE html>
@@ -37,7 +27,7 @@ with open('docs/example/yonhdo.html', 'w') as f:
   <style>
   body { margin: 2em auto; max-width: 50em; }
   h1 { text-align: center; }
-  p { text-align: justify; text-indent: 2em; }
+  p { line-height: 1.5; text-align: justify; text-indent: 2em; }
   a { text-decoration: none; }
   table { border-collapse: collapse; }
   th, td { border: 1px solid black; vertical-align: top; }
@@ -56,8 +46,8 @@ with open('docs/example/yonhdo.html', 'w') as f:
 			聲之代碼 = '<td rowspan="8">' + 聲 + '</td>'
 			for 開合 in '開合':
 				開合之代碼 = '<td rowspan="4">' + 開合 + '</td>'
-				for 等 in range(1, 5):
-					等之代碼 = '<td>' + 等到漢字(等) + '</td>'
+				for 等 in '一二三四':
+					等之代碼 = '<td>' + 等 + '</td>'
 					f.write('<tr>')
 					f.write(韻之代碼)
 					f.write(聲之代碼)
