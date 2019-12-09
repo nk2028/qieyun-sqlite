@@ -6,7 +6,7 @@ SQLite database and JavaScript APIs for traditional Chinese phonology
 
 ### SQLite Database (in `db` folder)
 
-Find the small rhymes without _fanqie_.
+Find the small rhymes without _fanqie_:
 
 ```sql
 SELECT 小韻號, 音韻地位, 上字, 下字,
@@ -22,7 +22,7 @@ GROUP BY 小韻號;
 | 1919 | 章開三蒸上 | _NULL_ | _NULL_ | 拯抍撜𨋬氶 |
 | 3177 | 影開二銜去 | _NULL_ | _NULL_ | 𪒠 |
 
-### JavaScript API (in `js` folder)
+### JavaScript Library (in `js` folder)
 
 ```javascript
 char_entities['拯'];  // [["1919", "救也助也無韻切音蒸上聲五"]]

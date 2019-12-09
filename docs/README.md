@@ -73,7 +73,7 @@ More examples:
 * [廣韻聲母與等配合表](https://sgalal.github.io/Guangyun/db/notebook/廣韻聲母與等配合表.html)
 * [現代廣韻等韻圖](https://sgalal.github.io/Guangyun/db/example/yonhdo.html)
 
-## JavaScript API
+## JavaScript Library
 
 ### Web interface
 
@@ -177,3 +177,5 @@ Supported phonological attributes:
 * `攝到韻`
 * `韻賅上去入到重紐`
 * `組到母`
+
+<style>.highlight .err { background-color: inherit; color: inherit; }</style>
