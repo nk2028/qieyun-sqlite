@@ -20,17 +20,17 @@ async function selectPredefinedScripts() {
 
 	let url;
 	if (v == 'kuxyonh')
-		url = 'kuxyonh.js';
+		url = 'high_level/kuxyonh.js';
 	else if (v == 'ayaka2019')
-		url = 'ayaka2019.js';
+		url = 'high_level/ayaka2019.js';
 	else if (v == 'kuxyonh-ll')
-		url = 'kuxyonh.js';
+		url = 'low_level/kuxyonh.js';
 	else if (v == 'ayaka2019-ll')
-		url = 'ayaka2019.js';
+		url = 'low_level/ayaka2019.js';
 	else
 		return;
 
-	const response = await fetch('example/high_level/' + url);
+	const response = await fetch('example/' + url);
 	const text = await response.text();
 	codeInputArea.setValue(text);
 	handleDefineScript();
@@ -52,11 +52,13 @@ function handlePredefinedOptionsChange() {
 			const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
 			return (i + 1) + ' ' + 小韻名 + ' ' + 韻 + 母 + 開合 + 等 + ' ' + brogue2(i + 1);
 		}).join('\n');
+		outputArea.handleArticle = null;
 	} else if (predefinedOptions.value == 'exportAllSyllables') {
-		outputArea.innerText = [...Array(3874).keys()].map(i => {
+		outputArea.innerText = [...new Set([...Array(3874).keys()].map(i => {
 			const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
-			return (i + 1) + ' ' + 小韻名 + ' ' + brogue2(i + 1);
-		}).join('\n');
+			return brogue2(i + 1);
+		}))].join(', ');
+		outputArea.handleArticle = null;
 	} else if (predefinedOptions.value == 'convertArticle')
 		handleArticle();
 	else
@@ -104,6 +106,8 @@ function makeSingleEntry(ch, res) {
 	tooltipContainer.classList.add('tooltip-container');
 
 	const rt = document.createElement('rt');
+	rt.lang = 'zh-Latn';
+	rt.setAttribute('xml:lang', 'zh-Latn');
 	rt.innerText = pronunciation;
 	ruby.appendChild(rt);
 
@@ -141,6 +145,8 @@ function makeMultipleEntry(ch, ress) {
 		const pronunciation = brogue2(sr);
 
 		const rt = document.createElement('rt');
+		rt.lang = 'zh-Latn';
+		rt.setAttribute('xml:lang', 'zh-Latn');
 		rt.innerText = pronunciation;
 
 		ruby.appendChild(rt);
@@ -193,7 +199,11 @@ function handleArticle() {
 		;
 	} else {
 		const newOutputArea = document.createElement('div');
-		convertText.split('').map(n => newOutputArea.appendChild(makeConversion(n)));
+		convertText.split('').map(n => {
+			newOutputArea.appendChild(makeConversion(n));
+			newOutputArea.appendChild((() => { const n = document.createTextNode(' '); n.handleExport = () => ''; return n; })());
+		});
+		newOutputArea.handleExport = () => [...newOutputArea.childNodes].map(node => node.handleExport()).join('');
 		const oldOutputArea = outputArea;
 		outputArea.id = '';
 		newOutputArea.id = 'outputArea';
@@ -201,18 +211,12 @@ function handleArticle() {
 	}
 }
 
-function getSelectedData() {
-	return [...outputArea.childNodes].map(node => node.handleExport()).join('');
-}
-
 function handleCopy() {
-	try {
-		navigator.clipboard.writeText(getSelectedData()).then(() => {
-			console.log('已成功匯出至剪貼簿。');
-		}, () => {
-			console.log('匯出至剪貼簿失敗。');
-		});
-	} catch (e) {
-		console.log('轉換結果區域為空。請先點擊轉換，再點擊匯出。');
-	}
+	const text = !outputArea.handleExport ? outputArea.innerText : outputArea.handleExport();
+
+	navigator.clipboard.writeText(text).then(() => {
+		notify('已成功匯出至剪貼簿。');
+	}, () => {
+		notify('匯出至剪貼簿失敗。');
+	});
 }

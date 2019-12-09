@@ -1,6 +1,7 @@
 /* Global style */
 
 html {
+	padding: 0 1em;
 	scrollbar-color: #393b3e #1c1e1f;
 }
 
@@ -8,9 +9,8 @@ body {
 	background-color: black;
 	color: white;
 	font-family: sans-serif;
-	margin: 0;
+	margin: 0 auto;
 	max-width: 68em;
-	margin: 2em auto;
 }
 
 p {
@@ -30,16 +30,20 @@ input, option, select, textarea {
 	font-family: inherit;
 }
 
-textarea:not(#articleInput) {
-	height: 400px;
+textarea {
 	width: 100%;
-	resize: none;
+	resize: vertical;
 }
 
 /* Converter - Output area */
 
+#outputArea {
+	overflow-wrap: break-word;
+	text-align: justify;
+}
+
 #outputArea rt {
-	font-size: 80%;
+	font-size: 85%;
 }
 
 .entry {
@@ -76,9 +80,9 @@ textarea:not(#articleInput) {
 	background-color: rgba(64,64,64,0.75);
 	border: 1px solid white;
 	color: #eee;
-	width: 750px;
-	max-width: calc(100vw - 2.5em);
+	left: 1em;
 	position: absolute;
+	width: calc(100vw - 3em);
 	z-index: 1;
 }
 

@@ -2,7 +2,7 @@
 <html lang="zh-Hant-HK" xml:lang="zh-Hant-HK" dir="ltr">
 <head>
   <meta charset="utf-8"/>
-  <title>Brogue 2 the Chinese Dialect Generator</title>
+  <title>Web Interface for Guangyun JavaScript Library</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="../brogue2.js"></script>
   
@@ -14,32 +14,37 @@
   <script src="index.js"></script>
   <link rel="stylesheet" href="index.css"/>
 
+  <script src="../notify.js"></script>
+
   <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </head>
 <body>
-  <h1 lang="en-HK" xml:lang="en-HK">Brogue 2 the Chinese Dialect Generator</h1>
+  <h1 lang="en-HK" xml:lang="en-HK">Web Interface for <em>Guangyun</em> JavaScript Library</h1>
 
   <div id="scriptInput"></div>
 
+  <p><input type="button" value="適用" onclick="handleDefineScript()"/></p>
   <p>
-    <label for="predefinedScripts">在上面輸入，或從預設程式碼中選取</label>
+    <label for="predefinedScripts">或從預設程式碼中選取</label>
     <select name="predefinedScripts" id="predefinedScripts">
-      <optgroup label="通用">
+      <optgroup label="通用 - High-Level API">
         <option value="kuxyonh">古韻羅馬字</option>
       </optgroup>
-      <optgroup label="私用">
+      <optgroup label="通用 - Low-Level API">
+        <option value="kuxyonh-ll">古韻羅馬字</option>
+      </optgroup>
+      <optgroup label="私用 - High-Level API">
         <option value="ayaka2019">三日月綾香朗讀音 2019 版</option>
       </optgroup>
-      <optgroup label="Low-Level API 示例">
-        <option value="kuxyonh-ll">古韻羅馬字</option>
+      <optgroup label="私用 - Low-Level API">
         <option value="ayaka2019-ll">三日月綾香朗讀音 2019 版</option>
       </optgroup>
     </select>
     <input type="button" value="加載" onclick="selectPredefinedScripts()"/>
-    <input type="button" value="適用" onclick="handleDefineScript()"/>
   </p>
 
-  <p>輸入框 <textarea name="articleInput" id="articleInput">我能吞下玻璃而不傷身體。</textarea></p>
+  <p>輸入框：</p>
+  <p><textarea name="articleInput" id="articleInput">我能吞下短短的玻璃而不傷身體。</textarea></p>
 
   <p>
     <label for="predefinedOptions">您想要做什麼？</label>
