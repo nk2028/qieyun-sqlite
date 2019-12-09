@@ -204,15 +204,15 @@ if (小韻號 == 3693) 聲母 = 'tsch';  // 錫徹開4, th -> tsch
 function 聲調規則() {
 	const 清聲母 = new Set(['', 'h', 'k', 'kh', 'p', 'ph', 'q', 's', 'sc', 't', 'th', 'ts', 'tsc', 'tsch', 'tsh']);
 	if (清聲母.has(聲母)) {
-		if (equal聲(小韻號, '平')) return '55';  // '˥'
-		if (equal聲(小韻號, '上')) return '35';  // '˧˥'
-		if (equal聲(小韻號, '去')) return '53';  // '˥˧'
-		if (equal聲(小韻號, '入')) return '33';  // '˧'
+		if (equal聲(小韻號, '平')) return '˥';
+		if (equal聲(小韻號, '上')) return '˧˥';
+		if (equal聲(小韻號, '去')) return '˥˧';
+		if (equal聲(小韻號, '入')) return '˧';
 	} else {
-		if (equal聲(小韻號, '平')) return '33';  // '˧'
-		if (equal聲(小韻號, '上')) return '13';  // '˩˧'
-		if (equal聲(小韻號, '去')) return '31';  // '˧˩'
-		if (equal聲(小韻號, '入')) return '11';  // '˩'
+		if (equal聲(小韻號, '平')) return '˧';
+		if (equal聲(小韻號, '上')) return '˩˧';
+		if (equal聲(小韻號, '去')) return '˧˩';
+		if (equal聲(小韻號, '入')) return '˩';
 	}
 }
 const 聲調 = 聲調規則();
