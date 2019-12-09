@@ -11,7 +11,7 @@ import urllib
 # Prepare files
 
 def download_file_if_not_exist(name):
-	url = 'https://raw.githubusercontent.com/sgalal/ytenx/kyonh/ytenx/db/kyonh/' + name
+	url = 'https://raw.githubusercontent.com/sgalal/ytenx/kyonh/ytenx/sync/kyonh/' + name
 	local_name = 'db/' + name
 	try:
 		if not os.path.exists(local_name):

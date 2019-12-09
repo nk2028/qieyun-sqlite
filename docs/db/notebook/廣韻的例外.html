@@ -13147,7 +13147,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;../data.sqlite3&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;../../data.sqlite3&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13186,7 +13186,7 @@ div#notebook {
 <span class="s1">GROUP_CONCAT(字頭, &#39;&#39;) AS 字頭</span>
 <span class="s1">FROM 廣韻字頭全</span>
 <span class="s1">WHERE 上字 IS NULL</span>
-<span class="s1">OR 上字 IS NULL</span>
+<span class="s1">OR 下字 IS NULL</span>
 <span class="s1">GROUP BY 小韻號;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 

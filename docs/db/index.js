@@ -75,17 +75,22 @@ WHERE type IN ('table', 'view');
 
 -- Examples
 
+-- 找出沒有反切的小韻
+
 SELECT 小韻號, 音韻地位, 上字, 下字,
 group_concat(字頭, '') AS 字頭
 FROM 廣韻字頭全
 WHERE 上字 IS NULL
-OR 上字 IS NULL
+OR 下字 IS NULL
 GROUP BY 小韻號;
+
+-- 找出前 5 組具有相同名字的小韻
 
 SELECT 小韻, group_concat(小韻全名) AS 小韻全名
 FROM 廣韻小韻全
 GROUP BY 小韻
 HAVING count(*) > 1
+ORDER BY 小韻號
 LIMIT 5;		
 `,
 		mode: 'sql',

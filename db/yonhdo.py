@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Build: python docs/example/yonhdo.py
+
+# For /docs/db/example/yonhdo.html
 
 from collections import defaultdict
 import sqlite3
@@ -15,7 +16,7 @@ for 韻, 聲, 開合, 等, 母, 小韻, 小韻號 in cur.execute('SELECT 韻賅�
 
 格式化小韻小韻號 = lambda 小韻, 小韻號: f'<a href="https://ytenx.org/kyonh/sieux/{小韻號}/">{小韻}</a>'
 
-with open('docs/example/yonhdo.html', 'w') as f:
+with open('docs/db/example/yonhdo.html', 'w') as f:
 	f.write('''<!DOCTYPE html>
 <html lang="zh-Hant-HK" xml:lang="zh-Hant-HK" dir="ltr">
 <head>
