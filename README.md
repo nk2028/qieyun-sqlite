@@ -43,9 +43,9 @@ See <https://sgalal.github.io/Guangyun/> for details.
 $ npm install -g minify
 ```
 
-**CodeMirror files**
+**CodeMirror Files**
 
-Prefix: <https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/>
+Download prefix: <https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/>
 
 * `codemirror.min.js`
 * `codemirror.min.css`
@@ -61,6 +61,8 @@ $ python js/build.py
 ```
 
 ## License
+
+_Guangyun_ data is in the public domain.
 
 Codes from the CodeMirror project (`/docs/codemirror`) is distributed under MIT license.
 

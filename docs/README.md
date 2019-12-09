@@ -2,13 +2,13 @@
 
 Database and APIs for traditional Chinese phonology
 
-## Database (in `db` folder)
+## Database
+
+Web interface: <https://sgalal.github.io/Guangyun/db/>.
 
 ### Usage
 
 The database could be downloaded from <https://sgalal.github.io/Guangyun/data.sqlite3>.
-
-Or you can access the [web interface](https://sgalal.github.io/Guangyun/db/).
 
 ### Structure
 
@@ -71,7 +71,9 @@ More examples:
 * [廣韻聲母與等配合表](https://sgalal.github.io/Guangyun/db/notebook/廣韻聲母與等配合表.html)
 * [現代廣韻等韻圖](https://sgalal.github.io/Guangyun/db/example/yonhdo.html)
 
-## JavaScript API (in `js` folder)
+## JavaScript API
+
+Web interface: <https://sgalal.github.io/Guangyun/js/>.
 
 ### Usage
 
@@ -79,43 +81,56 @@ More examples:
 <script src="https://sgalal.github.io/Guangyun/brogue2.js"></script>
 ```
 
-The size of the library is less than 1 MB, which is satisfactory for most of the web applications.
+The size of the library is less than 1 MB, which is satisfactory for most of the web applications. The actual transferred size (compressed) is less than 0.5 MB.
 
-The actual transferred size (compressed) is less than 0.5 MB.
+### Examples
 
 ```javascript
 char_entities['拯'];  // [["1919", "救也助也無韻切音蒸上聲五"]]
+
+/* High-Level API */
 let 小韻號 = 1919;  // 選擇第 1919 小韻（拯小韻）
 const is = s => check小韻(小韻號, s);
 is('章母');  // true, 拯小韻是章母
 is('曉匣母');  // false, 拯小韻不是曉匣母
 is('重紐A類 或 以母 或 端精章組 或 日母');  // true, 拯小韻是章組
+
+/* Low-Level API */
+let 小韻號 = 1919;  // 選擇第 1919 小韻（拯小韻）
+equal母(小韻號, '章');  // true, 拯小韻是章母
+in母(小韻號, ['曉', '匣']);  // false, 拯小韻不是曉匣母
+is重紐A類(小韻號) || equal母(小韻號, '以') || in組(小韻號, ['端', '精', '章']) || equal母(小韻號, '日');  // true, 拯小韻是章組
 ```
 
-function `check小韻`：
+### API
 
-參數 1：小韻號 (1 ≤ i ≤ 3874)
+#### `char_entities`
 
-參數 2：字符串
+二維數組，字 -> [(小韻號1, 解釋1), (小韻號2, 解釋2), ...]
 
-字符串格式：先以「或」字分隔，再以空格分隔。
+#### High-Level API (Function `check小韻`)
+
+* Argument 1: 小韻號 (1 ≤ i ≤ 3874)
+* Argument 2: String of phonological attributes
+
+String format: 先以「或」字分隔，再以空格分隔
 
 如 `見組 重紐A類 或 以母 四等 去聲` 表示「(見組 且 重紐A類) 或 (以母 且 四等 且 去聲)」。
 
 字符串不支援括號。
 
-支援的音韻屬性如下：
+Supported phonological attributes:
 
-Phonological Attribute | Chinese Name | English Name | Possible Values
-:- | :- | :- | :-
-韻 | 韻母 | rhyme | 東冬鍾江支支A支B…<br/>董湩腫講紙紙A紙B…<br/>送宋用絳寘寘A寘B…<br/>屋沃燭覺…
-韻賅上去 | 韻母（舉平以賅上去） | rhyme (舉平以賅上去) | 東冬鍾江支支A支B…<br/>祭泰夬廢<br/>屋沃燭覺…
-韻賅上去入 | 韻母（舉平以賅上去入） | rhyme (舉平以賅上去入) | 東冬鍾江支支A支B…<br/>祭泰夬廢
-攝 | 攝 | class | 通江止遇蟹臻山效果假宕梗曾流深咸
-母 | 聲母 | initial | 幫滂並明<br/>端透定泥<br/>知徹澄孃<br/>精清從心邪<br/>莊初崇生俟<br/>章昌船書常<br/>見溪羣疑<br/>影曉匣云以來日
-組 | 組 | group | 幫端知精莊章見<br/>（未涵蓋「影曉匣云以來日」）
-等 | 等 | division | 一二三四<br/>1234
-聲 | 聲調 | tone | 平上去入<br/>仄<br/>舒
+| Phonological Attribute | Chinese Name | English Name | Possible Values |
+| :- | :- | :- | :- |
+| 韻 | 韻母 | rhyme | 東冬鍾江支支A支B…<br/>董湩腫講紙紙A紙B…<br/>送宋用絳寘寘A寘B…<br/>屋沃燭覺… |
+| 韻賅上去 | 韻母（舉平以賅上去） | rhyme (舉平以賅上去) | 東冬鍾江支支A支B…<br/>祭泰夬廢<br/>屋沃燭覺… |
+| 韻賅上去入 | 韻母（舉平以賅上去入） | rhyme (舉平以賅上去入) | 東冬鍾江支支A支B…<br/>祭泰夬廢 |
+| 攝 | 攝 | class | 通江止遇蟹臻山效果假宕梗曾流深咸 |
+| 母 | 聲母 | initial | 幫滂並明<br/>端透定泥<br/>知徹澄孃<br/>精清從心邪<br/>莊初崇生俟<br/>章昌船書常<br/>見溪羣疑<br/>影曉匣云以來日 |
+| 組 | 組 | group | 幫端知精莊章見<br/>（未涵蓋「影曉匣云以來日」） |
+| 等 | 等 | division | 一二三四<br/>1234 |
+| 聲 | 聲調 | tone | 平上去入<br/>仄<br/>舒 |
 
 亦支援「開」、「合」、「重紐A類」、「重紐B類」。
 
@@ -127,20 +142,9 @@ Phonological Attribute | Chinese Name | English Name | Possible Values
 
 元韻放在臻攝而不是山攝。
 
-dict `char_entities`:
+#### Low-Level API
 
-二維數組，字 -> [(小韻號1, 解釋1), (小韻號2, 解釋2), ...]
-
-### Low-Level API
-
-```javascript
-let 小韻號 = 1919;  // 選擇第 1919 小韻（拯小韻）
-equal母(小韻號, '章');  // true, 拯小韻是章母
-in母(小韻號, ['曉', '匣']);  // false, 拯小韻不是曉匣母
-is重紐A類(小韻號) || equal母(小韻號, '以') || in組(小韻號, ['端', '精', '章']) || equal母(小韻號, '日');  // true, 拯小韻是章組
-```
-
-#### `equal`, `in` 類
+**`equal`, `in` 類**
 
 * function `equal韻` `in韻`
 * function `equal韻賅上去` `in韻賅上去`
@@ -155,14 +159,14 @@ is重紐A類(小韻號) || equal母(小韻號, '以') || in組(小韻號, ['端'
 
 參數 2：相應音韻屬性的可能取值
 
-#### `is` 類
+**`is` 類**
 
 * function `is開` `is合`
 * function `is重紐A類` `is重紐B類`
 
 參數：小韻號 (1 ≤ i ≤ 3874)
 
-#### Map Table
+**Map Table**
 
 * `韻賅上去到韻`
 * `韻賅上去入到韻`
