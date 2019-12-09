@@ -41,28 +41,36 @@ async function selectPredefinedScripts() {
 let brogue2;
 
 function handleDefineScript() {
-	brogue2 = new Function('小韻號', codeInputArea.getValue());
+	try {
+		brogue2 = new Function('小韻號', codeInputArea.getValue());
+	} catch (err) {
+		notify(err.message);
+	}
 }
 
 /* Predefined Options */
 
-function handlePredefinedOptionsChange() {
-	if (predefinedOptions.value == 'exportAllSmallRhymes') {
-		outputArea.innerText = [...Array(3874).keys()].map(i => {
-			const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
-			return (i + 1) + ' ' + 小韻名 + ' ' + 韻 + 母 + 開合 + 等 + ' ' + brogue2(i + 1);
-		}).join('\n');
-		outputArea.handleArticle = null;
-	} else if (predefinedOptions.value == 'exportAllSyllables') {
-		outputArea.innerText = [...new Set([...Array(3874).keys()].map(i => {
-			const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
-			return brogue2(i + 1);
-		}))].join(', ');
-		outputArea.handleArticle = null;
-	} else if (predefinedOptions.value == 'convertArticle')
-		handleArticle();
-	else
-		outputArea.innerHTML = '';
+function handlePredefinedOptions() {
+	try {
+		if (predefinedOptions.value == 'exportAllSmallRhymes') {
+			outputArea.innerText = [...Array(3874).keys()].map(i => {
+				const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
+				return (i + 1) + ' ' + 小韻名 + ' ' + 韻 + 母 + 開合 + 等 + ' ' + brogue2(i + 1);
+			}).join('\n');
+			outputArea.handleArticle = null;
+		} else if (predefinedOptions.value == 'exportAllSyllables') {
+			outputArea.innerText = [...new Set([...Array(3874).keys()].map(i => {
+				const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
+				return brogue2(i + 1);
+			}))].join(', ');
+			outputArea.handleArticle = null;
+		} else if (predefinedOptions.value == 'convertArticle')
+			handleArticle();
+		else
+			outputArea.innerHTML = '';
+	} catch (err) {
+		notify(err.message);
+	}
 }
 
 /* Converter */
