@@ -1,10 +1,12 @@
 # _Guangyun_
 
-Database and APIs for traditional Chinese phonology
+SQLite database and JavaScript APIs for traditional Chinese phonology
 
-## Database
+## SQLite Database
 
-Web interface: <https://sgalal.github.io/Guangyun/db/>.
+### Web interface
+
+<https://sgalal.github.io/Guangyun/db/>
 
 ### Usage
 
@@ -73,7 +75,9 @@ More examples:
 
 ## JavaScript API
 
-Web interface: <https://sgalal.github.io/Guangyun/js/>.
+### Web interface
+
+<https://sgalal.github.io/Guangyun/js/>
 
 ### Usage
 

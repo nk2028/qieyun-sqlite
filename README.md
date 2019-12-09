@@ -1,12 +1,12 @@
 # _Guangyun_
 
-Database and APIs for traditional Chinese phonology
+SQLite database and JavaScript APIs for traditional Chinese phonology
 
 ## Usage
 
-### Database (in `db` folder)
+### SQLite Database (in `db` folder)
 
-找出沒有反切的小韻：
+Find the small rhymes without _fanqie_.
 
 ```sql
 SELECT 小韻號, 音韻地位, 上字, 下字,
