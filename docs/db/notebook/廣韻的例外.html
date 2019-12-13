@@ -13765,7 +13765,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 小韻, 小韻全名</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 小韻, group_concat(小韻全名) AS 小韻全名</span>
 <span class="s1">FROM 廣韻小韻全</span>
 <span class="s1">GROUP BY 小韻</span>
 <span class="s1">HAVING count(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
@@ -13812,797 +13812,797 @@ div#notebook {
     <tr>
       <th>0</th>
       <td>㓼</td>
-      <td>1307㓼小韻</td>
+      <td>1307㓼小韻,3302㓼小韻</td>
     </tr>
     <tr>
       <th>1</th>
       <td>㔌</td>
-      <td>1030㔌小韻</td>
+      <td>1030㔌小韻,3080㔌小韻</td>
     </tr>
     <tr>
       <th>2</th>
       <td>㛂</td>
-      <td>1752㛂小韻</td>
+      <td>1752㛂小韻,1755㛂小韻</td>
     </tr>
     <tr>
       <th>3</th>
       <td>㟅</td>
-      <td>33㟅小韻</td>
+      <td>33㟅小韻,85㟅小韻</td>
     </tr>
     <tr>
       <th>4</th>
       <td>㪁</td>
-      <td>1154㪁小韻</td>
+      <td>1154㪁小韻,3157㪁小韻</td>
     </tr>
     <tr>
       <th>5</th>
       <td>㱡</td>
-      <td>964㱡小韻</td>
+      <td>964㱡小韻,1922㱡小韻</td>
     </tr>
     <tr>
       <th>6</th>
       <td>䀴</td>
-      <td>1918䀴小韻</td>
+      <td>1918䀴小韻,3854䀴小韻</td>
     </tr>
     <tr>
       <th>7</th>
       <td>䁤</td>
-      <td>1282䁤小韻</td>
+      <td>1282䁤小韻,2234䁤小韻</td>
     </tr>
     <tr>
       <th>8</th>
       <td>䃔</td>
-      <td>40䃔小韻</td>
+      <td>40䃔小韻,2123䃔小韻</td>
     </tr>
     <tr>
       <th>9</th>
       <td>䆀</td>
-      <td>1456䆀小韻</td>
+      <td>1456䆀小韻,2530䆀小韻</td>
     </tr>
     <tr>
       <th>10</th>
       <td>䟽</td>
-      <td>236䟽小韻</td>
+      <td>236䟽小韻,2300䟽小韻</td>
     </tr>
     <tr>
       <th>11</th>
       <td>䫲</td>
-      <td>2019䫲小韻</td>
+      <td>2019䫲小韻,3116䫲小韻</td>
     </tr>
     <tr>
       <th>12</th>
       <td>䰖</td>
-      <td>1560䰖小韻</td>
+      <td>1560䰖小韻,3411䰖小韻</td>
     </tr>
     <tr>
       <th>13</th>
       <td>三</td>
-      <td>1090三小韻</td>
+      <td>1090三小韻,3127三小韻</td>
     </tr>
     <tr>
       <th>14</th>
       <td>且</td>
-      <td>245且小韻</td>
+      <td>245且小韻,1776且小韻</td>
     </tr>
     <tr>
       <th>15</th>
       <td>中</td>
-      <td>3中小韻</td>
+      <td>3中小韻,2112中小韻</td>
     </tr>
     <tr>
       <th>16</th>
       <td>些</td>
-      <td>801些小韻</td>
+      <td>801些小韻,2834些小韻</td>
     </tr>
     <tr>
       <th>17</th>
       <td>企</td>
-      <td>1248企小韻</td>
+      <td>1248企小韻,2176企小韻</td>
     </tr>
     <tr>
       <th>18</th>
       <td>作</td>
-      <td>2360作小韻</td>
+      <td>2360作小韻,3574作小韻</td>
     </tr>
     <tr>
       <th>19</th>
       <td>侃</td>
-      <td>1558侃小韻</td>
+      <td>1558侃小韻,2641侃小韻</td>
     </tr>
     <tr>
       <th>20</th>
       <td>便</td>
-      <td>615便小韻</td>
+      <td>615便小韻,2751便小韻</td>
     </tr>
     <tr>
       <th>21</th>
       <td>倗</td>
-      <td>1924倗小韻</td>
+      <td>1924倗小韻,3028倗小韻</td>
     </tr>
     <tr>
       <th>22</th>
       <td>倚</td>
-      <td>1212倚小韻</td>
+      <td>1212倚小韻,2172倚小韻</td>
     </tr>
     <tr>
       <th>23</th>
       <td>傍</td>
-      <td>856傍小韻</td>
+      <td>856傍小韻,2931傍小韻</td>
     </tr>
     <tr>
       <th>24</th>
       <td>儑</td>
-      <td>3112儑小韻</td>
+      <td>3112儑小韻,3801儑小韻</td>
     </tr>
     <tr>
       <th>25</th>
       <td>兼</td>
-      <td>1129兼小韻</td>
+      <td>1129兼小韻,3152兼小韻</td>
     </tr>
     <tr>
       <th>26</th>
       <td>凝</td>
-      <td>960凝小韻</td>
+      <td>960凝小韻,3017凝小韻</td>
     </tr>
     <tr>
       <th>27</th>
       <td>凭</td>
-      <td>951凭小韻</td>
+      <td>951凭小韻,3015凭小韻</td>
     </tr>
     <tr>
       <th>28</th>
       <td>出</td>
-      <td>2243出小韻</td>
+      <td>2243出小韻,3333出小韻</td>
     </tr>
     <tr>
       <th>29</th>
       <td>分</td>
-      <td>459分小韻</td>
+      <td>459分小韻,2589分小韻</td>
     </tr>
     <tr>
       <th>30</th>
       <td>剸</td>
-      <td>1651剸小韻</td>
+      <td>1651剸小韻,2755剸小韻</td>
     </tr>
     <tr>
       <th>31</th>
       <td>卒</td>
-      <td>3327卒小韻</td>
+      <td>3327卒小韻,3391卒小韻</td>
     </tr>
     <tr>
       <th>32</th>
       <td>吟</td>
-      <td>1063吟小韻</td>
+      <td>1063吟小韻,3098吟小韻</td>
     </tr>
     <tr>
       <th>33</th>
       <td>吹</td>
-      <td>98吹小韻</td>
+      <td>98吹小韻,2174吹小韻</td>
     </tr>
     <tr>
       <th>34</th>
       <td>和</td>
-      <td>753和小韻</td>
+      <td>753和小韻,2838和小韻</td>
     </tr>
     <tr>
       <th>35</th>
       <td>啜</td>
-      <td>2414啜小韻</td>
+      <td>2414啜小韻,3534啜小韻</td>
     </tr>
     <tr>
       <th>36</th>
       <td>啞</td>
-      <td>1770啞小韻</td>
+      <td>1770啞小韻,3611啞小韻</td>
     </tr>
     <tr>
       <th>37</th>
       <td>喊</td>
-      <td>2030喊小韻</td>
+      <td>2030喊小韻,2076喊小韻</td>
     </tr>
     <tr>
       <th>38</th>
       <td>圈</td>
-      <td>1646圈小韻</td>
+      <td>1646圈小韻,2610圈小韻</td>
     </tr>
     <tr>
       <th>39</th>
       <td>埯</td>
-      <td>2031埯小韻</td>
+      <td>2031埯小韻,2064埯小韻</td>
     </tr>
     <tr>
       <th>40</th>
       <td>堲</td>
-      <td>3304堲小韻</td>
+      <td>3304堲小韻,3721堲小韻</td>
     </tr>
     <tr>
       <th>41</th>
       <td>增</td>
-      <td>973增小韻</td>
+      <td>973增小韻,3030增小韻</td>
     </tr>
     <tr>
       <th>42</th>
       <td>奔</td>
-      <td>496奔小韻</td>
+      <td>496奔小韻,2627奔小韻</td>
     </tr>
     <tr>
       <th>43</th>
       <td>女</td>
-      <td>1335女小韻</td>
+      <td>1335女小韻,2311女小韻</td>
     </tr>
     <tr>
       <th>44</th>
       <td>奻</td>
-      <td>549奻小韻</td>
+      <td>549奻小韻,2682奻小韻</td>
     </tr>
     <tr>
       <th>45</th>
       <td>妠</td>
-      <td>3114妠小韻</td>
+      <td>3114妠小韻,3461妠小韻</td>
     </tr>
     <tr>
       <th>46</th>
       <td>嬽</td>
-      <td>567嬽小韻</td>
+      <td>567嬽小韻,644嬽小韻</td>
     </tr>
     <tr>
       <th>47</th>
       <td>孨</td>
-      <td>2742孨小韻</td>
+      <td>2742孨小韻,3770孨小韻</td>
     </tr>
     <tr>
       <th>48</th>
       <td>少</td>
-      <td>1681少小韻</td>
+      <td>1681少小韻,2785少小韻</td>
     </tr>
     <tr>
       <th>49</th>
       <td>屯</td>
-      <td>442屯小韻</td>
+      <td>442屯小韻,492屯小韻</td>
     </tr>
     <tr>
       <th>50</th>
       <td>崽</td>
-      <td>335崽小韻</td>
+      <td>335崽小韻,358崽小韻</td>
     </tr>
     <tr>
       <th>51</th>
       <td>巉</td>
-      <td>1144巉小韻</td>
+      <td>1144巉小韻,2085巉小韻</td>
     </tr>
     <tr>
       <th>52</th>
       <td>巋</td>
-      <td>183巋小韻</td>
+      <td>183巋小韻,1285巋小韻</td>
     </tr>
     <tr>
       <th>53</th>
       <td>巢</td>
-      <td>689巢小韻</td>
+      <td>689巢小韻,2807巢小韻</td>
     </tr>
     <tr>
       <th>54</th>
       <td>差</td>
-      <td>120差小韻</td>
+      <td>120差小韻,348差小韻,2459差小韻</td>
     </tr>
     <tr>
       <th>55</th>
       <td>從</td>
-      <td>57從小韻</td>
+      <td>57從小韻,2139從小韻</td>
     </tr>
     <tr>
       <th>56</th>
       <td>徵</td>
-      <td>958徵小韻</td>
+      <td>958徵小韻,1288徵小韻</td>
     </tr>
     <tr>
       <th>57</th>
       <td>恐</td>
-      <td>1181恐小韻</td>
+      <td>1181恐小韻,2138恐小韻</td>
     </tr>
     <tr>
       <th>58</th>
       <td>扮</td>
-      <td>1422扮小韻</td>
+      <td>1422扮小韻,2692扮小韻</td>
     </tr>
     <tr>
       <th>59</th>
       <td>掣</td>
-      <td>2401掣小韻</td>
+      <td>2401掣小韻,3537掣小韻</td>
     </tr>
     <tr>
       <th>60</th>
       <td>撰</td>
-      <td>1591撰小韻</td>
+      <td>1591撰小韻,1653撰小韻</td>
     </tr>
     <tr>
       <th>61</th>
       <td>操</td>
-      <td>723操小韻</td>
+      <td>723操小韻,2815操小韻</td>
     </tr>
     <tr>
       <th>62</th>
       <td>擔</td>
-      <td>1089擔小韻</td>
+      <td>1089擔小韻,3126擔小韻</td>
     </tr>
     <tr>
       <th>63</th>
       <td>攤</td>
-      <td>1576攤小韻</td>
+      <td>1576攤小韻,2644攤小韻</td>
     </tr>
     <tr>
       <th>64</th>
       <td>敗</td>
-      <td>2495敗小韻</td>
+      <td>2495敗小韻,2505敗小韻</td>
     </tr>
     <tr>
       <th>65</th>
       <td>敲</td>
-      <td>696敲小韻</td>
+      <td>696敲小韻,2795敲小韻</td>
     </tr>
     <tr>
       <th>66</th>
       <td>暴</td>
-      <td>2816暴小韻</td>
+      <td>2816暴小韻,3196暴小韻</td>
     </tr>
     <tr>
       <th>67</th>
       <td>朓</td>
-      <td>1668朓小韻</td>
+      <td>1668朓小韻,2786朓小韻</td>
     </tr>
     <tr>
       <th>68</th>
       <td>枕</td>
-      <td>1985枕小韻</td>
+      <td>1985枕小韻,3089枕小韻</td>
     </tr>
     <tr>
       <th>69</th>
       <td>棧</td>
-      <td>1597棧小韻</td>
+      <td>1597棧小韻,1663棧小韻</td>
     </tr>
     <tr>
       <th>70</th>
       <td>楚</td>
-      <td>1339楚小韻</td>
+      <td>1339楚小韻,2312楚小韻</td>
     </tr>
     <tr>
       <th>71</th>
       <td>榜</td>
-      <td>1835榜小韻</td>
+      <td>1835榜小韻,2962榜小韻</td>
     </tr>
     <tr>
       <th>72</th>
       <td>殑</td>
-      <td>963殑小韻</td>
+      <td>963殑小韻,1921殑小韻,3020殑小韻</td>
     </tr>
     <tr>
       <th>73</th>
       <td>毀</td>
-      <td>1205毀小韻</td>
+      <td>1205毀小韻,2183毀小韻</td>
     </tr>
     <tr>
       <th>74</th>
       <td>汪</td>
-      <td>849汪小韻</td>
+      <td>849汪小韻,2945汪小韻</td>
     </tr>
     <tr>
       <th>75</th>
       <td>沈</td>
-      <td>1050沈小韻</td>
+      <td>1050沈小韻,1986沈小韻</td>
     </tr>
     <tr>
       <th>76</th>
       <td>泥</td>
-      <td>314泥小韻</td>
+      <td>314泥小韻,2382泥小韻</td>
     </tr>
     <tr>
       <th>77</th>
       <td>浜</td>
-      <td>892浜小韻</td>
+      <td>892浜小韻,1867浜小韻</td>
     </tr>
     <tr>
       <th>78</th>
       <td>淙</td>
-      <td>86淙小韻</td>
+      <td>86淙小韻,2149淙小韻</td>
     </tr>
     <tr>
       <th>79</th>
       <td>深</td>
-      <td>1054深小韻</td>
+      <td>1054深小韻,3103深小韻</td>
     </tr>
     <tr>
       <th>80</th>
       <td>湩</td>
-      <td>1187湩小韻</td>
+      <td>1187湩小韻,2131湩小韻</td>
     </tr>
     <tr>
       <th>81</th>
       <td>湫</td>
-      <td>1675湫小韻</td>
+      <td>1675湫小韻,1936湫小韻</td>
     </tr>
     <tr>
       <th>82</th>
       <td>潛</td>
-      <td>1117潛小韻</td>
+      <td>1117潛小韻,3141潛小韻</td>
     </tr>
     <tr>
       <th>83</th>
       <td>灑</td>
-      <td>1418灑小韻</td>
+      <td>1418灑小韻,1769灑小韻</td>
     </tr>
     <tr>
       <th>84</th>
       <td>烘</td>
-      <td>32烘小韻</td>
+      <td>32烘小韻,2118烘小韻</td>
     </tr>
     <tr>
       <th>85</th>
       <td>焌</td>
-      <td>2629焌小韻</td>
+      <td>2629焌小韻,3334焌小韻</td>
     </tr>
     <tr>
       <th>86</th>
       <td>爲</td>
-      <td>89爲小韻</td>
+      <td>89爲小韻,2157爲小韻</td>
     </tr>
     <tr>
       <th>87</th>
       <td>爹</td>
-      <td>802爹小韻</td>
+      <td>802爹小韻,1735爹小韻</td>
     </tr>
     <tr>
       <th>88</th>
       <td>牝</td>
-      <td>1264牝小韻</td>
+      <td>1264牝小韻,1476牝小韻</td>
     </tr>
     <tr>
       <th>89</th>
       <td>狂</td>
-      <td>836狂小韻</td>
+      <td>836狂小韻,2923狂小韻</td>
     </tr>
     <tr>
       <th>90</th>
       <td>猭</td>
-      <td>635猭小韻</td>
+      <td>635猭小韻,2734猭小韻</td>
     </tr>
     <tr>
       <th>91</th>
       <td>瓦</td>
-      <td>1786瓦小韻</td>
+      <td>1786瓦小韻,2891瓦小韻</td>
     </tr>
     <tr>
       <th>92</th>
       <td>甚</td>
-      <td>1988甚小韻</td>
+      <td>1988甚小韻,3101甚小韻</td>
     </tr>
     <tr>
       <th>93</th>
       <td>生</td>
-      <td>884生小韻</td>
+      <td>884生小韻,2964生小韻</td>
     </tr>
     <tr>
       <th>94</th>
       <td>省</td>
-      <td>1859省小韻</td>
+      <td>1859省小韻,1895省小韻</td>
     </tr>
     <tr>
       <th>95</th>
       <td>瞢</td>
-      <td>13瞢小韻</td>
+      <td>13瞢小韻,974瞢小韻</td>
     </tr>
     <tr>
       <th>96</th>
       <td>稱</td>
-      <td>962稱小韻</td>
+      <td>962稱小韻,3016稱小韻</td>
     </tr>
     <tr>
       <th>97</th>
       <td>稴</td>
-      <td>2057稴小韻</td>
+      <td>2057稴小韻,3154稴小韻</td>
     </tr>
     <tr>
       <th>98</th>
       <td>積</td>
-      <td>2155積小韻</td>
+      <td>2155積小韻,3650積小韻</td>
     </tr>
     <tr>
       <th>99</th>
       <td>窒</td>
-      <td>3300窒小韻</td>
+      <td>3300窒小韻,3489窒小韻</td>
     </tr>
     <tr>
       <th>100</th>
       <td>等</td>
-      <td>1455等小韻</td>
+      <td>1455等小韻,1923等小韻</td>
     </tr>
     <tr>
       <th>101</th>
       <td>精</td>
-      <td>910精小韻</td>
+      <td>910精小韻,2992精小韻</td>
     </tr>
     <tr>
       <th>102</th>
       <td>絮</td>
-      <td>2304絮小韻</td>
+      <td>2304絮小韻,2314絮小韻</td>
     </tr>
     <tr>
       <th>103</th>
       <td>綰</td>
-      <td>1579綰小韻</td>
+      <td>1579綰小韻,2674綰小韻</td>
     </tr>
     <tr>
       <th>104</th>
       <td>縛</td>
-      <td>2852縛小韻</td>
+      <td>2852縛小韻,3559縛小韻</td>
     </tr>
     <tr>
       <th>105</th>
       <td>縱</td>
-      <td>61縱小韻</td>
+      <td>61縱小韻,2132縱小韻</td>
     </tr>
     <tr>
       <th>106</th>
       <td>翹</td>
-      <td>684翹小韻</td>
+      <td>684翹小韻,2788翹小韻</td>
     </tr>
     <tr>
       <th>107</th>
       <td>聱</td>
-      <td>697聱小韻</td>
+      <td>697聱小韻,1042聱小韻</td>
     </tr>
     <tr>
       <th>108</th>
       <td>能</td>
-      <td>397能小韻</td>
+      <td>397能小韻,980能小韻,1926能小韻</td>
     </tr>
     <tr>
       <th>109</th>
       <td>脅</td>
-      <td>3156脅小韻</td>
+      <td>3156脅小韻,3863脅小韻</td>
     </tr>
     <tr>
       <th>110</th>
       <td>脞</td>
-      <td>762脞小韻</td>
+      <td>762脞小韻,1762脞小韻</td>
     </tr>
     <tr>
       <th>111</th>
       <td>興</td>
-      <td>961興小韻</td>
+      <td>961興小韻,3011興小韻</td>
     </tr>
     <tr>
       <th>112</th>
       <td>若</td>
-      <td>800若小韻</td>
+      <td>800若小韻,1787若小韻,3545若小韻</td>
     </tr>
     <tr>
       <th>113</th>
       <td>茁</td>
-      <td>3318茁小韻</td>
+      <td>3318茁小韻,3445茁小韻,3527茁小韻</td>
     </tr>
     <tr>
       <th>114</th>
       <td>荒</td>
-      <td>844荒小韻</td>
+      <td>844荒小韻,2943荒小韻</td>
     </tr>
     <tr>
       <th>115</th>
       <td>華</td>
-      <td>773華小韻</td>
+      <td>773華小韻,775華小韻</td>
     </tr>
     <tr>
       <th>116</th>
       <td>著</td>
-      <td>2298著小韻</td>
+      <td>2298著小韻,3564著小韻</td>
     </tr>
     <tr>
       <th>117</th>
       <td>蓄</td>
-      <td>3215蓄小韻</td>
+      <td>3215蓄小韻,3226蓄小韻</td>
     </tr>
     <tr>
       <th>118</th>
       <td>蕝</td>
-      <td>2418蕝小韻</td>
+      <td>2418蕝小韻,3504蕝小韻</td>
     </tr>
     <tr>
       <th>119</th>
       <td>藏</td>
-      <td>858藏小韻</td>
+      <td>858藏小韻,2932藏小韻</td>
     </tr>
     <tr>
       <th>120</th>
       <td>虚</td>
-      <td>237虚小韻</td>
+      <td>237虚小韻,246虚小韻</td>
     </tr>
     <tr>
       <th>121</th>
       <td>虥</td>
-      <td>559虥小韻</td>
+      <td>559虥小韻,574虥小韻</td>
     </tr>
     <tr>
       <th>122</th>
       <td>虺</td>
-      <td>349虺小韻</td>
+      <td>349虺小韻,1319虺小韻</td>
     </tr>
     <tr>
       <th>123</th>
       <td>螼</td>
-      <td>1494螼小韻</td>
+      <td>1494螼小韻,2572螼小韻</td>
     </tr>
     <tr>
       <th>124</th>
       <td>行</td>
-      <td>887行小韻</td>
+      <td>887行小韻,2957行小韻</td>
     </tr>
     <tr>
       <th>125</th>
       <td>衰</td>
-      <td>136衰小韻</td>
+      <td>136衰小韻,165衰小韻</td>
     </tr>
     <tr>
       <th>126</th>
       <td>要</td>
-      <td>676要小韻</td>
+      <td>676要小韻,2771要小韻</td>
     </tr>
     <tr>
       <th>127</th>
       <td>見</td>
-      <td>2702見小韻</td>
+      <td>2702見小韻,2705見小韻</td>
     </tr>
     <tr>
       <th>128</th>
       <td>覘</td>
-      <td>1112覘小韻</td>
+      <td>1112覘小韻,3138覘小韻</td>
     </tr>
     <tr>
       <th>129</th>
       <td>親</td>
-      <td>408親小韻</td>
+      <td>408親小韻,2571親小韻</td>
     </tr>
     <tr>
       <th>130</th>
       <td>詑</td>
-      <td>129詑小韻</td>
+      <td>129詑小韻,748詑小韻</td>
     </tr>
     <tr>
       <th>131</th>
       <td>論</td>
-      <td>497論小韻</td>
+      <td>497論小韻,2626論小韻</td>
     </tr>
     <tr>
       <th>132</th>
       <td>諵</td>
-      <td>1140諵小韻</td>
+      <td>1140諵小韻,3167諵小韻</td>
     </tr>
     <tr>
       <th>133</th>
       <td>豻</td>
-      <td>508豻小韻</td>
+      <td>508豻小韻,552豻小韻</td>
     </tr>
     <tr>
       <th>134</th>
       <td>跪</td>
-      <td>1207跪小韻</td>
+      <td>1207跪小韻,1244跪小韻</td>
     </tr>
     <tr>
       <th>135</th>
       <td>蹱</td>
-      <td>58蹱小韻</td>
+      <td>58蹱小韻,2133蹱小韻</td>
     </tr>
     <tr>
       <th>136</th>
       <td>載</td>
-      <td>2529載小韻</td>
+      <td>2529載小韻,2542載小韻</td>
     </tr>
     <tr>
       <th>137</th>
       <td>輕</td>
-      <td>920輕小韻</td>
+      <td>920輕小韻,2990輕小韻</td>
     </tr>
     <tr>
       <th>138</th>
       <td>轟</td>
-      <td>901轟小韻</td>
+      <td>901轟小韻,2974轟小韻</td>
     </tr>
     <tr>
       <th>139</th>
       <td>迎</td>
-      <td>886迎小韻</td>
+      <td>886迎小韻,2965迎小韻</td>
     </tr>
     <tr>
       <th>140</th>
       <td>近</td>
-      <td>1511近小韻</td>
+      <td>1511近小韻,2592近小韻</td>
     </tr>
     <tr>
       <th>141</th>
       <td>遠</td>
-      <td>1516遠小韻</td>
+      <td>1516遠小韻,2608遠小韻</td>
     </tr>
     <tr>
       <th>142</th>
       <td>選</td>
-      <td>1652選小韻</td>
+      <td>1652選小韻,2740選小韻</td>
     </tr>
     <tr>
       <th>143</th>
       <td>邅</td>
-      <td>606邅小韻</td>
+      <td>606邅小韻,1662邅小韻,2752邅小韻</td>
     </tr>
     <tr>
       <th>144</th>
       <td>重</td>
-      <td>56重小韻</td>
+      <td>56重小韻,1176重小韻,2136重小韻</td>
     </tr>
     <tr>
       <th>145</th>
       <td>野</td>
-      <td>1348野小韻</td>
+      <td>1348野小韻,1766野小韻</td>
     </tr>
     <tr>
       <th>146</th>
       <td>長</td>
-      <td>815長小韻</td>
+      <td>815長小韻,1826長小韻</td>
     </tr>
     <tr>
       <th>147</th>
       <td>闞</td>
-      <td>2073闞小韻</td>
+      <td>2073闞小韻,3118闞小韻</td>
     </tr>
     <tr>
       <th>148</th>
       <td>頸</td>
-      <td>929頸小韻</td>
+      <td>929頸小韻,1889頸小韻</td>
     </tr>
     <tr>
       <th>149</th>
       <td>飯</td>
-      <td>1529飯小韻</td>
+      <td>1529飯小韻,2600飯小韻</td>
     </tr>
     <tr>
       <th>150</th>
       <td>餧</td>
-      <td>1438餧小韻</td>
+      <td>1438餧小韻,2181餧小韻</td>
     </tr>
     <tr>
       <th>151</th>
       <td>饒</td>
-      <td>666饒小韻</td>
+      <td>666饒小韻,2789饒小韻</td>
     </tr>
     <tr>
       <th>152</th>
       <td>鰥</td>
-      <td>555鰥小韻</td>
+      <td>555鰥小韻,2693鰥小韻</td>
     </tr>
     <tr>
       <th>153</th>
       <td>𠊧</td>
-      <td>1880𠊧小韻</td>
+      <td>1880𠊧小韻,2971𠊧小韻</td>
     </tr>
     <tr>
       <th>154</th>
       <td>𡰝</td>
-      <td>570𡰝小韻</td>
+      <td>570𡰝小韻,646𡰝小韻</td>
     </tr>
     <tr>
       <th>155</th>
       <td>𤣆</td>
-      <td>402𤣆小韻</td>
+      <td>402𤣆小韻,572𤣆小韻</td>
     </tr>
     <tr>
       <th>156</th>
       <td>𥄎</td>
-      <td>3524𥄎小韻</td>
+      <td>3524𥄎小韻,3671𥄎小韻</td>
     </tr>
     <tr>
       <th>157</th>
       <td>𪉦</td>
-      <td>3121𪉦小韻</td>
+      <td>3121𪉦小韻,3166𪉦小韻</td>
     </tr>
     <tr>
       <th>158</th>
       <td>𪗨</td>
-      <td>3312𪗨小韻</td>
+      <td>3312𪗨小韻,3339𪗨小韻</td>
     </tr>
   </tbody>
 </table>
