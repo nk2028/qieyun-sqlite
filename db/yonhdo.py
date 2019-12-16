@@ -14,6 +14,9 @@ d = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(dict
 for 韻, 聲, 開合, 等, 母, 小韻, 小韻號 in cur.execute('SELECT 韻賅上去入, 聲, 開合, 等漢字, 母, 小韻, 小韻號 FROM 廣韻小韻全;'):
 	d[韻][聲][開合][等][母] = 小韻, 小韻號
 
+cur.close()
+conn.close()
+
 格式化小韻小韻號 = lambda 小韻, 小韻號: f'<a href="https://ytenx.org/kyonh/sieux/{小韻號}/">{小韻}</a>'
 
 with open('docs/db/example/yonhdo.html', 'w') as f:

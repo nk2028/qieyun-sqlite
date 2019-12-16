@@ -146,6 +146,13 @@ Supported phonological attributes:
 
 元韻放在臻攝而不是山攝。
 
+聲母 娘 -> 孃
+聲母 谿 -> 溪
+聲母 群 -> 羣
+
+韻母 餚 -> 肴
+韻母 眞 -> 真
+
 #### Low-Level API
 
 **`equal`, `in` 類**
