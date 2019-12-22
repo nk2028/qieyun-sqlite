@@ -27,6 +27,8 @@ async function selectPredefinedScripts() {
 		url = 'low_level/kuxyonh.js';
 	else if (v == 'ayaka2019-ll')
 		url = 'low_level/ayaka2019.js';
+	else if (v == 'dv8')
+		url = 'high_level/dv8.js';
 	else
 		return;
 

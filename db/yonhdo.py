@@ -6,7 +6,7 @@
 from collections import defaultdict
 import sqlite3
 
-conn = sqlite3.connect('docs/data.sqlite3')
+conn = sqlite3.connect('../docs/data.sqlite3')
 cur = conn.cursor()
 
 d = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(dict))))
