@@ -11,7 +11,7 @@ import urllib
 # Prepare files
 
 def download_file_if_not_exist(name):
-	url = 'https://raw.githubusercontent.com/sgalal/ytenx/kyonh/ytenx/sync/kyonh/' + name
+	url = 'https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/' + name
 	local_name = 'db/' + name
 	try:
 		if not os.path.exists(local_name):
@@ -83,32 +83,27 @@ cur.executemany('INSERT INTO 廣韻小韻3 VALUES (?, ?, ?, ?, ?, ?)', zip(data_
 cur.execute('''
 CREATE TABLE 廣韻小韻
 ( '小韻號' INTEGER PRIMARY KEY
-, '小韻' TEXT NOT NULL
-, '韻' TEXT NOT NULL
-, '母' TEXT NOT NULL
-, '開合' TEXT NOT NULL
-, '等' INTEGER NOT NULL
-, '上字' TEXT
-, '下字' TEXT
+, '小韻' TEXT NOT NULL CHECK (length(小韻) = 1)
+, '母' TEXT NOT NULL CHECK (length(母) = 1)
+, '開合' TEXT NOT NULL CHECK (開合 IN ('開', '合'))
+, '等' INTEGER NOT NULL CHECK (等 >= 1 AND 等 <= 4)
+, '韻' TEXT NOT NULL CHECK (length(韻) = 1)
+, '重紐' TEXT CHECK (重紐 IN ('A', 'B'))
+, '上字' TEXT CHECK (length(上字) = 1)
+, '下字' TEXT CHECK (length(下字) = 1)
 , '古韻羅馬字' TEXT NOT NULL
 , '有女羅馬字' TEXT
 , '白一平轉寫' TEXT NOT NULL
 , '推導中州音' TEXT NOT NULL
 , '推導普通話' TEXT
-CHECK
-(   LENGTH(小韻) = 1
-AND LENGTH(母) = 1
-AND 開合 IN ('開', '合')
-AND 等 >= 1
-AND 等 <= 4
-AND LENGTH(上字) = 1
-AND LENGTH(下字) = 1
-)
 );''')
 
 cur.execute('''
 INSERT INTO 廣韻小韻
-SELECT 小韻號, 小韻, 韻, 母, 開合, 等,
+SELECT 小韻號, 小韻,
+母, 開合, 等,
+substr(韻, 1, 1) AS 韻,
+nullif(substr(韻, 2, 1), '') AS 重紐,
 substr(反切, 1, 1) AS 上字, substr(反切, 2) AS 下字,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
 FROM 廣韻小韻1 INNER JOIN 廣韻小韻2
@@ -133,13 +128,13 @@ cur.executemany('INSERT INTO 廣韻字頭 VALUES (?, ?, ?, ?)', zip(data_char_en
 # Extra
 
 韻到韻賅上去 = pandas.read_csv('db/subgroup.csv', na_filter=False)
-韻到韻賅上去SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻到韻賅上去['Rhyme'], 韻到韻賅上去['Subgroup']))
+韻到韻賅上去SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻到韻賅上去['Rhyme'], 韻到韻賅上去['Subgroup']) if len(x) == 1)  # 重紐AB is removed
 
 韻到韻賅上去入 = pandas.read_csv('db/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '韻系'])
-韻到韻賅上去入SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻到韻賅上去入['#韻目'], 韻到韻賅上去入['韻系']))
+韻到韻賅上去入SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻到韻賅上去入['#韻目'], 韻到韻賅上去入['韻系']) if len(x) == 1)  # 重紐AB is removed
 
 韻賅上去入到攝 = pandas.read_csv('db/YonhGheh.txt', sep=' ', na_filter=False)
-韻賅上去入到攝SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻賅上去入到攝['#韻系'], 韻賅上去入到攝['攝']))
+韻賅上去入到攝SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻賅上去入到攝['#韻系'], 韻賅上去入到攝['攝']) if len(x) == 1)  # 重紐AB is removed
 
 母到母號 = pandas.read_csv('db/initial.csv', dtype=str, na_filter=False)
 母到母號SQL = '\n'.join("WHEN '" + x + "' THEN " + y for x, y in zip(母到母號['Initial'], 母到母號['InitialID']))
@@ -148,23 +143,26 @@ cur.execute(f'''
 CREATE VIEW 廣韻小韻全 AS
 SELECT 小韻號, 小韻,
 小韻號 || 小韻 || '小韻' AS 小韻全名,
-母 || 開合 || 等漢字 || 韻賅上去入 || 聲 AS 音韻地位,
+母 || 開合 || 等漢字 || 韻賅上去入 || ifnull(重紐, '') || 聲 AS 音韻地位,
+CASE 母 {母到母號SQL} END AS 母號,
+母, 開合, 等, 等漢字,
 韻,
 CASE 韻 {韻到韻賅上去SQL} END AS 韻賅上去,
 韻賅上去入,
 CASE 韻賅上去入 {韻賅上去入到攝SQL} END AS 攝,
-CASE 母 {母到母號SQL} END AS 母號,
-母, 開合, 等, 等漢字, 聲, 上字, 下字,
+重紐,
+聲, 上字, 下字,
+上字 || 下字 || '切' AS 反切,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
-FROM (SELECT 小韻號, 小韻, 韻,
-CASE 韻 {韻到韻賅上去入SQL} END AS 韻賅上去入,
-母, 開合, 等,
+FROM (SELECT 小韻號, 小韻, 母, 開合, 等,
 CASE 等
 WHEN 1 THEN '一'
 WHEN 2 THEN '二'
 WHEN 3 THEN '三'
 ELSE '四'
-END AS 等漢字,
+END AS 等漢字, 韻,
+CASE 韻 {韻到韻賅上去入SQL} END AS 韻賅上去入,
+重紐,
 CASE
 WHEN 小韻號 <= 1156 THEN '平'
 WHEN 小韻號 <= 2091 THEN '上'
@@ -177,8 +175,9 @@ FROM 廣韻小韻);''')
 
 cur.execute('''
 CREATE VIEW 廣韻字頭全 AS
-SELECT 字頭號, 字頭, 解釋, 小韻號, 小韻, 小韻全名, 音韻地位, 小韻內字序, 韻, 韻賅上去,
-韻賅上去入, 攝, 母號, 母, 開合, 等, 等漢字, 聲, 上字, 下字,
+SELECT 字頭號, 字頭, 解釋, 小韻號, 小韻, 小韻全名, 音韻地位, 小韻內字序,
+母號, 母, 開合, 等, 等漢字, 韻, 韻賅上去,
+韻賅上去入, 攝, 重紐, 聲, 上字, 下字, 反切,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
 FROM (SELECT row_number() OVER (ORDER BY 小韻號, 小韻內字序) AS 字頭號,
 小韻號, 小韻內字序, 字頭, 解釋

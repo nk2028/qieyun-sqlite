@@ -6,12 +6,12 @@
 from collections import defaultdict
 import sqlite3
 
-conn = sqlite3.connect('../docs/data.sqlite3')
+conn = sqlite3.connect('docs/data.sqlite3')
 cur = conn.cursor()
 
 d = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(dict))))
 
-for 韻, 聲, 開合, 等, 母, 小韻, 小韻號 in cur.execute('SELECT 韻賅上去入, 聲, 開合, 等漢字, 母, 小韻, 小韻號 FROM 廣韻小韻全;'):
+for 韻, 聲, 開合, 等, 母, 小韻, 小韻號 in cur.execute("SELECT 韻賅上去入 || ifnull(重紐, ''), 聲, 開合, 等漢字, 母, 小韻, 小韻號 FROM 廣韻小韻全;"):
 	d[韻][聲][開合][等][母] = 小韻, 小韻號
 
 cur.close()
