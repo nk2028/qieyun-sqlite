@@ -56,7 +56,7 @@ function get音韻地位(小韻號) {
 /* Low-Level API - equal-prefixed */
 
 function equal組(小韻號, s) {
-	return get母(小韻號) == 組到母[s];
+	return 組到母[s].some(x => get母(小韻號) == x);
 }
 
 function equal等(小韻號, s) {
