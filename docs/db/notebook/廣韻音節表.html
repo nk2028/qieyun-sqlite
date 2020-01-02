@@ -13190,11 +13190,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">小韻地位</span><span class="p">,</span> <span class="n">母</span><span class="p">,</span> <span class="n">小韻</span><span class="p">,</span> <span class="n">小韻號</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 開合 || 等漢字 || 韻 AS 小韻名字, 母, MIN(小韻) AS 小韻, 小韻號</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">音韻地位</span><span class="p">,</span> <span class="n">小韻</span><span class="p">,</span> <span class="n">小韻號</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 音韻地位, min(小韻) AS 小韻, 小韻號</span>
 <span class="s1">FROM 廣韻小韻全</span>
-<span class="s1">GROUP BY 小韻名字, 母</span>
+<span class="s1">GROUP BY 音韻地位</span>
 <span class="s1">ORDER BY 小韻號;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">d</span><span class="p">[</span><span class="n">小韻地位</span><span class="p">][</span><span class="n">母</span><span class="p">]</span> <span class="o">=</span> <span class="n">小韻</span><span class="p">,</span> <span class="n">小韻號</span>
+    <span class="n">母</span><span class="p">,</span> <span class="n">韻</span> <span class="o">=</span> <span class="n">音韻地位</span><span class="p">[:</span><span class="mi">1</span><span class="p">],</span> <span class="n">音韻地位</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">韻</span><span class="p">][</span><span class="n">母</span><span class="p">]</span> <span class="o">=</span> <span class="n">小韻</span><span class="p">,</span> <span class="n">小韻號</span>
 </pre></div>
 
     </div>
@@ -13324,7 +13325,7 @@ div#notebook {
   </thead>
   <tbody>
     <tr>
-      <th>開一東</th>
+      <th>開一東平</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/31/">蓬</a></td>
@@ -13365,7 +13366,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三東</th>
+      <th>開三東平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/17/">風</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/18/">豐</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/16/">馮</a></td>
@@ -13406,7 +13407,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/9/">戎</a></td>
     </tr>
     <tr>
-      <th>開一冬</th>
+      <th>開一冬平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13447,7 +13448,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三鍾</th>
+      <th>開三鍾平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/51/">封</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/60/">峯</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/59/">逢</a></td>
@@ -13488,7 +13489,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/62/">茸</a></td>
     </tr>
     <tr>
-      <th>開二江</th>
+      <th>開二江平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/73/">邦</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/75/">胮</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/78/">龐</a></td>
@@ -13529,7 +13530,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三支</th>
+      <th>開三支平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13570,7 +13571,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/111/">兒</a></td>
     </tr>
     <tr>
-      <th>合三支</th>
+      <th>合三支平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13611,7 +13612,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/132/">痿</a></td>
     </tr>
     <tr>
-      <th>合三支B</th>
+      <th>合三支B平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13652,7 +13653,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三支B</th>
+      <th>開三支B平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/100/">陂</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/99/">鈹</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/109/">皮</a></td>
@@ -13693,7 +13694,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三支A</th>
+      <th>合三支A平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13734,7 +13735,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三支A</th>
+      <th>開三支A平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/116/">卑</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/141/">𤿎</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/117/">陴</a></td>
@@ -13775,7 +13776,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三脂</th>
+      <th>開三脂平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13816,7 +13817,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三脂A</th>
+      <th>開三脂A平</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/181/">紕</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/147/">𣬈</a></td>
@@ -13857,7 +13858,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三脂B</th>
+      <th>開三脂B平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/171/">悲</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/176/">丕</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/175/">邳</a></td>
@@ -13898,7 +13899,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三脂A</th>
+      <th>合三脂A平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13939,7 +13940,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三脂</th>
+      <th>合三脂平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -13980,7 +13981,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/164/">蕤</a></td>
     </tr>
     <tr>
-      <th>合三脂B</th>
+      <th>合三脂B平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14021,7 +14022,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三之</th>
+      <th>開三之平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14062,7 +14063,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/194/">而</a></td>
     </tr>
     <tr>
-      <th>合三微</th>
+      <th>合三微平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/215/">猆</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/214/">霏</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/216/">肥</a></td>
@@ -14103,7 +14104,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三微</th>
+      <th>開三微平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14144,7 +14145,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三魚</th>
+      <th>開三魚平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14185,7 +14186,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/244/">如</a></td>
     </tr>
     <tr>
-      <th>合三虞</th>
+      <th>合三虞平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/271/">跗</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/269/">敷</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/266/">扶</a></td>
@@ -14226,7 +14227,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/256/">儒</a></td>
     </tr>
     <tr>
-      <th>開一模</th>
+      <th>開一模平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/291/">逋</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/296/">𥠵</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/279/">酺</a></td>
@@ -14267,7 +14268,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四齊</th>
+      <th>開四齊平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/302/">豍</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/311/">磇</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/310/">鼙</a></td>
@@ -14308,7 +14309,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/319/">臡</a></td>
     </tr>
     <tr>
-      <th>合四齊</th>
+      <th>合四齊平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14349,7 +14350,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二佳</th>
+      <th>開二佳平</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/325/">牌</a></td>
@@ -14390,7 +14391,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二佳</th>
+      <th>合二佳平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14431,7 +14432,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二皆</th>
+      <th>開二皆平</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/343/">排</a></td>
@@ -14472,7 +14473,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二皆</th>
+      <th>合二皆平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14513,7 +14514,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一灰</th>
+      <th>合一灰平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/377/">桮</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/378/">肧</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/376/">裴</a></td>
@@ -14554,7 +14555,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一咍</th>
+      <th>開一咍平</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/400/">𡜊</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/392/">𤗏</a></td>
@@ -14595,7 +14596,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三眞</th>
+      <th>開三眞平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14636,7 +14637,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/406/">仁</a></td>
     </tr>
     <tr>
-      <th>開三眞A</th>
+      <th>開三眞A平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/411/">賔</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/421/">繽</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/422/">頻</a></td>
@@ -14677,7 +14678,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三眞B</th>
+      <th>開三眞B平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/432/">彬</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/451/">砏</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/429/">貧</a></td>
@@ -14718,7 +14719,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三眞B</th>
+      <th>合三眞B平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14759,7 +14760,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三眞</th>
+      <th>合三眞平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14800,7 +14801,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三諄</th>
+      <th>合三諄平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14841,7 +14842,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/439/">犉</a></td>
     </tr>
     <tr>
-      <th>合三諄A</th>
+      <th>合三諄A平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14882,7 +14883,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三臻</th>
+      <th>開三臻平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -14923,7 +14924,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三文</th>
+      <th>合三文平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/459/">分</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/463/">芬</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/458/">汾</a></td>
@@ -14964,7 +14965,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三欣</th>
+      <th>開三欣平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15005,7 +15006,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三元</th>
+      <th>合三元平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/480/">蕃</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/472/">飜</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/471/">煩</a></td>
@@ -15046,7 +15047,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三元</th>
+      <th>開三元平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15087,7 +15088,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一魂</th>
+      <th>合一魂平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/496/">奔</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/500/">濆</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/495/">盆</a></td>
@@ -15128,7 +15129,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一痕</th>
+      <th>開一痕平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15169,7 +15170,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一寒</th>
+      <th>開一寒平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15210,7 +15211,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一桓</th>
+      <th>合一桓平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/538/">𤳖</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/537/">潘</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/535/">槃</a></td>
@@ -15251,7 +15252,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二刪</th>
+      <th>開二刪平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/544/">班</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/548/">攀</a></td>
       <td>◯</td>
@@ -15292,7 +15293,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二刪</th>
+      <th>合二刪平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15333,7 +15334,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二山</th>
+      <th>開二山平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/563/">斒</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -15374,7 +15375,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二山</th>
+      <th>合二山平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15415,7 +15416,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四先</th>
+      <th>開四先平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/594/">邊</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/590/">蹁</a></td>
@@ -15456,7 +15457,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四先</th>
+      <th>合四先平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15497,7 +15498,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三仙</th>
+      <th>開三仙平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15538,7 +15539,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/602/">然</a></td>
     </tr>
     <tr>
-      <th>開三仙A</th>
+      <th>開三仙A平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/627/">鞭</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/614/">篇</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/615/">便</a></td>
@@ -15579,7 +15580,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三仙</th>
+      <th>合三仙平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15620,7 +15621,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/621/">堧</a></td>
     </tr>
     <tr>
-      <th>合三仙A</th>
+      <th>合三仙A平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15661,7 +15662,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三仙B</th>
+      <th>開三仙B平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15702,7 +15703,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三仙B</th>
+      <th>合三仙B平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15743,7 +15744,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四蕭</th>
+      <th>開四蕭平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15784,7 +15785,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三宵</th>
+      <th>開三宵平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -15825,7 +15826,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/666/">饒</a></td>
     </tr>
     <tr>
-      <th>開三宵B</th>
+      <th>開三宵B平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/672/">鑣</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -15866,7 +15867,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三宵A</th>
+      <th>開三宵A平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/671/">飊</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/683/">爂</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/673/">瓢</a></td>
@@ -15907,7 +15908,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二肴</th>
+      <th>開二肴平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/694/">包</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/695/">胞</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/701/">庖</a></td>
@@ -15948,7 +15949,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一豪</th>
+      <th>開一豪平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/715/">襃</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/724/">㯱</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/714/">袍</a></td>
@@ -15989,7 +15990,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一歌</th>
+      <th>開一歌平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16030,7 +16031,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一戈</th>
+      <th>合一戈平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/751/">波</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/752/">頗</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/743/">婆</a></td>
@@ -16071,7 +16072,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三戈</th>
+      <th>合三戈平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16112,7 +16113,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三戈</th>
+      <th>開三戈平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16153,7 +16154,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二麻</th>
+      <th>開二麻平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/782/">巴</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/780/">葩</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/793/">爬</a></td>
@@ -16194,7 +16195,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三麻</th>
+      <th>開三麻平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16235,7 +16236,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/800/">若</a></td>
     </tr>
     <tr>
-      <th>合二麻</th>
+      <th>合二麻平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16276,7 +16277,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三陽</th>
+      <th>開三陽平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16317,7 +16318,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/817/">穰</a></td>
     </tr>
     <tr>
-      <th>合三陽</th>
+      <th>合三陽平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/818/">方</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/835/">芳</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/810/">房</a></td>
@@ -16358,7 +16359,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一唐</th>
+      <th>開一唐平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/860/">幫</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/848/">滂</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/856/">傍</a></td>
@@ -16399,7 +16400,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一唐</th>
+      <th>合一唐平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16440,7 +16441,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二庚</th>
+      <th>開二庚平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/865/">閍</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/874/">磅</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/868/">彭</a></td>
@@ -16481,7 +16482,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二庚</th>
+      <th>合二庚平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16522,7 +16523,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三庚</th>
+      <th>開三庚平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/881/">兵</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/875/">平</a></td>
@@ -16563,7 +16564,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三庚</th>
+      <th>合三庚平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16604,7 +16605,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二耕</th>
+      <th>開二耕平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/892/">浜</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/900/">怦</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/905/">輣</a></td>
@@ -16645,7 +16646,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二耕</th>
+      <th>合二耕平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16686,7 +16687,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三清</th>
+      <th>開三清平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16727,7 +16728,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三清</th>
+      <th>合三清平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16768,7 +16769,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三清A</th>
+      <th>開三清A平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/923/">并</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -16809,7 +16810,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三清A</th>
+      <th>合三清A平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16850,7 +16851,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四青</th>
+      <th>開四青平</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/938/">竮</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/943/">瓶</a></td>
@@ -16891,7 +16892,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四青</th>
+      <th>合四青平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -16932,7 +16933,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三蒸</th>
+      <th>開三蒸平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/952/">冫</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/968/">砯</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/951/">凭</a></td>
@@ -16973,7 +16974,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/956/">仍</a></td>
     </tr>
     <tr>
-      <th>開一登</th>
+      <th>開一登平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/972/">崩</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/985/">漰</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/976/">朋</a></td>
@@ -17014,7 +17015,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一登</th>
+      <th>合一登平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17055,7 +17056,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三尤</th>
+      <th>開三尤平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1005/">不</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1003/">䬌</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1015/">浮</a></td>
@@ -17096,7 +17097,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1000/">柔</a></td>
     </tr>
     <tr>
-      <th>開一侯</th>
+      <th>開一侯平</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1031/">裒</a></td>
@@ -17137,7 +17138,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三幽</th>
+      <th>開三幽平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1036/">彪</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1039/">淲</a></td>
@@ -17178,7 +17179,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三侵</th>
+      <th>開三侵平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17219,7 +17220,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1053/">任</a></td>
     </tr>
     <tr>
-      <th>開三侵A</th>
+      <th>開三侵A平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17260,7 +17261,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三侵B</th>
+      <th>開三侵B平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17301,7 +17302,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一覃</th>
+      <th>開一覃平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17342,7 +17343,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一談</th>
+      <th>開一談平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17383,7 +17384,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三鹽</th>
+      <th>開三鹽平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17424,7 +17425,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1108/">𩓾</a></td>
     </tr>
     <tr>
-      <th>開三鹽B</th>
+      <th>開三鹽B平</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1101/">砭</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -17465,7 +17466,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三鹽A</th>
+      <th>開三鹽A平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17506,7 +17507,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四添</th>
+      <th>開四添平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17547,7 +17548,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二咸</th>
+      <th>開二咸平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17588,7 +17589,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二銜</th>
+      <th>開二銜平</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1149/">𨂝</a></td>
@@ -17629,7 +17630,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三嚴</th>
+      <th>開三嚴平</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17670,7 +17671,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三凡</th>
+      <th>合三凡平</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1156/">䒦</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1155/">凡</a></td>
@@ -17711,7 +17712,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一董</th>
+      <th>開一東上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1166/">琫</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1170/">菶</a></td>
@@ -17752,7 +17753,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三腫</th>
+      <th>開三鍾上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1186/">覂</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1179/">捧</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1178/">奉</a></td>
@@ -17793,7 +17794,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1175/">宂</a></td>
     </tr>
     <tr>
-      <th>開一湩</th>
+      <th>開一冬上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17834,7 +17835,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二講</th>
+      <th>開二江上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1198/">𦂌</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1194/">㭋</a></td>
@@ -17875,7 +17876,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三紙</th>
+      <th>開三支上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17916,7 +17917,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1226/">爾</a></td>
     </tr>
     <tr>
-      <th>開三紙B</th>
+      <th>開三支B上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1203/">彼</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1237/">㱟</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1204/">被</a></td>
@@ -17957,7 +17958,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三紙B</th>
+      <th>合三支B上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -17998,7 +17999,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三紙</th>
+      <th>合三支上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18039,7 +18040,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1218/">蘂</a></td>
     </tr>
     <tr>
-      <th>開三紙A</th>
+      <th>開三支A上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1225/">𢔌</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1238/">諀</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1228/">婢</a></td>
@@ -18080,7 +18081,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三紙A</th>
+      <th>合三支A上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18121,7 +18122,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三旨</th>
+      <th>開三脂上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18162,7 +18163,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三旨B</th>
+      <th>開三脂B上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1254/">鄙</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1274/">嚭</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1272/">否</a></td>
@@ -18203,7 +18204,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三旨A</th>
+      <th>開三脂A上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1258/">匕</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1264/">牝</a></td>
@@ -18244,7 +18245,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三旨B</th>
+      <th>合三脂B上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18285,7 +18286,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三旨</th>
+      <th>合三脂上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18326,7 +18327,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1275/">蕊</a></td>
     </tr>
     <tr>
-      <th>合三旨A</th>
+      <th>合三脂A上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18367,7 +18368,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三止</th>
+      <th>開三之上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18408,7 +18409,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1294/">耳</a></td>
     </tr>
     <tr>
-      <th>合三尾</th>
+      <th>合三微上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1316/">匪</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1315/">斐</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1323/">膹</a></td>
@@ -18449,7 +18450,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三尾</th>
+      <th>開三微上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18490,7 +18491,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三語</th>
+      <th>開三魚上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18531,7 +18532,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1329/">汝</a></td>
     </tr>
     <tr>
-      <th>合三麌</th>
+      <th>合三虞上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1354/">甫</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1357/">撫</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1356/">父</a></td>
@@ -18572,7 +18573,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1366/">乳</a></td>
     </tr>
     <tr>
-      <th>開一姥</th>
+      <th>開一模上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1391/">補</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1390/">普</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1382/">簿</a></td>
@@ -18613,7 +18614,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四薺</th>
+      <th>開四齊上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1408/">㪏</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1395/">䫌</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1405/">陛</a></td>
@@ -18654,7 +18655,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二蟹</th>
+      <th>開二佳上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1416/">擺</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1414/">罷</a></td>
@@ -18695,7 +18696,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二蟹</th>
+      <th>合二佳上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18736,7 +18737,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二駭</th>
+      <th>開二皆上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18777,7 +18778,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一賄</th>
+      <th>合一灰上</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1442/">琲</a></td>
@@ -18818,7 +18819,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一海</th>
+      <th>開一咍上</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1458/">俖</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1465/">倍</a></td>
@@ -18859,7 +18860,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1462/">疓</a></td>
     </tr>
     <tr>
-      <th>開三軫</th>
+      <th>開三眞上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18900,7 +18901,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1469/">忍</a></td>
     </tr>
     <tr>
-      <th>開三軫A</th>
+      <th>開三眞A上</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1476/">牝</a></td>
@@ -18941,7 +18942,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三軫B</th>
+      <th>開三眞B上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -18982,7 +18983,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三軫B</th>
+      <th>合三眞B上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19023,7 +19024,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三軫</th>
+      <th>合三眞上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19064,7 +19065,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三準</th>
+      <th>合三諄上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19105,7 +19106,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1487/">蝡</a></td>
     </tr>
     <tr>
-      <th>合三準A</th>
+      <th>合三諄A上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19146,7 +19147,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三吻</th>
+      <th>合三文上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1500/">粉</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1502/">忿</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1501/">憤</a></td>
@@ -19187,7 +19188,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三隱</th>
+      <th>開三欣上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19228,7 +19229,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三𧤛</th>
+      <th>開三臻上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19269,7 +19270,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三阮</th>
+      <th>合三元上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1524/">反</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1529/">飯</a></td>
@@ -19310,7 +19311,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三阮</th>
+      <th>開三元上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19351,7 +19352,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一混</th>
+      <th>合一魂上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1533/">本</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1531/">翉</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1543/">獖</a></td>
@@ -19392,7 +19393,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一很</th>
+      <th>開一痕上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19433,7 +19434,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一旱</th>
+      <th>開一寒上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19474,7 +19475,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一緩</th>
+      <th>合一桓上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1573/">粄</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1577/">坢</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1571/">伴</a></td>
@@ -19515,7 +19516,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二潸</th>
+      <th>開二刪上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1580/">版</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1590/">眅</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1585/">阪</a></td>
@@ -19556,7 +19557,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二潸</th>
+      <th>合二刪上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19597,7 +19598,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二產</th>
+      <th>開二山上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19638,7 +19639,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二產</th>
+      <th>合二山上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19679,7 +19680,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四銑</th>
+      <th>開四先上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1612/">編</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1615/">辮</a></td>
@@ -19720,7 +19721,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四銑</th>
+      <th>合四先上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19761,7 +19762,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三獮</th>
+      <th>開三仙上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19802,7 +19803,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1631/">蹨</a></td>
     </tr>
     <tr>
-      <th>開三獮A</th>
+      <th>開三仙A上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1638/">褊</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1656/">楩</a></td>
@@ -19843,7 +19844,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三獮B</th>
+      <th>開三仙B上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1641/">辡</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1659/">鴘</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1636/">辯</a></td>
@@ -19884,7 +19885,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三獮</th>
+      <th>合三仙上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19925,7 +19926,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1647/">輭</a></td>
     </tr>
     <tr>
-      <th>合三獮B</th>
+      <th>合三仙B上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -19966,7 +19967,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三獮A</th>
+      <th>合三仙A上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20007,7 +20008,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四篠</th>
+      <th>開四蕭上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20048,7 +20049,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三小</th>
+      <th>開三宵上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20089,7 +20090,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1682/">擾</a></td>
     </tr>
     <tr>
-      <th>開三小B</th>
+      <th>開三宵B上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1689/">表</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1697/">麃</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1691/">藨</a></td>
@@ -20130,7 +20131,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三小A</th>
+      <th>開三宵A上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1690/">褾</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1685/">縹</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1683/">摽</a></td>
@@ -20171,7 +20172,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二巧</th>
+      <th>開二肴上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1701/">飽</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1707/">鮑</a></td>
@@ -20212,7 +20213,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一晧</th>
+      <th>開一豪上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1727/">寶</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1714/">抱</a></td>
@@ -20253,7 +20254,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一哿</th>
+      <th>開一歌上</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1761/">爸</a></td>
@@ -20294,7 +20295,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一果</th>
+      <th>合一戈上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1756/">跛</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1757/">叵</a></td>
       <td>◯</td>
@@ -20335,7 +20336,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二馬</th>
+      <th>開二麻上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1783/">把</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1780/">跁</a></td>
@@ -20376,7 +20377,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三馬</th>
+      <th>開三麻上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20417,7 +20418,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1787/">若</a></td>
     </tr>
     <tr>
-      <th>合三果</th>
+      <th>合三戈上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20458,7 +20459,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二馬</th>
+      <th>合二麻上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20499,7 +20500,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三養</th>
+      <th>開三陽上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20540,7 +20541,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1817/">壤</a></td>
     </tr>
     <tr>
-      <th>合三養</th>
+      <th>合三陽上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1821/">昉</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1819/">髣</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1830/">𩦠</a></td>
@@ -20581,7 +20582,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一蕩</th>
+      <th>開一唐上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1835/">榜</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1847/">髈</a></td>
       <td>◯</td>
@@ -20622,7 +20623,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一蕩</th>
+      <th>合一唐上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20663,7 +20664,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二梗</th>
+      <th>開二庚上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1867/">浜</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1874/">鮩</a></td>
@@ -20704,7 +20705,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三梗</th>
+      <th>開三庚上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1856/">丙</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -20745,7 +20746,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三梗</th>
+      <th>合三庚上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20786,7 +20787,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二梗</th>
+      <th>合二庚上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20827,7 +20828,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二耿</th>
+      <th>開二耕上</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1881/">皏</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1880/">𠊧</a></td>
@@ -20868,7 +20869,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三靜</th>
+      <th>開三清上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20909,7 +20910,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三靜A</th>
+      <th>開三清A上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1890/">餅</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -20950,7 +20951,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三靜</th>
+      <th>合三清上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -20991,7 +20992,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三靜A</th>
+      <th>合三清A上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21032,7 +21033,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四迥</th>
+      <th>合四青上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21073,7 +21074,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四迥</th>
+      <th>開四青上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1910/">鞞</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1913/">頩</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1916/">竝</a></td>
@@ -21114,7 +21115,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三拯</th>
+      <th>開三蒸上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21155,7 +21156,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一等</th>
+      <th>開一登上</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/1924/">倗</a></td>
       <td>◯</td>
@@ -21196,7 +21197,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三有</th>
+      <th>開三尤上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1938/">缶</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1950/">㤱</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1937/">婦</a></td>
@@ -21237,7 +21238,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1940/">蹂</a></td>
     </tr>
     <tr>
-      <th>開一厚</th>
+      <th>開一侯上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1962/">㨐</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1966/">剖</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1957/">部</a></td>
@@ -21278,7 +21279,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三黝</th>
+      <th>開三幽上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21319,7 +21320,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三寑</th>
+      <th>開三侵上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21360,7 +21361,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/1984/">荏</a></td>
     </tr>
     <tr>
-      <th>開三寑A</th>
+      <th>開三侵A上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21401,7 +21402,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三寑B</th>
+      <th>開三侵B上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/1997/">稟</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/1999/">品</a></td>
       <td>◯</td>
@@ -21442,7 +21443,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一感</th>
+      <th>開一覃上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21483,7 +21484,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一敢</th>
+      <th>開一談上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21524,7 +21525,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三琰</th>
+      <th>開三鹽上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21565,7 +21566,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2043/">冉</a></td>
     </tr>
     <tr>
-      <th>開三琰B</th>
+      <th>開三鹽B上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2036/">貶</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -21606,7 +21607,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三琰A</th>
+      <th>開三鹽A上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21647,7 +21648,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四忝</th>
+      <th>開四添上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21688,7 +21689,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三儼</th>
+      <th>開三嚴上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21729,7 +21730,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二豏</th>
+      <th>開二咸上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21770,7 +21771,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二檻</th>
+      <th>開二銜上</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21811,7 +21812,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三梵</th>
+      <th>合三凡上</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2088/">𦜒</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2090/">釩</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2086/">范</a></td>
@@ -21852,7 +21853,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一送</th>
+      <th>開一東去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21893,7 +21894,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三送</th>
+      <th>開三東去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2104/">諷</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2110/">賵</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2093/">鳳</a></td>
@@ -21934,7 +21935,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一宋</th>
+      <th>開一冬去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -21975,7 +21976,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三用</th>
+      <th>開三鍾去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2128/">葑</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2126/">俸</a></td>
@@ -22016,7 +22017,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2134/">䩸</a></td>
     </tr>
     <tr>
-      <th>開二絳</th>
+      <th>開二江去</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2147/">肨</a></td>
       <td>◯</td>
@@ -22057,7 +22058,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三寘</th>
+      <th>開三支去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22098,7 +22099,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三寘A</th>
+      <th>開三支A去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2164/">臂</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2169/">譬</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2151/">避</a></td>
@@ -22139,7 +22140,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三寘</th>
+      <th>合三支去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22180,7 +22181,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2187/">䄲</a></td>
     </tr>
     <tr>
-      <th>合三寘B</th>
+      <th>合三支B去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22221,7 +22222,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三寘B</th>
+      <th>開三支B去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2160/">賁</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2159/">帔</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2161/">髲</a></td>
@@ -22262,7 +22263,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三寘A</th>
+      <th>合三支A去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22303,7 +22304,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三至</th>
+      <th>開三脂去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22344,7 +22345,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2226/">二</a></td>
     </tr>
     <tr>
-      <th>合三至</th>
+      <th>合三脂去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22385,7 +22386,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三至B</th>
+      <th>開三脂B去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2204/">祕</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2206/">濞</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2207/">備</a></td>
@@ -22426,7 +22427,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三至B</th>
+      <th>合三脂B去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22467,7 +22468,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三至A</th>
+      <th>開三脂A去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2235/">痹</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2215/">屁</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2233/">鼻</a></td>
@@ -22508,7 +22509,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三至A</th>
+      <th>合三脂A去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22549,7 +22550,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三志</th>
+      <th>開三之去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22590,7 +22591,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2261/">餌</a></td>
     </tr>
     <tr>
-      <th>合三未</th>
+      <th>合三微去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2279/">沸</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2280/">費</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2284/">𥝋</a></td>
@@ -22631,7 +22632,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三未</th>
+      <th>開三微去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22672,7 +22673,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三御</th>
+      <th>開三魚去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22713,7 +22714,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2308/">洳</a></td>
     </tr>
     <tr>
-      <th>合三遇</th>
+      <th>合三虞去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2334/">付</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2327/">赴</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2320/">附</a></td>
@@ -22754,7 +22755,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2326/">孺</a></td>
     </tr>
     <tr>
-      <th>開一暮</th>
+      <th>開一模去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2353/">布</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2355/">怖</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2358/">捕</a></td>
@@ -22795,7 +22796,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四霽</th>
+      <th>開四齊去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2374/">閉</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2378/">媲</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2379/">薜</a></td>
@@ -22836,7 +22837,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四霽</th>
+      <th>合四齊去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22877,7 +22878,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三祭</th>
+      <th>開三祭去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22918,7 +22919,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三祭</th>
+      <th>合三祭去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -22959,7 +22960,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2387/">芮</a></td>
     </tr>
     <tr>
-      <th>開三祭A</th>
+      <th>開三祭A去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2397/">蔽</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2419/">潎</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2394/">𡚁</a></td>
@@ -23000,7 +23001,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三祭B</th>
+      <th>合三祭B去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23041,7 +23042,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三祭B</th>
+      <th>開三祭B去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23082,7 +23083,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三廢</th>
+      <th>合三廢去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2544/">廢</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2545/">肺</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2547/">吠</a></td>
@@ -23123,7 +23124,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一泰</th>
+      <th>開一泰去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2430/">貝</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2431/">霈</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2445/">旆</a></td>
@@ -23164,7 +23165,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一泰</th>
+      <th>合一泰去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23205,7 +23206,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二卦</th>
+      <th>合二佳去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23246,7 +23247,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二卦</th>
+      <th>開二佳去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2470/">㠔</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2465/">派</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2463/">粺</a></td>
@@ -23287,7 +23288,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二怪</th>
+      <th>合二皆去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23328,7 +23329,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二怪</th>
+      <th>開二皆去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2481/">𢷎</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2482/">湃</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2485/">𢟡</a></td>
@@ -23369,7 +23370,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二夬</th>
+      <th>合二夬去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23410,7 +23411,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二夬</th>
+      <th>開二夬去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2505/">敗</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2495/">敗</a></td>
@@ -23451,7 +23452,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一隊</th>
+      <th>合一灰去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2525/">背</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2512/">配</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2510/">佩</a></td>
@@ -23492,7 +23493,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一代</th>
+      <th>開一咍去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23533,7 +23534,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三廢</th>
+      <th>開三廢去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23574,7 +23575,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三震</th>
+      <th>開三眞去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23615,7 +23616,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2553/">刃</a></td>
     </tr>
     <tr>
-      <th>開三震A</th>
+      <th>開三眞A去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2556/">儐</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2570/">𣎵</a></td>
       <td>◯</td>
@@ -23656,7 +23657,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三震B</th>
+      <th>開三眞B去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23697,7 +23698,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三櫬</th>
+      <th>開三臻去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23738,7 +23739,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三稕A</th>
+      <th>合三諄A去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23779,7 +23780,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三稕</th>
+      <th>合三諄去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23820,7 +23821,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2579/">閠</a></td>
     </tr>
     <tr>
-      <th>合三問</th>
+      <th>合三文去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2585/">糞</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2584/">湓</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2589/">分</a></td>
@@ -23861,7 +23862,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三焮</th>
+      <th>開三欣去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23902,7 +23903,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三願</th>
+      <th>合三元去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2597/">販</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2601/">嬔</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2600/">飯</a></td>
@@ -23943,7 +23944,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三願</th>
+      <th>開三元去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -23984,7 +23985,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一慁</th>
+      <th>合一魂去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2627/">奔</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2621/">噴</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2624/">坌</a></td>
@@ -24025,7 +24026,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一恨</th>
+      <th>開一痕去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24066,7 +24067,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一翰</th>
+      <th>開一寒去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24107,7 +24108,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一換</th>
+      <th>合一桓去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2662/">半</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2663/">判</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2664/">叛</a></td>
@@ -24148,7 +24149,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二諫</th>
+      <th>開二刪去</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2681/">襻</a></td>
       <td>◯</td>
@@ -24189,7 +24190,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二諫</th>
+      <th>合二刪去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24230,7 +24231,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二襇</th>
+      <th>開二山去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2692/">扮</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2688/">盼</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2687/">瓣</a></td>
@@ -24271,7 +24272,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二襇</th>
+      <th>合二山去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24312,7 +24313,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四霰</th>
+      <th>開四先去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2756/">徧</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2710/">片</a></td>
       <td>◯</td>
@@ -24353,7 +24354,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四霰</th>
+      <th>合四先去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24394,7 +24395,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三線</th>
+      <th>開三仙去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24435,7 +24436,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三線B</th>
+      <th>開三仙B去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2735/">變</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2738/">卞</a></td>
@@ -24476,7 +24477,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三線A</th>
+      <th>開三仙A去</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2746/">騗</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2751/">便</a></td>
@@ -24517,7 +24518,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三線A</th>
+      <th>合三仙A去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24558,7 +24559,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三線</th>
+      <th>合三仙去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24599,7 +24600,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2726/">𤲬</a></td>
     </tr>
     <tr>
-      <th>合三線B</th>
+      <th>合三仙B去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24640,7 +24641,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四嘯</th>
+      <th>開四蕭去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24681,7 +24682,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三笑</th>
+      <th>開三宵去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24722,7 +24723,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2789/">饒</a></td>
     </tr>
     <tr>
-      <th>開三笑A</th>
+      <th>開三宵A去</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2775/">剽</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2784/">驃</a></td>
@@ -24763,7 +24764,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三笑B</th>
+      <th>開三宵B去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2787/">裱</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -24804,7 +24805,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二效</th>
+      <th>開二肴去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2794/">豹</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2797/">奅</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2803/">靤</a></td>
@@ -24845,7 +24846,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一号</th>
+      <th>開一豪去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2817/">報</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2816/">暴</a></td>
@@ -24886,7 +24887,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一箇</th>
+      <th>開一歌去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -24927,7 +24928,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一過</th>
+      <th>合一戈去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2842/">播</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2846/">破</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2852/">縛</a></td>
@@ -24968,7 +24969,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二禡</th>
+      <th>開二麻去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2879/">霸</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2880/">帊</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2885/">𤝡</a></td>
@@ -25009,7 +25010,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三禡</th>
+      <th>開三麻去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25050,7 +25051,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二禡</th>
+      <th>合二麻去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25091,7 +25092,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三漾</th>
+      <th>開三陽去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25132,7 +25133,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/2896/">讓</a></td>
     </tr>
     <tr>
-      <th>合三漾</th>
+      <th>合三陽去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2918/">放</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2913/">訪</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2924/">防</a></td>
@@ -25173,7 +25174,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一宕</th>
+      <th>開一唐去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2935/">螃</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2931/">傍</a></td>
@@ -25214,7 +25215,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一宕</th>
+      <th>合一唐去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25255,7 +25256,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三映</th>
+      <th>開三庚去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2955/">柄</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2952/">病</a></td>
@@ -25296,7 +25297,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二映</th>
+      <th>開二庚去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2962/">榜</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2966/">膨</a></td>
@@ -25337,7 +25338,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二映</th>
+      <th>合二庚去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25378,7 +25379,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三映</th>
+      <th>合三庚去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25419,7 +25420,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二諍</th>
+      <th>開二耕去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2970/">迸</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/2971/">𠊧</a></td>
@@ -25460,7 +25461,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二諍</th>
+      <th>合二耕去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25501,7 +25502,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三勁A</th>
+      <th>開三清A去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/2985/">摒</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2983/">聘</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/2986/">偋</a></td>
@@ -25542,7 +25543,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三勁</th>
+      <th>開三清去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25583,7 +25584,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三勁A</th>
+      <th>合三清A去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25624,7 +25625,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四徑</th>
+      <th>開四青去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25665,7 +25666,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四徑</th>
+      <th>合四青去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25706,7 +25707,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三證</th>
+      <th>開三蒸去</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3015/">凭</a></td>
@@ -25747,7 +25748,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3008/">認</a></td>
     </tr>
     <tr>
-      <th>開一嶝</th>
+      <th>開一登去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3027/">𥦜</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3028/">倗</a></td>
@@ -25788,7 +25789,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三宥</th>
+      <th>開三尤去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3047/">富</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3045/">副</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3055/">復</a></td>
@@ -25829,7 +25830,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3058/">輮</a></td>
     </tr>
     <tr>
-      <th>開一候</th>
+      <th>開一侯去</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3066/">仆</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3078/">䏽</a></td>
@@ -25870,7 +25871,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三幼</th>
+      <th>開三幽去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25911,7 +25912,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三沁</th>
+      <th>開三侵去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25952,7 +25953,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3087/">妊</a></td>
     </tr>
     <tr>
-      <th>開三沁B</th>
+      <th>開三侵B去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -25993,7 +25994,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一勘</th>
+      <th>開一覃去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26034,7 +26035,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一闞</th>
+      <th>開一談去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26075,7 +26076,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三豔</th>
+      <th>開三鹽去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26116,7 +26117,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3130/">染</a></td>
     </tr>
     <tr>
-      <th>開三豔A</th>
+      <th>開三鹽A去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26157,7 +26158,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三豔B</th>
+      <th>開三鹽B去</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3132/">窆</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -26198,7 +26199,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四㮇</th>
+      <th>開四添去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26239,7 +26240,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三釅</th>
+      <th>開三嚴去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26280,7 +26281,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三范</th>
+      <th>合三凡去</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3179/">汎</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3178/">梵</a></td>
@@ -26321,7 +26322,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二陷</th>
+      <th>開二咸去</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26362,7 +26363,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二鑑</th>
+      <th>開二銜去</th>
       <td>◯</td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3174/">埿</a></td>
@@ -26403,7 +26404,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一屋</th>
+      <th>開一東入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3198/">卜</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3197/">扑</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3196/">暴</a></td>
@@ -26444,7 +26445,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三屋</th>
+      <th>開三東入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3200/">福</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3221/">蝮</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3201/">伏</a></td>
@@ -26485,7 +26486,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3212/">肉</a></td>
     </tr>
     <tr>
-      <th>開一沃</th>
+      <th>開一冬入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3241/">襮</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3234/">僕</a></td>
@@ -26526,7 +26527,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三燭</th>
+      <th>開三鍾入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3264/">䪁</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3260/">幞</a></td>
@@ -26567,7 +26568,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3251/">辱</a></td>
     </tr>
     <tr>
-      <th>開二覺</th>
+      <th>開二江入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3272/">剥</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3275/">璞</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3274/">雹</a></td>
@@ -26608,7 +26609,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三質</th>
+      <th>開三眞入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26649,7 +26650,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3286/">日</a></td>
     </tr>
     <tr>
-      <th>開三質A</th>
+      <th>開三眞A入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3306/">必</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3292/">匹</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3308/">邲</a></td>
@@ -26690,7 +26691,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三櫛</th>
+      <th>開三臻入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26731,7 +26732,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三質B</th>
+      <th>開三眞B入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3317/">筆</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3314/">弼</a></td>
@@ -26772,7 +26773,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三質</th>
+      <th>合三眞入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26813,7 +26814,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三術</th>
+      <th>合三諄入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26854,7 +26855,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三術A</th>
+      <th>合三諄A入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26895,7 +26896,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三質B</th>
+      <th>合三眞B入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -26936,7 +26937,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三物</th>
+      <th>合三文入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3341/">弗</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3349/">拂</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3346/">佛</a></td>
@@ -26977,7 +26978,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三迄</th>
+      <th>開三欣入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27018,7 +27019,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三月</th>
+      <th>合三元入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3363/">髮</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3370/">㤄</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3357/">伐</a></td>
@@ -27059,7 +27060,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三月</th>
+      <th>開三元入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27100,7 +27101,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一沒</th>
+      <th>合一魂入</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3382/">䪬</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3375/">勃</a></td>
@@ -27141,7 +27142,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一麧</th>
+      <th>開一痕入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27182,7 +27183,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一曷</th>
+      <th>開一寒入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27223,7 +27224,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一末</th>
+      <th>合一桓入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3410/">撥</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3419/">鏺</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3424/">跋</a></td>
@@ -27264,7 +27265,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二鎋</th>
+      <th>開二山入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3430/">八</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3444/">汃</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3427/">拔</a></td>
@@ -27305,7 +27306,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二鎋</th>
+      <th>合二山入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27346,7 +27347,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二黠</th>
+      <th>開二刪入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3462/">捌</a></td>
       <td>◯</td>
       <td>◯</td>
@@ -27387,7 +27388,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3466/">𩭿</a></td>
     </tr>
     <tr>
-      <th>合二黠</th>
+      <th>合二刪入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27428,7 +27429,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四屑</th>
+      <th>開四先入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3483/">㢼</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3487/">撆</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3488/">蹩</a></td>
@@ -27469,7 +27470,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四屑</th>
+      <th>合四先入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27510,7 +27511,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三薛</th>
+      <th>開三仙入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27551,7 +27552,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3495/">熱</a></td>
     </tr>
     <tr>
-      <th>開三薛B</th>
+      <th>開三仙B入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3519/">䇷</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3517/">别</a></td>
@@ -27592,7 +27593,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三薛A</th>
+      <th>開三仙A入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3502/">鷩</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3516/">瞥</a></td>
       <td>◯</td>
@@ -27633,7 +27634,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三薛</th>
+      <th>合三仙入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27674,7 +27675,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3510/">爇</a></td>
     </tr>
     <tr>
-      <th>合三薛A</th>
+      <th>合三仙A入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27715,7 +27716,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三薛B</th>
+      <th>合三仙B入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27756,7 +27757,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三藥</th>
+      <th>開三陽入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27797,7 +27798,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3545/">若</a></td>
     </tr>
     <tr>
-      <th>合三藥</th>
+      <th>合三陽入</th>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3568/">𩅿</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3559/">縛</a></td>
@@ -27838,7 +27839,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一鐸</th>
+      <th>開一唐入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3586/">博</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3579/">𩔈</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3581/">泊</a></td>
@@ -27879,7 +27880,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一鐸</th>
+      <th>合一唐入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -27920,7 +27921,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二陌</th>
+      <th>開二庚入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3599/">伯</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3615/">拍</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3598/">白</a></td>
@@ -27961,7 +27962,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三陌</th>
+      <th>開三庚入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3667/">碧</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3625/">欂</a></td>
@@ -28002,7 +28003,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二陌</th>
+      <th>合二庚入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28043,7 +28044,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三陌</th>
+      <th>合三庚入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28084,7 +28085,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二麥</th>
+      <th>開二耕入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3629/">檗</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3642/">𢶉</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3630/">䌟</a></td>
@@ -28125,7 +28126,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合二麥</th>
+      <th>合二耕入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28166,7 +28167,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三昔</th>
+      <th>開三清入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28207,7 +28208,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三昔A</th>
+      <th>開三清A入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3664/">辟</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3665/">僻</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3661/">擗</a></td>
@@ -28248,7 +28249,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三昔</th>
+      <th>合三清入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28289,7 +28290,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三昔A</th>
+      <th>合三清A入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28330,7 +28331,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四錫</th>
+      <th>開四青入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3687/">壁</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3674/">霹</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3686/">甓</a></td>
@@ -28371,7 +28372,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合四錫</th>
+      <th>合四青入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28412,7 +28413,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三職</th>
+      <th>開三蒸入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3714/">逼</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3717/">堛</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3719/">愎</a></td>
@@ -28453,7 +28454,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三職</th>
+      <th>合三蒸入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28494,7 +28495,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一德</th>
+      <th>開一登入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3735/">北</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3744/">覆</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3736/">菔</a></td>
@@ -28535,7 +28536,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合一德</th>
+      <th>合一登入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28576,7 +28577,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三緝</th>
+      <th>開三侵入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28617,7 +28618,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3751/">入</a></td>
     </tr>
     <tr>
-      <th>開三緝A</th>
+      <th>開三侵A入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28658,7 +28659,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三緝B</th>
+      <th>開三侵B入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3773/">鵖</a></td>
       <td>◯</td>
       <td><a href="https://ytenx.org/kyonh/sieux/3772/">𩾳</a></td>
@@ -28699,7 +28700,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一合</th>
+      <th>開一覃入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28740,7 +28741,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開一盍</th>
+      <th>開一談入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28781,7 +28782,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三葉</th>
+      <th>開三鹽入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28822,7 +28823,7 @@ div#notebook {
       <td><a href="https://ytenx.org/kyonh/sieux/3819/">讘</a></td>
     </tr>
     <tr>
-      <th>開三葉B</th>
+      <th>開三鹽B入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28863,7 +28864,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三葉A</th>
+      <th>開三鹽A入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28904,7 +28905,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開四怗</th>
+      <th>開四添入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28945,7 +28946,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二洽</th>
+      <th>開二咸入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -28986,7 +28987,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開二狎</th>
+      <th>開二銜入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -29027,7 +29028,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>開三業</th>
+      <th>開三嚴入</th>
       <td>◯</td>
       <td>◯</td>
       <td>◯</td>
@@ -29068,7 +29069,7 @@ div#notebook {
       <td>◯</td>
     </tr>
     <tr>
-      <th>合三乏</th>
+      <th>合三凡入</th>
       <td><a href="https://ytenx.org/kyonh/sieux/3870/">法</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3871/">𥎰</a></td>
       <td><a href="https://ytenx.org/kyonh/sieux/3869/">乏</a></td>

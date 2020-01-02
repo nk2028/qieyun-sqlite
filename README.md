@@ -12,8 +12,7 @@ Find the small rhymes without _fanqie_:
 SELECT 小韻號, 音韻地位, 反切,
 group_concat(字頭, '') AS 字頭
 FROM 廣韻字頭全
-WHERE 上字 IS NULL
-OR 下字 IS NULL
+WHERE 反切 IS NULL
 GROUP BY 小韻號;
 ```
 

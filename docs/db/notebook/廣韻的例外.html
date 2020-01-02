@@ -13182,11 +13182,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 小韻號, 音韻地位, 上字, 下字,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 小韻號, 音韻地位, 反切,</span>
 <span class="s1">GROUP_CONCAT(字頭, &#39;&#39;) AS 字頭</span>
 <span class="s1">FROM 廣韻字頭全</span>
-<span class="s1">WHERE 上字 IS NULL</span>
-<span class="s1">OR 下字 IS NULL</span>
+<span class="s1">WHERE 反切 IS NULL</span>
 <span class="s1">GROUP BY 小韻號;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
@@ -13225,8 +13224,7 @@ div#notebook {
       <th></th>
       <th>小韻號</th>
       <th>音韻地位</th>
-      <th>上字</th>
-      <th>下字</th>
+      <th>反切</th>
       <th>字頭</th>
     </tr>
   </thead>
@@ -13236,14 +13234,12 @@ div#notebook {
       <td>1919</td>
       <td>章開三蒸上</td>
       <td>None</td>
-      <td>None</td>
       <td>拯抍撜𨋬氶</td>
     </tr>
     <tr>
       <th>1</th>
       <td>3177</td>
       <td>影開二銜去</td>
-      <td>None</td>
       <td>None</td>
       <td>𪒠</td>
     </tr>
@@ -13651,11 +13647,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 上字 || 下字 || &#39;切&#39; AS 反切,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 反切,</span>
 <span class="s1">group_concat(小韻全名) AS 小韻全名</span>
 <span class="s1">FROM 廣韻小韻全</span>
-<span class="s1">WHERE 上字 IS NOT NULL</span>
-<span class="s1">GROUP BY 上字, 下字</span>
+<span class="s1">WHERE 反切 IS NOT NULL</span>
+<span class="s1">GROUP BY 反切</span>
 <span class="s1">HAVING count(*) &gt; 1;&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 </pre></div>
 
@@ -14627,7 +14623,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 上字, 小韻號, 音韻地位, 上字 || 下字 || &#39;切&#39; AS 反切</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 上字, 小韻號, 音韻地位, 反切</span>
 <span class="s1">FROM 廣韻小韻全</span>
 <span class="s1">WHERE 上字 NOT IN</span>
 <span class="s1">(SELECT 字頭 FROM 廣韻字頭)</span>
@@ -14760,7 +14756,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 下字, 小韻號, 音韻地位, 上字 || 下字 || &#39;切&#39; AS 反切</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pandas</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT 下字, 小韻號, 音韻地位, 反切</span>
 <span class="s1">FROM 廣韻小韻全</span>
 <span class="s1">WHERE 下字 NOT IN</span>
 <span class="s1">(SELECT 字頭 FROM 廣韻字頭)</span>
