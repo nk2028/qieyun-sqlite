@@ -16,23 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* Predefined Scripts */
 
 async function selectPredefinedScripts() {
-	const v = predefinedScripts.value;
-
-	let url;
-	if (v == 'kuxyonh')
-		url = 'high_level/kuxyonh.js';
-	else if (v == 'ayaka2019')
-		url = 'high_level/ayaka2019.js';
-	else if (v == 'kuxyonh-ll')
-		url = 'low_level/kuxyonh.js';
-	else if (v == 'ayaka2019-ll')
-		url = 'low_level/ayaka2019.js';
-	else if (v == 'dv8')
-		url = 'high_level/dv8.js';
-	else
-		return;
-
-	const response = await fetch('example/' + url);
+	const response = await fetch('example/' + predefinedScripts.value + '.js');
 	const text = await response.text();
 	codeInputArea.setValue(text);
 	handleDefineScript();
@@ -78,8 +62,7 @@ function handlePredefinedOptions() {
 /* Converter */
 
 function makeLongStr(sr) {
-	const [小韻名, 韻, 母, 開合, 等] = small_rhymes[sr - 1];
-	return 韻 + 開合 + 等 + 母;
+	return get音韻地位(sr);
 }
 
 function makeTooltip(ch, pronunciation, sr, expl) {
