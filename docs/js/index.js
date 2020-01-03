@@ -1,5 +1,9 @@
 'use strict';
 
+function makeErr(err, i) {
+	return '小韻 ' + i + ': ' + err.message + '\n' + err.stack;
+}
+
 /* CodeMirror - codeInputArea */
 
 let codeInputArea;
@@ -30,33 +34,37 @@ function handleDefineScript() {
 	try {
 		brogue2 = new Function('小韻號', codeInputArea.getValue());
 	} catch (err) {
-		notify(err.message);
+		notify(makeErr(err));
 	}
 }
 
 /* Predefined Options */
 
 function handlePredefinedOptions() {
-	try {
-		if (predefinedOptions.value == 'exportAllSmallRhymes') {
-			outputArea.innerText = [...Array(3874).keys()].map(i => {
-				const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
-				return (i + 1) + ' ' + 小韻名 + ' ' + 韻 + 母 + 開合 + 等 + ' ' + brogue2(i + 1);
-			}).join('\n');
-			outputArea.handleArticle = null;
-		} else if (predefinedOptions.value == 'exportAllSyllables') {
-			outputArea.innerText = [...new Set([...Array(3874).keys()].map(i => {
-				const [小韻名, 韻, 母, 開合, 等] = small_rhymes[i];
+	if (predefinedOptions.value == 'exportAllSmallRhymes') {
+		outputArea.innerText = [...Array(3874).keys()].map(i => {
+			try {
+				return get音韻地位(i + 1) + ' ' + brogue2(i + 1);
+			} catch (err) {
+				notify(makeErr(err, i + 1));
+				throw err;
+			}
+		}).join('\n');
+		outputArea.handleArticle = null;
+	} else if (predefinedOptions.value == 'exportAllSyllables') {
+		outputArea.innerText = [...new Set([...Array(3874).keys()].map(i => {
+			try {
 				return brogue2(i + 1);
-			}))].join(', ');
-			outputArea.handleArticle = null;
-		} else if (predefinedOptions.value == 'convertArticle')
-			handleArticle();
-		else
-			outputArea.innerHTML = '';
-	} catch (err) {
-		notify(err.message);
-	}
+			} catch (err) {
+				notify(makeErr(err, i + 1));
+				throw err;
+			}
+		}))].join(', ');
+		outputArea.handleArticle = null;
+	} else if (predefinedOptions.value == 'convertArticle')
+		handleArticle();
+	else
+		outputArea.innerHTML = '';
 }
 
 /* Converter */
@@ -84,7 +92,12 @@ function makeNoEntry(ch) {
 
 function makeSingleEntry(ch, res) {
 	const [sr, expl] = res;
-	const pronunciation = brogue2(sr);
+	var pronunciation;
+	try {
+		pronunciation = brogue2(sr);
+	} catch (err) {
+		notify(makeErr(err, sr));
+	}
 
 	const outerContainer = document.createElement('div');
 	outerContainer.classList.add('entry');
@@ -100,7 +113,6 @@ function makeSingleEntry(ch, res) {
 
 	const rt = document.createElement('rt');
 	rt.lang = 'zh-Latn';
-	rt.setAttribute('xml:lang', 'zh-Latn');
 	rt.innerText = pronunciation;
 	ruby.appendChild(rt);
 
@@ -135,11 +147,15 @@ function makeMultipleEntry(ch, ress) {
 	for (let i = 0, len = ress.length; i < len; i++) {
 		const res = ress[i];
 		const [sr, expl] = res;
-		const pronunciation = brogue2(sr);
+		var pronunciation;
+		try {
+			pronunciation = brogue2(sr);
+		} catch (err) {
+			notify(makeErr(err, sr));
+		}
 
 		const rt = document.createElement('rt');
 		rt.lang = 'zh-Latn';
-		rt.setAttribute('xml:lang', 'zh-Latn');
 		rt.innerText = pronunciation;
 
 		ruby.appendChild(rt);

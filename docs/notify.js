@@ -42,11 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	text-align: center;
 	width: 70vw;
 }
+
+#notificationText {
+	text-align: left;
+}
 `));
 
-	document.body.appendChild(htmlToElement(`<div name="notificationWrapper" id="notificationWrapper" lang="zh-Hant-HK" xml:lang="zh-Hant-HK">
+	document.body.appendChild(htmlToElement(`<div id="notificationWrapper" lang="en-HK">
 	<div class="notificationOutput">
-		<p name="notificationText" id="notificationText"></p>
+		<pre id="notificationText"></pre>
 		<p><input type="button" value="確定" onclick="handleNotification()"/></p>
 	</div>
 </div>`));

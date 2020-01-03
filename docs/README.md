@@ -152,8 +152,6 @@ Supported phonological attributes:
 
 #### Low-Level API
 
-**`get`, `equal`, `in` 類**
-
 * function `get韻` `in韻`
 * function `get韻賅上去` `in韻賅上去`
 * function `get韻賅上去入` `in韻賅上去入`
@@ -166,13 +164,6 @@ Supported phonological attributes:
 參數 1：小韻號 (1 ≤ i ≤ 3874)
 
 參數 2：相應音韻屬性的可能取值
-
-**`is` 類**
-
-* function `is開` `is合`
-* function `is重紐A類` `is重紐B類`
-
-參數：小韻號 (1 ≤ i ≤ 3874)
 
 **Map Table**
 

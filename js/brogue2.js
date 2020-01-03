@@ -19,7 +19,8 @@ function get等漢字(小韻號) {
 }
 
 function get韻(小韻號) {
-	return small_rhymes[小韻號 - 1][3];
+	// return small_rhymes[小韻號 - 1][3];  // JS: '莊O3𧤛'[3] = "\ud85e"
+	return [...small_rhymes[小韻號 - 1]][3];
 }
 
 function get韻賅上去(小韻號) {
@@ -35,7 +36,8 @@ function get攝(小韻號) {
 }
 
 function get重紐(小韻號) {
-	return small_rhymes[小韻號 - 1][4];
+	// return small_rhymes[小韻號 - 1][4];
+	return [...small_rhymes[小韻號 - 1]][4];
 }
 
 function get聲(小韻號) {
@@ -106,24 +108,6 @@ function in聲(小韻號, a) {
 	return a.some(s => equal聲(小韻號, s));
 }
 
-/* Low-Level API - is-prefixed */
-
-function is開(小韻號) {
-	return get開合(小韻號) == '開';
-}
-
-function is合(小韻號) {
-	return get開合(小韻號) == '合';
-}
-
-function is重紐A類(小韻號) {
-	return get重紐(小韻號) == 'A';
-}
-
-function is重紐B類(小韻號) {
-	return get重紐(小韻號) == 'B';
-}
-
 /* High-Level API */
 
 function check小韻(小韻號, s) {
@@ -137,9 +121,9 @@ function check小韻(小韻號, s) {
 		else if (s.endsWith('組'))
 			return in組(小韻號, s.slice(0, -1).split(''));
 		else if (s == '開')
-			return is開(小韻號);
+			return get開合(小韻號) == '開';
 		else if (s == '合')
-			return is合(小韻號);
+			return get開合(小韻號) == '合';
 		else if (s.endsWith('等'))
 			return in等(小韻號, s.slice(0, -1).split(''));
 		else if (s.endsWith('韻賅上去'))
@@ -151,9 +135,9 @@ function check小韻(小韻號, s) {
 		else if (s.endsWith('聲'))
 			return in聲(小韻號, s.slice(0, -1).split(''));
 		else if (s == '重紐A類')
-			return is重紐A類(小韻號);
+			return get重紐(小韻號) == 'A';
 		else if (s == '重紐B類')
-			return is重紐B類(小韻號);
+			return get重紐(小韻號) == 'B';
 		else
 			throw new Error('無此運算符');
 	}));
