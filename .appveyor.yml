@@ -8,6 +8,9 @@ environment:
   access_token:
     secure: 1Ep5ZXTk0f1AbqY1xVTGnHWDEEBnSm2RnlExqhH0AsAPS1cRYl9aJRHDonSioUOD
 
+before_build:
+- sudo python3 -m pip install pandas
+
 build_script:
 - python3 build.py
 
