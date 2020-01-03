@@ -13,6 +13,7 @@ import urllib
 def download_file_if_not_exist(name):
 	url = 'https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/' + name
 	local_name = 'build/' + name
+	sys.stdout.write('Retrieving ' + url + '...\n')
 	try:
 		if not os.path.exists(local_name):
 			urllib.request.urlretrieve(url, local_name)
