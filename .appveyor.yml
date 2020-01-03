@@ -9,7 +9,7 @@ environment:
     secure: 1Ep5ZXTk0f1AbqY1xVTGnHWDEEBnSm2RnlExqhH0AsAPS1cRYl9aJRHDonSioUOD
 
 before_build:
-- sudo pip3 install pandas
+- pip3 install pandas --user
 
 build_script:
 - ./build.py
