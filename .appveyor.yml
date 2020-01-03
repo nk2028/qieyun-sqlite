@@ -1,4 +1,4 @@
-image: ubuntu1804
+image: macos
 
 branches:
   only:
@@ -9,8 +9,7 @@ environment:
     secure: 1Ep5ZXTk0f1AbqY1xVTGnHWDEEBnSm2RnlExqhH0AsAPS1cRYl9aJRHDonSioUOD
 
 before_build:
-- sudo DEBIAN_FRONTEND=noninteractive apt-get -y update
-- sudo DEBIAN_FRONTEND=noninteractive apt-get -y install python3-pandas
+- sudo pip install pandas
 
 build_script:
 - ./build.py
