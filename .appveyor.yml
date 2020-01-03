@@ -27,5 +27,5 @@ after_build:
 - |-
   if [ -n "$(git status --porcelain)" ]; then
     git commit -m "Deploy $APPVEYOR_REPO_COMMIT by AppVeyor"
-    git push origin master
+    git push origin gh-pages
   fi
