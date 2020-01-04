@@ -13,9 +13,9 @@ import urllib
 def download_file_if_not_exist(name):
 	url = 'https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/' + name
 	local_name = 'build/' + name
-	sys.stdout.write('Retrieving ' + url + '...\n')
 	try:
 		if not os.path.exists(local_name):
+			sys.stdout.write('Retrieving ' + url + '...\n')
 			urllib.request.urlretrieve(url, local_name)
 	except urllib.error.HTTPError as e:
 		print(name, e)
@@ -88,8 +88,8 @@ CREATE TABLE 廣韻小韻
 , '母' TEXT NOT NULL CHECK (length(母) = 1)
 , '開合' TEXT NOT NULL CHECK (開合 IN ('開', '合'))
 , '等' INTEGER NOT NULL CHECK (等 >= 1 AND 等 <= 4)
-, '韻' TEXT NOT NULL CHECK (length(韻) = 1)
 , '重紐' TEXT CHECK (重紐 IN ('A', 'B'))
+, '韻' TEXT NOT NULL CHECK (length(韻) = 1)
 , '上字' TEXT CHECK (length(上字) = 1)
 , '下字' TEXT CHECK (length(下字) = 1)
 , '古韻羅馬字' TEXT NOT NULL
@@ -103,8 +103,8 @@ cur.execute('''
 INSERT INTO 廣韻小韻
 SELECT 小韻號, 小韻,
 母, 開合, 等,
-substr(韻, 1, 1) AS 韻,
 nullif(substr(韻, 2, 1), '') AS 重紐,
+substr(韻, 1, 1) AS 韻,
 substr(反切, 1, 1) AS 上字, substr(反切, 2) AS 下字,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
 FROM 廣韻小韻1 INNER JOIN 廣韻小韻2
@@ -144,14 +144,13 @@ cur.execute(f'''
 CREATE VIEW 廣韻小韻全 AS
 SELECT 小韻號, 小韻,
 小韻號 || 小韻 || '小韻' AS 小韻全名,
-母 || 開合 || 等漢字 || 韻賅上去入 || ifnull(重紐, '') || 聲 AS 音韻地位,
+母 || 開合 || 等漢字 || ifnull(重紐, '') || 韻賅上去入 || 聲 AS 音韻地位,
 CASE 母 {母到母號SQL} END AS 母號,
-母, 開合, 等, 等漢字,
+母, 開合, 等, 等漢字, 重紐,
 韻,
 CASE 韻 {韻到韻賅上去SQL} END AS 韻賅上去,
 韻賅上去入,
 CASE 韻賅上去入 {韻賅上去入到攝SQL} END AS 攝,
-重紐,
 聲, 上字, 下字,
 上字 || 下字 || '切' AS 反切,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
@@ -161,9 +160,8 @@ WHEN 1 THEN '一'
 WHEN 2 THEN '二'
 WHEN 3 THEN '三'
 ELSE '四'
-END AS 等漢字, 韻,
+END AS 等漢字, 重紐, 韻,
 CASE 韻 {韻到韻賅上去入SQL} END AS 韻賅上去入,
-重紐,
 CASE
 WHEN 小韻號 <= 1156 THEN '平'
 WHEN 小韻號 <= 2091 THEN '上'
@@ -177,8 +175,8 @@ FROM 廣韻小韻);''')
 cur.execute('''
 CREATE VIEW 廣韻字頭全 AS
 SELECT 字頭號, 字頭, 解釋, 小韻號, 小韻, 小韻全名, 音韻地位, 小韻內字序,
-母號, 母, 開合, 等, 等漢字, 韻, 韻賅上去,
-韻賅上去入, 攝, 重紐, 聲, 上字, 下字, 反切,
+母號, 母, 開合, 等, 等漢字, 重紐, 韻, 韻賅上去,
+韻賅上去入, 攝, 聲, 上字, 下字, 反切,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
 FROM (SELECT row_number() OVER (ORDER BY 小韻號, 小韻內字序) AS 字頭號,
 小韻號, 小韻內字序, 字頭, 解釋
