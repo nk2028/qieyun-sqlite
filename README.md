@@ -6,7 +6,7 @@
 
 ## 用法
 
-推薦使用 [DB Browser for SQLite](https://sqlitebrowser.org/) 開啓本資料庫。
+推薦使用 [DB Browser for SQLite](https://sqlitebrowser.org/) 開啓 [本資料庫](https://sgalal.github.io/qieyun-sqlite/data.sqlite3)。
 
 ![Screenshot of DB Browser for SQLite showing the qieyun-sqlite database](screenshot.png)
 
