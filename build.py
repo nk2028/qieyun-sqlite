@@ -6,20 +6,16 @@ import os
 import pandas
 import sqlite3
 import sys
-import urllib
+from urllib import request
 
 # Prepare files
 
 def download_file_if_not_exist(name):
 	url = 'https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/' + name
 	local_name = 'build/' + name
-	try:
-		if not os.path.exists(local_name):
-			sys.stdout.write('Retrieving ' + url + '...\n')
-			urllib.request.urlretrieve(url, local_name)
-	except urllib.error.HTTPError as e:
-		print(name, e)
-		sys.exit(0)
+	if not os.path.exists(local_name):
+		sys.stdout.write('Retrieving ' + url + '...\n')
+		request.urlretrieve(url, local_name)
 
 download_file_if_not_exist('YonhMiuk.txt')
 download_file_if_not_exist('SieuxYonh.txt')
