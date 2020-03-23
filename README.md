@@ -1,10 +1,12 @@
-# qieyun-sqlite
+# qieyun-sqlite [![JSDelivr badge](https://data.jsdelivr.com/v1/package/npm/qieyun-sqlite/badge)](https://www.jsdelivr.com/package/npm/qieyun-sqlite)
 
 《切韻》音系 SQLite 資料庫
 
 姊妹項目：《切韻》音系 JavaScript 函式庫 \([sgalal/qieyun-js](https://github.com/sgalal/qieyun-js)\)。
 
 ## 用法
+
+下載連結：<https://cdn.jsdelivr.net/npm/qieyun-sqlite@0.1.28/data.sqlite3> (1.51 MB)。
 
 推薦使用 [DB Browser for SQLite](https://sqlitebrowser.org/) 開啓 [本資料庫](https://sgalal.github.io/qieyun-sqlite/data.sqlite3)。
 
@@ -105,6 +107,15 @@ WHERE length(字頭) > 1;
 | ⿰隺犬 | 至也髙也 | 3276㱿小韻 | 溪開二江入 | 15 |
 | ⌸艹大雨 | 俗 | 3291七小韻 | 清開三眞入 | 7 |
 | ⿱入疌 | 織⿱入?疌 | 3817聶小韻 | 孃開三鹽入 | 4 |
+
+## Build
+
+Build:
+
+```sh
+$ pip install -r requirements.txt
+$ python build.py
+```
 
 ## License
 

@@ -1,0 +1,28 @@
+{
+  "name": "qieyun-sqlite",
+  "version": "0.1.28",
+  "description": "SQLite database for the Qieyun phonological system | 《切韻》音系 SQLite 資料庫",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgalal/qieyun-sqlite.git"
+  },
+  "keywords": [
+    "guangyun",
+    "linguistics",
+    "historical-linguistics",
+    "chinese-nlp",
+    "qieyun"
+  ],
+  "author": "sgalal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sgalal/qieyun-sqlite/issues"
+  },
+  "homepage": "https://github.com/sgalal/qieyun-sqlite#readme",
+  "files": [
+    "data.sqlite3"
+  ]
+}
