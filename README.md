@@ -12,6 +12,46 @@
 
 ![Screenshot of DB Browser for SQLite showing the qieyun-sqlite database](screenshot.png)
 
+## 示例
+
+Examples on Google Colab:
+
+- [廣韻聲類與等配合表](https://colab.research.google.com/drive/12QmUVy8xdb_Uyh562UfF0HRibJfxg7Nu)
+- [廣韻韻等與開合配合表](https://colab.research.google.com/drive/1VDJJ2N4jjZZ4FsAK_bGPS5m8mIUKzhfM)
+- [廣韻的例外](https://colab.research.google.com/drive/1hmCivFJ2ZWDm8b9Oyk34g-VTFYkd7BJf)
+
+### 查找所有無反切的小韻
+
+```sql
+SELECT 小韻號, 音韻描述, 反切,
+group_concat(字頭, '') AS 字頭
+FROM 廣韻字頭全
+WHERE 反切 IS NULL
+GROUP BY 小韻號;
+```
+
+| 小韻號 | 音韻描述 | 反切 | 字頭 |
+| -- | -- | -- | -- |
+| 1919 | 章開三蒸上 | _NULL_ | 拯抍撜𨋬氶 |
+| 3177 | 影開二銜去 | _NULL_ | 𪒠 |
+
+### 查找長度大於 1 的字頭
+
+```sql
+SELECT 字頭, 解釋, 小韻全名,
+音韻描述, 小韻內字序
+FROM 廣韻字頭全
+WHERE length(字頭) > 1;
+```
+
+| 字頭 | 解釋 | 小韻全名 | 音韻描述 | 小韻內字序 |
+| -- | -- | -- | -- | -- |
+| ⿱𥫗瀸 | 上同 | 576前小韻 | 從開四先平 | 6 |
+| ⿱⿰来攵正 | 俗 | 1883整小韻 | 章開三清上 | 2 |
+| ⿰隺犬 | 至也髙也 | 3276㱿小韻 | 溪開二江入 | 15 |
+| ⌸艹大雨 | 俗 | 3291七小韻 | 清開三眞入 | 7 |
+| ⿱入疌 | 織⿱入?疌 | 3817聶小韻 | 孃開三鹽入 | 4 |
+
 ## 表
 
 ### 廣韻小韻全
@@ -73,40 +113,6 @@
 | 推導中州音 | tuŋ | hui |
 | 推導普通話 | dong1 | hui1 |
 | 解釋 | 上同 | 仰目也 |
-
-## 示例
-
-### 查找所有無反切的小韻
-
-```sql
-SELECT 小韻號, 音韻描述, 反切,
-group_concat(字頭, '') AS 字頭
-FROM 廣韻字頭全
-WHERE 反切 IS NULL
-GROUP BY 小韻號;
-```
-
-| 小韻號 | 音韻描述 | 反切 | 字頭 |
-| -- | -- | -- | -- |
-| 1919 | 章開三蒸上 | _NULL_ | 拯抍撜𨋬氶 |
-| 3177 | 影開二銜去 | _NULL_ | 𪒠 |
-
-### 查找長度大於 1 的字頭
-
-```sql
-SELECT 字頭, 解釋, 小韻全名,
-音韻描述, 小韻內字序
-FROM 廣韻字頭全
-WHERE length(字頭) > 1;
-```
-
-| 字頭 | 解釋 | 小韻全名 | 音韻描述 | 小韻內字序 |
-| -- | -- | -- | -- | -- |
-| ⿱𥫗瀸 | 上同 | 576前小韻 | 從開四先平 | 6 |
-| ⿱⿰来攵正 | 俗 | 1883整小韻 | 章開三清上 | 2 |
-| ⿰隺犬 | 至也髙也 | 3276㱿小韻 | 溪開二江入 | 15 |
-| ⌸艹大雨 | 俗 | 3291七小韻 | 清開三眞入 | 7 |
-| ⿱入疌 | 織⿱入?疌 | 3817聶小韻 | 孃開三鹽入 | 4 |
 
 ## Build
 
