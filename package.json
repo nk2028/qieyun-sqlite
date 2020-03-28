@@ -1,6 +1,6 @@
 {
   "name": "qieyun-sqlite",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "SQLite database for the Qieyun phonological system | 《切韻》音系 SQLite 資料庫",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,5 +24,9 @@
   "homepage": "https://github.com/sgalal/qieyun-sqlite#readme",
   "files": [
     "data.sqlite3"
-  ]
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "qieyun": "^0.6.0"
+  }
 }

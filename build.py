@@ -5,13 +5,14 @@ from itertools import repeat
 import os
 import pandas
 import sqlite3
+import subprocess
 import sys
 from urllib import request
 
 # Prepare files
 
-def download_file_if_not_exist(name):
-	url = 'https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/' + name
+def download_file_if_not_exist(name, prefix='https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/'):
+	url = prefix + name
 	local_name = 'build/' + name
 	if not os.path.exists(local_name):
 		sys.stdout.write('Retrieving ' + url + '...\n')
@@ -31,6 +32,32 @@ if os.path.exists('data.sqlite3'):
 conn = sqlite3.connect('data.sqlite3')
 cur = conn.cursor()
 
+## Build unt 切韻朗讀音
+
+download_file_if_not_exist('unt.js', prefix='https://raw.githubusercontent.com/sgalal/qieyun-autoderiver/master/examples/')
+
+def unt切韻朗讀音():
+	with open('build/unt.js') as f:
+		s = f.read()
+	with open('build/unt_modified.js', 'w') as f:
+		f.write('''const fs = require('fs');
+const Qieyun = require('qieyun');
+
+function unt(音韻地位) {
+''' + s + '''
+}
+
+const stream = fs.createWriteStream('build/unt.txt');
+stream.once('open', function(fd) {
+  stream.write('小韻號,unt切韻朗讀音\\n');
+  [...Array(3874).keys()].map(x => stream.write(((x + 1) + ',' + unt(Qieyun.get音韻地位(x + 1)) + '\\n')));
+  stream.end();
+});
+''')
+	subprocess.run(['node', 'build/unt_modified.js'])
+
+unt切韻朗讀音()
+
 ## Emplace TEMP 廣韻小韻1
 
 cur.execute('''
@@ -48,8 +75,7 @@ cur.executemany('INSERT INTO 廣韻小韻1 VALUES (?, ?, ?, ?, ?, ?)', zip(data_
 
 ## Emplace TEMP 廣韻小韻2
 
-cur.execute('''
-CREATE TEMP TABLE 廣韻小韻2
+cur.execute('''CREATE TEMP TABLE 廣韻小韻2
 ( 'id' INTEGER PRIMARY KEY
 , '韻1' TEXT NOT NULL
 , '等' INTEGER NOT NULL
@@ -75,6 +101,17 @@ data_extd_small_rhyme = pandas.read_csv('build/PrengQim.txt', sep=' ', keep_defa
 data_extd_small_rhyme2 = pandas.read_csv('build/Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
 cur.executemany('INSERT INTO 廣韻小韻3 VALUES (?, ?, ?, ?, ?, ?)', zip(data_extd_small_rhyme['#序號'], data_extd_small_rhyme['古韻'], data_extd_small_rhyme['有女'], data_extd_small_rhyme['Baxter'], data_extd_small_rhyme2['推導中州音'], data_extd_small_rhyme2['推導普通話']))
 
+## Emplace 廣韻小韻4
+
+cur.execute('''
+CREATE TEMP TABLE 廣韻小韻4
+( '小韻號' INTEGER PRIMARY KEY
+, 'unt切韻朗讀音' TEXT NOT NULL
+);''')
+
+data_extd_small_rhyme_3 = pandas.read_csv('build/unt.txt', sep=',', na_filter=False, usecols=['小韻號', 'unt切韻朗讀音'])
+cur.executemany('INSERT INTO 廣韻小韻4 VALUES (?, ?)', zip(data_extd_small_rhyme_3['小韻號'], data_extd_small_rhyme_3['unt切韻朗讀音']))
+
 ## Emplace 廣韻小韻
 
 cur.execute('''
@@ -91,6 +128,7 @@ CREATE TABLE 廣韻小韻
 , '古韻羅馬字' TEXT NOT NULL
 , '有女羅馬字' TEXT
 , '白一平轉寫' TEXT NOT NULL
+, 'unt切韻朗讀音' TEXT NOT NULL
 , '推導中州音' TEXT NOT NULL
 , '推導普通話' TEXT
 );''')
@@ -102,10 +140,12 @@ SELECT 小韻號, 小韻,
 nullif(substr(韻, 2, 1), '') AS 重紐,
 substr(韻, 1, 1) AS 韻,
 substr(反切, 1, 1) AS 上字, substr(反切, 2) AS 下字,
-古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
+古韻羅馬字, 有女羅馬字, 白一平轉寫, unt切韻朗讀音, 推導中州音, 推導普通話
 FROM 廣韻小韻1 INNER JOIN 廣韻小韻2
 USING (韻1)
 INNER JOIN 廣韻小韻3
+USING (小韻號)
+INNER JOIN 廣韻小韻4
 USING (小韻號);''')
 
 ## Emplace 廣韻字頭
@@ -124,9 +164,6 @@ cur.executemany('INSERT INTO 廣韻字頭 VALUES (?, ?, ?, ?)', zip(data_char_en
 
 # Extra
 
-韻到韻賅上去 = pandas.read_csv('build/subgroup.csv', na_filter=False)
-韻到韻賅上去SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻到韻賅上去['Rhyme'], 韻到韻賅上去['Subgroup']) if len(x) == 1)  # 重紐AB is removed
-
 韻到韻賅上去入 = pandas.read_csv('build/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '韻系'])
 韻到韻賅上去入SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻到韻賅上去入['#韻目'], 韻到韻賅上去入['韻系']) if len(x) == 1)  # 重紐AB is removed
 
@@ -140,16 +177,15 @@ cur.execute(f'''
 CREATE VIEW 廣韻小韻全 AS
 SELECT 小韻號, 小韻,
 小韻號 || 小韻 || '小韻' AS 小韻全名,
-母 || 開合 || 等漢字 || ifnull(重紐, '') || 韻賅上去入 || 聲 AS 音韻地位,
+母 || 開合 || 等漢字 || ifnull(重紐, '') || 韻賅上去入 || 聲 AS 音韻描述,
 CASE 母 {母到母號SQL} END AS 母號,
 母, 開合, 等, 等漢字, 重紐,
 韻,
-CASE 韻 {韻到韻賅上去SQL} END AS 韻賅上去,
 韻賅上去入,
 CASE 韻賅上去入 {韻賅上去入到攝SQL} END AS 攝,
 聲, 上字, 下字,
 上字 || 下字 || '切' AS 反切,
-古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
+古韻羅馬字, 有女羅馬字, 白一平轉寫, unt切韻朗讀音, 推導中州音, 推導普通話
 FROM (SELECT 小韻號, 小韻, 母, 開合, 等,
 CASE 等
 WHEN 1 THEN '一'
@@ -165,15 +201,15 @@ WHEN 小韻號 <= 3182 THEN '去'
 WHEN 小韻號 <= 3874 THEN '入'
 END AS 聲,
 上字, 下字,
-古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話
+古韻羅馬字, 有女羅馬字, 白一平轉寫, unt切韻朗讀音, 推導中州音, 推導普通話
 FROM 廣韻小韻);''')
 
 cur.execute('''
 CREATE VIEW 廣韻字頭全 AS
-SELECT 字頭號, 字頭, 小韻號, 小韻, 小韻全名, 音韻地位, 小韻內字序,
-母號, 母, 開合, 等, 等漢字, 重紐, 韻, 韻賅上去,
+SELECT 字頭號, 字頭, 小韻號, 小韻, 音韻描述, 小韻內字序,
+母號, 母, 開合, 等, 等漢字, 重紐, 韻,
 韻賅上去入, 攝, 聲, 上字, 下字, 反切,
-古韻羅馬字, 有女羅馬字, 白一平轉寫, 推導中州音, 推導普通話, 解釋
+古韻羅馬字, 有女羅馬字, 白一平轉寫, unt切韻朗讀音, 推導中州音, 推導普通話, 解釋
 FROM (SELECT row_number() OVER (ORDER BY 小韻號, 小韻內字序) AS 字頭號,
 小韻號, 小韻內字序, 字頭, 解釋
 FROM 廣韻字頭)
