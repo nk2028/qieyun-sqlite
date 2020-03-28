@@ -6,7 +6,7 @@
 
 ## 用法
 
-下載連結：<https://cdn.jsdelivr.net/npm/qieyun-sqlite@0.1.28/data.sqlite3> (1.51 MB)。
+下載連結：<https://cdn.jsdelivr.net/npm/qieyun-sqlite@0.1.29/data.sqlite3> (1.56 MB)。
 
 推薦使用 [DB Browser for SQLite](https://sqlitebrowser.org/) 開啓 [本資料庫](https://sgalal.github.io/qieyun-sqlite/data.sqlite3)。
 
