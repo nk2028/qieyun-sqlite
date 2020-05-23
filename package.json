@@ -1,13 +1,13 @@
 {
   "name": "qieyun-sqlite",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "description": "SQLite database for the Qieyun phonological system | 《切韻》音系 SQLite 資料庫",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sgalal/qieyun-sqlite.git"
+    "url": "git+https://github.com/nk2028/qieyun-sqlite.git"
   },
   "keywords": [
     "guangyun",
@@ -16,12 +16,12 @@
     "chinese-nlp",
     "qieyun"
   ],
-  "author": "sgalal",
+  "author": "Ngiox Khyen 2028 Project",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sgalal/qieyun-sqlite/issues"
+    "url": "https://github.com/nk2028/qieyun-sqlite/issues"
   },
-  "homepage": "https://github.com/sgalal/qieyun-sqlite#readme",
+  "homepage": "https://github.com/nk2028/qieyun-sqlite#readme",
   "files": [
     "data.sqlite3"
   ],

@@ -34,7 +34,7 @@ cur = conn.cursor()
 
 ## Build unt 切韻朗讀音
 
-download_file_if_not_exist('unt.js', prefix='https://raw.githubusercontent.com/sgalal/qieyun-autoderiver/master/examples/')
+download_file_if_not_exist('unt.js', prefix='https://raw.githubusercontent.com/nk2028/qieyun-autoderiver/master/examples/')
 
 def unt切韻朗讀音():
 	with open('build/unt.js') as f:
