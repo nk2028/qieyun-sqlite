@@ -2,3 +2,4 @@ node_modules
 .mypy_cache
 *.sqlite3
 *.sqlite3-journal
+/package-lock.json

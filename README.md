@@ -1,14 +1,14 @@
-# qieyun-sqlite [![JSDelivr badge](https://data.jsdelivr.com/v1/package/npm/qieyun-sqlite/badge)](https://www.jsdelivr.com/package/npm/qieyun-sqlite)
+# qieyun-sqlite
 
 《切韻》音系 SQLite 資料庫
 
-姊妹項目：《切韻》音系 JavaScript 函式庫 \([nk2028/qieyun-js](https://github.com/nk2028/qieyun-js)\)。
+關聯項目：《切韻》音系 JavaScript 函式庫 \([nk2028/qieyun-js](https://github.com/nk2028/qieyun-js)\)。
 
 ## 用法
 
-下載連結：<https://cdn.jsdelivr.net/npm/qieyun-sqlite@0.1.31/data.sqlite3> (1.55 MB)。
+下載連結：See [releases](https://github.com/nk2028/qieyun-sqlite/releases).
 
-推薦使用 [DB Browser for SQLite](https://sqlitebrowser.org/) 開啟本資料庫。
+推薦使用 [DB Browser for SQLite](https://sqlitebrowser.org/) 開啓本資料庫。
 
 ![Screenshot of DB Browser for SQLite showing the qieyun-sqlite database](screenshot.png)
 
@@ -32,7 +32,7 @@ Examples on Google Colab:
 
 ```sh
 $ pip install -r requirements.txt
-$ npm install
+$ npm install qieyun
 $ python build.py
 ```
 
