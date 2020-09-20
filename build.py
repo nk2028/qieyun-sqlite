@@ -1,67 +1,14 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 from itertools import repeat
-import os
 import pandas
 import sqlite3
-import subprocess
-import sys
-from urllib import request
-
-# Prepare files
-
-def download_file_if_not_exist(name, prefix='https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/'):
-	url = prefix + name
-	local_name = 'build/' + name
-	if not os.path.exists(local_name):
-		sys.stdout.write('Retrieving ' + url + '...\n')
-		request.urlretrieve(url, local_name)
-
-download_file_if_not_exist('YonhMiuk.txt')
-download_file_if_not_exist('SieuxYonh.txt')
-download_file_if_not_exist('YonhMux.txt')
-download_file_if_not_exist('Dzih.txt')
-download_file_if_not_exist('YonhGheh.txt')
-download_file_if_not_exist('PrengQim.txt')
-download_file_if_not_exist('Dauh.txt')
-
-if os.path.exists('data.sqlite3'):
-	os.remove('data.sqlite3')
 
 conn = sqlite3.connect('data.sqlite3')
 cur = conn.cursor()
 
-## Build unt 切韻朗讀音
-
-download_file_if_not_exist('unt.js', prefix='https://raw.githubusercontent.com/nk2028/qieyun-examples/master/')
-
-def unt切韻朗讀音():
-	with open('build/unt.js') as f:
-		s = f.read()
-	with open('build/unt_modified.js', 'w') as f:
-		f.write('''const fs = require('fs');
-const Qieyun = require('qieyun');
-
-function unt(音韻地位) {
-''' + s + '''
-}
-
-const stream = fs.createWriteStream('build/unt.txt');
-stream.once('open', function(fd) {
-  stream.write('小韻號,unt切韻朗讀音\\n');
-  [...Array(3874).keys()].map(x => stream.write(((x + 1) + ',' + unt(Qieyun.get音韻地位(x + 1)) + '\\n')));
-  stream.end();
-});
-''')
-	subprocess.run(['node', 'build/unt_modified.js'])
-
-unt切韻朗讀音()
-
-## Emplace TEMP 廣韻小韻1
+## TEMP 廣韻小韻1
 
 cur.execute('''
-CREATE TEMP TABLE 廣韻小韻1
+CREATE TEMP TABLE '廣韻小韻1'
 ( '小韻號' INTEGER PRIMARY KEY
 , '小韻' TEXT
 , '母' TEXT NOT NULL
@@ -73,9 +20,9 @@ CREATE TEMP TABLE 廣韻小韻1
 data_small_rhyme_1 = pandas.read_csv('build/SieuxYonh.txt', sep=' ', header=None, usecols=[0, 1, 2, 3, 4, 5], names=['SmallRhymeId', 'SmallRhyme', 'Initial', 'Rhyme1', 'Rhyme', 'Fanqie'])
 cur.executemany('INSERT INTO 廣韻小韻1 VALUES (?, ?, ?, ?, ?, ?)', zip(data_small_rhyme_1['SmallRhymeId'], data_small_rhyme_1['SmallRhyme'], data_small_rhyme_1['Initial'], data_small_rhyme_1['Rhyme1'], data_small_rhyme_1['Rhyme'], data_small_rhyme_1['Fanqie']))
 
-## Emplace TEMP 廣韻小韻2
+## TEMP 廣韻小韻2
 
-cur.execute('''CREATE TEMP TABLE 廣韻小韻2
+cur.execute('''CREATE TEMP TABLE '廣韻小韻2'
 ( 'id' INTEGER PRIMARY KEY
 , '韻1' TEXT NOT NULL
 , '等' INTEGER NOT NULL
@@ -85,10 +32,10 @@ cur.execute('''CREATE TEMP TABLE 廣韻小韻2
 data_small_rhyme_2 = pandas.read_csv('build/YonhMux.txt', sep=' ', na_filter=False, usecols=['#韻母', '等', '呼'])
 cur.executemany('INSERT INTO 廣韻小韻2 VALUES (?, ?, ?, ?)', zip(repeat(None), data_small_rhyme_2['#韻母'], data_small_rhyme_2['等'], data_small_rhyme_2['呼']))
 
-## Emplace 廣韻小韻3
+## 廣韻小韻3
 
 cur.execute('''
-CREATE TEMP TABLE 廣韻小韻3
+CREATE TEMP TABLE '廣韻小韻3'
 ( '小韻號' INTEGER PRIMARY KEY
 , '古韻羅馬字' TEXT NOT NULL
 , '有女羅馬字' TEXT
@@ -101,10 +48,10 @@ data_extd_small_rhyme = pandas.read_csv('build/PrengQim.txt', sep=' ', keep_defa
 data_extd_small_rhyme2 = pandas.read_csv('build/Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
 cur.executemany('INSERT INTO 廣韻小韻3 VALUES (?, ?, ?, ?, ?, ?)', zip(data_extd_small_rhyme['#序號'], data_extd_small_rhyme['古韻'], data_extd_small_rhyme['有女'], data_extd_small_rhyme['Baxter'], data_extd_small_rhyme2['推導中州音'], data_extd_small_rhyme2['推導普通話']))
 
-## Emplace 廣韻小韻4
+## 廣韻小韻4
 
 cur.execute('''
-CREATE TEMP TABLE 廣韻小韻4
+CREATE TEMP TABLE '廣韻小韻4'
 ( '小韻號' INTEGER PRIMARY KEY
 , 'unt切韻朗讀音' TEXT NOT NULL
 );''')
@@ -112,10 +59,10 @@ CREATE TEMP TABLE 廣韻小韻4
 data_extd_small_rhyme_3 = pandas.read_csv('build/unt.txt', sep=',', na_filter=False, usecols=['小韻號', 'unt切韻朗讀音'])
 cur.executemany('INSERT INTO 廣韻小韻4 VALUES (?, ?)', zip(data_extd_small_rhyme_3['小韻號'], data_extd_small_rhyme_3['unt切韻朗讀音']))
 
-## Emplace 廣韻小韻
+## 廣韻小韻
 
 cur.execute('''
-CREATE TABLE 廣韻小韻
+CREATE TABLE '廣韻小韻'
 ( '小韻號' INTEGER PRIMARY KEY
 , '小韻' TEXT NOT NULL CHECK (length(小韻) = 1)
 , '母' TEXT NOT NULL CHECK (length(母) = 1)
@@ -148,15 +95,15 @@ USING (小韻號)
 INNER JOIN 廣韻小韻4
 USING (小韻號);''')
 
-## Emplace 廣韻字頭
+## 廣韻字頭
 
 cur.execute('''
-CREATE TABLE 廣韻字頭
+CREATE TABLE '廣韻字頭'
 ( '小韻號' INTEGER NOT NULL REFERENCES '廣韻小韻'
 , '小韻內字序' INTEGER NOT NULL
 , '字頭' TEXT NOT NULL
 , '解釋' TEXT NOT NULL
-, PRIMARY KEY (小韻號, 小韻內字序)
+, PRIMARY KEY ('小韻號', '小韻內字序')
 );''')
 
 data_char_entity = pandas.read_csv('build/Dzih.txt', sep=' ', na_filter=False, header=None, names=['Name', 'SmallRhymeId', 'NumInSmallRhyme', 'Explanation'])
@@ -174,7 +121,7 @@ cur.executemany('INSERT INTO 廣韻字頭 VALUES (?, ?, ?, ?)', zip(data_char_en
 母到母號SQL = '\n'.join("WHEN '" + x + "' THEN " + y for x, y in zip(母到母號['Initial'], 母到母號['InitialID']))
 
 cur.execute(f'''
-CREATE VIEW 廣韻小韻全 AS
+CREATE VIEW '廣韻小韻全' AS
 SELECT 小韻號, 小韻,
 小韻號 || 小韻 || '小韻' AS 小韻全名,
 母 || 開合 || 等漢字 || ifnull(重紐, '') || 韻賅上去入 || 聲 AS 音韻描述,
@@ -217,7 +164,7 @@ END AS 聲,
 FROM 廣韻小韻);''')
 
 cur.execute('''
-CREATE VIEW 廣韻字頭全 AS
+CREATE VIEW '廣韻字頭全' AS
 SELECT 字頭號, 字頭, 小韻號, 小韻, 音韻描述, 小韻內字序,
 母號, 母, 組, 開合, 等, 等漢字, 重紐, 韻,
 韻賅上去入, 攝, 聲, 上字, 下字, 反切,

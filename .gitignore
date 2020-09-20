@@ -1,4 +1,5 @@
 node_modules
+.vscode
 .mypy_cache
 *.sqlite3
 *.sqlite3-journal
