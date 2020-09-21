@@ -12,7 +12,7 @@ wget -nc -P build https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sy
 
 # Prepare unt 切韻朗讀音
 
-wget -nc -P build https://raw.githubusercontent.com/nk2028/qieyun-examples/master/unt.js
+wget -nc -P build https://cdn.jsdelivr.net/gh/nk2028/qieyun-examples@20200908/unt.js
 
 echo 'const Qieyun = require("qieyun");
 
