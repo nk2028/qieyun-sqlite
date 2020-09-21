@@ -2,7 +2,7 @@ from itertools import repeat
 import pandas
 import sqlite3
 
-conn = sqlite3.connect('data.sqlite3')
+conn = sqlite3.connect('qieyun.sqlite3')
 cur = conn.cursor()
 
 ## TEMP 廣韻小韻1

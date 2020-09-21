@@ -34,4 +34,4 @@ node build/unt_modified.js > build/unt.txt
 
 # Remove old artifact
 
-rm -rf data.sqlite3
+rm -rf qieyun.sqlite3
