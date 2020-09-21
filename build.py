@@ -22,7 +22,8 @@ cur.executemany('INSERT INTO 廣韻小韻1 VALUES (?, ?, ?, ?, ?, ?)', zip(data_
 
 ## TEMP 廣韻小韻2
 
-cur.execute('''CREATE TEMP TABLE '廣韻小韻2'
+cur.execute('''
+CREATE TEMP TABLE '廣韻小韻2'
 ( 'id' INTEGER PRIMARY KEY
 , '韻1' TEXT NOT NULL
 , '等' INTEGER NOT NULL
