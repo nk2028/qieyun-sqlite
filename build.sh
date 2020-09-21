@@ -23,11 +23,10 @@ cat build/unt.js >> build/unt_modified.js
 echo '}
 
 console.log("小韻號,unt切韻朗讀音");
-[...Array(3874).keys()].map(i => {
-	const sr = i + 1;
+for (let sr = 1; sr < 3874; sr++) {
 	const res = unt(Qieyun.get音韻地位(sr));
 	console.log(sr + "," + res);
-});' >> build/unt_modified.js
+}' >> build/unt_modified.js
 
 # Build unt 切韻朗讀音
 
