@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+    - name: Build
+      run: |
+        # Install dependencies
+        pip install -r requirements.txt
+        npm install qieyun-examples-node@0.0.1
+
+        # Prepare data files
+        mkdir -p cache
+        (cd cache && curl -LsSZ --remote-name-all https://raw.githubusercontent.com/BYVoid/ytenx/master/ytenx/sync/kyonh/{YonhMiuk.txt,SieuxYonh.txt,YonhMux.txt,Dzih.txt,YonhGheh.txt,PrengQim.txt,Dauh.txt})
+        node build/unt.js > cache/unt.txt
+
+        # Build
+        python build/main.py

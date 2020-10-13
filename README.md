@@ -1,4 +1,4 @@
-# qieyun-sqlite
+# qieyun-sqlite [![](https://github.com/nk2028/qieyun-sqlite/workflows/Build/badge.svg)](https://github.com/nk2028/qieyun-sqlite/actions?query=workflow%3A%22Build%22)
 
 《切韻》音系 SQLite 資料庫
 
@@ -20,7 +20,7 @@
 
 ![Screenshot of DB Browser for SQLite showing the qieyun-sqlite database](screenshot.png)
 
-## 示例
+## Examples
 
 Examples on Google Colab:
 
@@ -28,17 +28,11 @@ Examples on Google Colab:
 - [廣韻韻等與開合配合表](https://colab.research.google.com/drive/1VDJJ2N4jjZZ4FsAK_bGPS5m8mIUKzhfM)
 - [廣韻的例外](https://colab.research.google.com/drive/1hmCivFJ2ZWDm8b9Oyk34g-VTFYkd7BJf)
 
-## 構建
+## Build
 
-```sh
-pip install -r requirements.txt
-npm install qieyun@0.7.3
-./build.sh
-python build.py
-```
+See [build script](.github/workflows/build.yml).
 
 ## License
 
-Dictionary data is in the public domain.
-
-Python code are distributed under MIT license.
+- Data: Public domain.
+- Source code: MIT license.

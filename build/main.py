@@ -17,7 +17,7 @@ CREATE TEMP TABLE '廣韻小韻1'
 , '反切' TEXT
 );''')
 
-data_small_rhyme_1 = pandas.read_csv('build/SieuxYonh.txt', sep=' ', header=None, usecols=[0, 1, 2, 3, 4, 5], names=['SmallRhymeId', 'SmallRhyme', 'Initial', 'Rhyme1', 'Rhyme', 'Fanqie'])
+data_small_rhyme_1 = pandas.read_csv('cache/SieuxYonh.txt', sep=' ', header=None, usecols=[0, 1, 2, 3, 4, 5], names=['SmallRhymeId', 'SmallRhyme', 'Initial', 'Rhyme1', 'Rhyme', 'Fanqie'])
 cur.executemany('INSERT INTO 廣韻小韻1 VALUES (?, ?, ?, ?, ?, ?)', zip(data_small_rhyme_1['SmallRhymeId'], data_small_rhyme_1['SmallRhyme'], data_small_rhyme_1['Initial'], data_small_rhyme_1['Rhyme1'], data_small_rhyme_1['Rhyme'], data_small_rhyme_1['Fanqie']))
 
 ## TEMP 廣韻小韻2
@@ -30,7 +30,7 @@ CREATE TEMP TABLE '廣韻小韻2'
 , '開合' TEXT NOT NULL
 );''')
 
-data_small_rhyme_2 = pandas.read_csv('build/YonhMux.txt', sep=' ', na_filter=False, usecols=['#韻母', '等', '呼'])
+data_small_rhyme_2 = pandas.read_csv('cache/YonhMux.txt', sep=' ', na_filter=False, usecols=['#韻母', '等', '呼'])
 cur.executemany('INSERT INTO 廣韻小韻2 VALUES (?, ?, ?, ?)', zip(repeat(None), data_small_rhyme_2['#韻母'], data_small_rhyme_2['等'], data_small_rhyme_2['呼']))
 
 ## 廣韻小韻3
@@ -45,8 +45,8 @@ CREATE TEMP TABLE '廣韻小韻3'
 , '推導普通話' TEXT
 );''')
 
-data_extd_small_rhyme = pandas.read_csv('build/PrengQim.txt', sep=' ', keep_default_na=False, na_values=[''])  # https://stackoverflow.com/a/27173640
-data_extd_small_rhyme2 = pandas.read_csv('build/Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
+data_extd_small_rhyme = pandas.read_csv('cache/PrengQim.txt', sep=' ', keep_default_na=False, na_values=[''])  # https://stackoverflow.com/a/27173640
+data_extd_small_rhyme2 = pandas.read_csv('cache/Dauh.txt', sep=' ', na_filter=False, usecols=['推導中州音', '推導普通話'])
 cur.executemany('INSERT INTO 廣韻小韻3 VALUES (?, ?, ?, ?, ?, ?)', zip(data_extd_small_rhyme['#序號'], data_extd_small_rhyme['古韻'], data_extd_small_rhyme['有女'], data_extd_small_rhyme['Baxter'], data_extd_small_rhyme2['推導中州音'], data_extd_small_rhyme2['推導普通話']))
 
 ## 廣韻小韻4
@@ -57,7 +57,7 @@ CREATE TEMP TABLE '廣韻小韻4'
 , 'unt切韻朗讀音' TEXT NOT NULL
 );''')
 
-data_extd_small_rhyme_3 = pandas.read_csv('build/unt.txt', sep=',', na_filter=False, usecols=['小韻號', 'unt切韻朗讀音'])
+data_extd_small_rhyme_3 = pandas.read_csv('cache/unt.txt', sep=',', na_filter=False, usecols=['小韻號', 'unt切韻朗讀音'])
 cur.executemany('INSERT INTO 廣韻小韻4 VALUES (?, ?)', zip(data_extd_small_rhyme_3['小韻號'], data_extd_small_rhyme_3['unt切韻朗讀音']))
 
 ## 廣韻小韻
@@ -107,15 +107,15 @@ CREATE TABLE '廣韻字頭'
 , PRIMARY KEY ('小韻號', '小韻內字序')
 );''')
 
-data_char_entity = pandas.read_csv('build/Dzih.txt', sep=' ', na_filter=False, header=None, names=['Name', 'SmallRhymeId', 'NumInSmallRhyme', 'Explanation'])
+data_char_entity = pandas.read_csv('cache/Dzih.txt', sep=' ', na_filter=False, header=None, names=['Name', 'SmallRhymeId', 'NumInSmallRhyme', 'Explanation'])
 cur.executemany('INSERT INTO 廣韻字頭 VALUES (?, ?, ?, ?)', zip(data_char_entity['SmallRhymeId'], data_char_entity['NumInSmallRhyme'], data_char_entity['Name'], data_char_entity['Explanation']))
 
 # Extra
 
-韻到韻賅上去入 = pandas.read_csv('build/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '韻系'])
+韻到韻賅上去入 = pandas.read_csv('cache/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '韻系'])
 韻到韻賅上去入SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻到韻賅上去入['#韻目'], 韻到韻賅上去入['韻系']) if len(x) == 1)  # 重紐AB is removed
 
-韻賅上去入到攝 = pandas.read_csv('build/YonhGheh.txt', sep=' ', na_filter=False)
+韻賅上去入到攝 = pandas.read_csv('cache/YonhGheh.txt', sep=' ', na_filter=False)
 韻賅上去入到攝SQL = '\n'.join("WHEN '" + x + "' THEN '" + y + "'" for x, y in zip(韻賅上去入到攝['#韻系'], 韻賅上去入到攝['攝']) if len(x) == 1)  # 重紐AB is removed
 
 母到母號 = pandas.read_csv('build/initial.csv', dtype=str, na_filter=False)
