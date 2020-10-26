@@ -17,13 +17,11 @@ jobs:
         node-version: 14
     - name: Setup Python
       uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-        architecture: 'x64'
     - name: Build
       run: |
         # Install dependencies
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
         npm install qieyun-examples-node@0.0.1
 
         # Prepare data files
@@ -33,3 +31,8 @@ jobs:
 
         # Build
         python build/main.py
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: qieyun.sqlite3
+        path: qieyun.sqlite3
