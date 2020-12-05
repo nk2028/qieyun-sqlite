@@ -141,9 +141,6 @@ cur.executemany('INSERT INTO 廣韻字頭 VALUES (?, ?, ?, ?)', zip(data_char_en
 韻到韻賅上去入 = pandas.read_csv('cache/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '韻系'])
 韻到韻賅上去入SQL = '\n'.join(f"WHEN '{x}' THEN '{y}'" for x, y in zip(韻到韻賅上去入['#韻目'], 韻到韻賅上去入['韻系']) if len(x) == 1)  # 重紐AB is removed here
 
-韻賅上去入到攝 = pandas.read_csv('cache/YonhGheh.txt', sep=' ', na_filter=False)
-韻賅上去入到攝SQL = '\n'.join(f"WHEN '{x}' THEN '{y}'" for x, y in zip(韻賅上去入到攝['#韻系'], 韻賅上去入到攝['攝']) if len(x) == 1)  # 重紐AB is removed here
-
 母到母號 = pandas.read_csv('build/initial.csv', dtype=str, na_filter=False)
 母到母號SQL = '\n'.join(f"WHEN '{x}' THEN {y}" for x, y in zip(母到母號['Initial'], 母到母號['InitialID']))
 
@@ -168,7 +165,42 @@ END AS 組,
 開合, 等, 等漢字, 重紐,
 韻,
 韻賅上去入,
-CASE 韻賅上去入 {韻賅上去入到攝SQL} END AS 攝,
+CASE
+WHEN 韻賅上去入 IN ('東', '冬', '鍾') THEN 0
+WHEN 韻賅上去入 IN ('江') THEN 1
+WHEN 韻賅上去入 IN ('支', '脂', '之', '微') THEN 2
+WHEN 韻賅上去入 IN ('魚', '虞', '模') THEN 3
+WHEN 韻賅上去入 IN ('齊', '佳', '皆', '灰', '咍', '祭', '泰', '夬', '廢') THEN 4
+WHEN 韻賅上去入 IN ('眞', '諄', '臻', '文', '欣', '元', '魂', '痕') THEN 5
+WHEN 韻賅上去入 IN ('寒', '桓', '刪', '山', '先', '仙') THEN 6
+WHEN 韻賅上去入 IN ('蕭', '宵', '肴', '豪') THEN 7
+WHEN 韻賅上去入 IN ('歌', '戈') THEN 8
+WHEN 韻賅上去入 IN ('麻') THEN 9
+WHEN 韻賅上去入 IN ('唐', '陽') THEN 10
+WHEN 韻賅上去入 IN ('庚', '耕', '清', '青') THEN 11
+WHEN 韻賅上去入 IN ('登', '蒸') THEN 12
+WHEN 韻賅上去入 IN ('侯', '尤', '幽') THEN 13
+WHEN 韻賅上去入 IN ('侵') THEN 14
+WHEN 韻賅上去入 IN ('覃', '談', '鹽', '添', '咸', '銜', '嚴', '凡') THEN 15
+END AS 攝號,
+CASE
+WHEN 韻賅上去入 IN ('東', '冬', '鍾') THEN '通'
+WHEN 韻賅上去入 IN ('江') THEN '江'
+WHEN 韻賅上去入 IN ('支', '脂', '之', '微') THEN '止'
+WHEN 韻賅上去入 IN ('魚', '虞', '模') THEN '遇'
+WHEN 韻賅上去入 IN ('齊', '佳', '皆', '灰', '咍', '祭', '泰', '夬', '廢') THEN '蟹'
+WHEN 韻賅上去入 IN ('眞', '諄', '臻', '文', '欣', '元', '魂', '痕') THEN '臻'
+WHEN 韻賅上去入 IN ('寒', '桓', '刪', '山', '先', '仙') THEN '山'
+WHEN 韻賅上去入 IN ('蕭', '宵', '肴', '豪') THEN '效'
+WHEN 韻賅上去入 IN ('歌', '戈') THEN '果'
+WHEN 韻賅上去入 IN ('麻') THEN '假'
+WHEN 韻賅上去入 IN ('唐', '陽') THEN '宕'
+WHEN 韻賅上去入 IN ('庚', '耕', '清', '青') THEN '梗'
+WHEN 韻賅上去入 IN ('登', '蒸') THEN '曾'
+WHEN 韻賅上去入 IN ('侯', '尤', '幽') THEN '流'
+WHEN 韻賅上去入 IN ('侵') THEN '深'
+WHEN 韻賅上去入 IN ('覃', '談', '鹽', '添', '咸', '銜', '嚴', '凡') THEN '咸'
+END AS 攝,
 聲, 上字, 下字,
 上字 || 下字 || '切' AS 反切,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, unt切韻朗讀音, 推導中州音, 推導普通話
@@ -194,7 +226,7 @@ cur.execute('''
 CREATE VIEW '廣韻字頭全' AS
 SELECT 字頭號, 字頭, 小韻號, 小韻, 音韻描述, 小韻內字序,
 母號, 母, 組, 開合, 等, 等漢字, 重紐, 韻,
-韻賅上去入, 攝, 聲, 上字, 下字, 反切,
+韻賅上去入, 攝號, 攝, 聲, 上字, 下字, 反切,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, unt切韻朗讀音, 推導中州音, 推導普通話, 解釋
 FROM (SELECT row_number() OVER (ORDER BY 小韻號, 小韻內字序) AS 字頭號,
 小韻號, 小韻內字序, 字頭, 解釋
