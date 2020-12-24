@@ -141,8 +141,13 @@ cur.executemany('INSERT INTO 廣韻字頭 VALUES (?, ?, ?, ?)', zip(data_char_en
 韻到韻賅上去入 = pandas.read_csv('cache/YonhMiuk.txt', sep=' ', na_filter=False, usecols=['#韻目', '韻系'])
 韻到韻賅上去入SQL = '\n'.join(f"WHEN '{x}' THEN '{y}'" for x, y in zip(韻到韻賅上去入['#韻目'], 韻到韻賅上去入['韻系']) if len(x) == 1)  # 重紐AB is removed here
 
-母到母號 = pandas.read_csv('build/initial.csv', dtype=str, na_filter=False)
-母到母號SQL = '\n'.join(f"WHEN '{x}' THEN {y}" for x, y in zip(母到母號['Initial'], 母到母號['InitialID']))
+with open('build/initials.txt') as f:
+	母順序 = f.read()
+	母到母號SQL = '\n'.join(f"WHEN '{母}' THEN {母號}" for 母號, 母 in enumerate(母順序))
+
+with open('build/rhymes.txt') as f:
+	韻賅上去入順序 = f.read()
+	韻賅上去入到韻賅上去入號SQL = '\n'.join(f"WHEN '{韻賅上去入}' THEN '{韻賅上去入號}'" for 韻賅上去入號, 韻賅上去入 in enumerate(韻賅上去入順序))
 
 cur.execute(f'''
 CREATE VIEW '廣韻小韻全' AS
@@ -164,6 +169,7 @@ WHEN 母 IN ('來', '日', '以') THEN null
 END AS 組,
 開合, 等, 等漢字, 重紐,
 韻,
+CASE 韻賅上去入 {韻賅上去入到韻賅上去入號SQL} END AS 韻賅上去入號,
 韻賅上去入,
 CASE
 WHEN 韻賅上去入 IN ('東', '冬', '鍾') THEN 0
@@ -226,7 +232,7 @@ cur.execute('''
 CREATE VIEW '廣韻字頭全' AS
 SELECT 字頭號, 字頭, 小韻號, 小韻, 音韻描述, 小韻內字序,
 母號, 母, 組, 開合, 等, 等漢字, 重紐, 韻,
-韻賅上去入, 攝號, 攝, 聲, 上字, 下字, 反切,
+韻賅上去入號, 韻賅上去入, 攝號, 攝, 聲, 上字, 下字, 反切,
 古韻羅馬字, 有女羅馬字, 白一平轉寫, unt切韻朗讀音, 推導中州音, 推導普通話, 解釋
 FROM (SELECT row_number() OVER (ORDER BY 小韻號, 小韻內字序) AS 字頭號,
 小韻號, 小韻內字序, 字頭, 解釋
