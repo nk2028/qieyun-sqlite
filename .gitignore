@@ -2,3 +2,5 @@
 .mypy_cache
 *.sqlite3
 *.sqlite3-journal
+/字頭表.csv
+/小韻表.csv

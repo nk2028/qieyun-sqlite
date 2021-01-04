@@ -1,5 +1,8 @@
-from itertools import repeat
+import os
 import sqlite3
+
+os.system('curl -LsSo 字頭表.csv https://raw.githubusercontent.com/nk2028/qieyun-data/9849852/%E5%AD%97%E9%A0%AD%E8%A1%A8.csv')
+os.system('curl -LsSo 小韻表.csv https://raw.githubusercontent.com/nk2028/qieyun-data/9849852/%E5%B0%8F%E9%9F%BB%E8%A1%A8.csv')
 
 conn = sqlite3.connect('qieyun.sqlite3')
 cur = conn.cursor()
