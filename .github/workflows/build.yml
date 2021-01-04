@@ -3,8 +3,12 @@ name: Build
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '*.md'
   pull_request:
     branches: [ main ]
+    paths-ignore:
+      - '*.md'
 
 jobs:
   build:
@@ -16,8 +20,7 @@ jobs:
       with:
         python-version: '3.9'
     - name: Build
-      run: |
-        python build.py
+      run: python build.py
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:

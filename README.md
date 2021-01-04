@@ -26,7 +26,7 @@ Examples on Google Colab:
 
 ## 構建
 
-參見 [建置腳本]](.github/workflows/build.yml).
+參見[建置腳本](.github/workflows/build.yml)。
 
 ## License
 

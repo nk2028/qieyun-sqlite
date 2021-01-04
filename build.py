@@ -61,6 +61,7 @@ CREATE TABLE '小韻'
 
 def 小韻資料():
 	with open('小韻表.csv') as f:
+		next(f) # skip header
 		for line in f:
 			小韻號, 母, 呼, 等, 重紐, 韻, 聲, 反切 = line.rstrip('\n').split(',')
 			小韻號 = int(小韻號)
@@ -84,6 +85,7 @@ CREATE TABLE '字頭'
 
 def 字頭資料():
 	with open('字頭表.csv') as f:
+		next(f) # skip header
 		for line in f:
 			小韻號, 字頭, 釋義 = line.rstrip('\n').split(',')
 			字頭號 = None
