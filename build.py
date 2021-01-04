@@ -43,6 +43,7 @@ def 生成號SQL(s):
 攝號SQL = '\n'.join(f"""WHEN 韻 IN ({','.join(f"'{韻}'" for 韻 in 韻們)}) THEN {攝號}""" for 攝號, (_, 韻們) in enumerate(攝順序, 1))
 攝SQL = '\n'.join(f"""WHEN 韻 IN ({','.join(f"'{韻}'" for 韻 in 韻們)}) THEN '{攝}'""" for 攝, 韻們 in 攝順序)
 組SQL = '\n'.join(f"""WHEN 母 IN ({','.join(f"'{母}'" for 母 in 母們)}) THEN '{組}'""" for 組, 母們 in 組列表)
+等數字SQL = "WHEN 1 THEN '一' WHEN 2 THEN '二' WHEN 3 THEN '三' WHEN 4 THEN '四'"
 
 ## 小韻
 
@@ -50,7 +51,7 @@ cur.execute('''
 CREATE TABLE '小韻'
 ( '小韻號' INTEGER PRIMARY KEY
 , '母' TEXT NOT NULL CHECK (length(母) = 1)
-, '呼' TEXT NOT NULL CHECK (呼 IN ('開', '合'))
+, '呼' TEXT CHECK (呼 IN ('開', '合'))
 , '等數字' INTEGER NOT NULL CHECK (等數字 >= 1 AND 等數字 <= 4)
 , '重紐' TEXT CHECK (重紐 IN ('A', 'B'))
 , '韻' TEXT NOT NULL CHECK (length(韻) = 1)
@@ -65,6 +66,7 @@ def 小韻資料():
 		for line in f:
 			小韻號, 母, 呼, 等, 重紐, 韻, 聲, 反切 = line.rstrip('\n').split(',')
 			小韻號 = int(小韻號)
+			呼 = None if 呼 == '' else 呼
 			等數字 = '〇一二三四'.index(等)
 			重紐 = None if 重紐 == '' else 重紐
 			上字 = None if 反切 == '' else 反切[0]
@@ -99,22 +101,15 @@ cur.executemany('INSERT INTO 字頭 VALUES (?, ?, ?, ?)', 字頭資料())
 cur.execute(f'''
 CREATE VIEW '小韻全' AS
 SELECT 小韻號,
-母 || 呼 ||
-CASE 等數字
-WHEN 1 THEN '一'
-WHEN 2 THEN '二'
-WHEN 3 THEN '三'
-WHEN 4 THEN '四'
-END
-|| ifnull(重紐, '') || 韻 || 聲 AS 音韻描述,
+母 ||
+ifnull(呼, '') ||
+CASE 等數字 {等數字SQL} END ||
+ifnull(重紐, '') ||
+韻 ||
+聲 AS 音韻描述,
 母,
 呼,
-CASE 等數字
-WHEN 1 THEN '一'
-WHEN 2 THEN '二'
-WHEN 3 THEN '三'
-WHEN 4 THEN '四'
-END AS 等,
+CASE 等數字 {等數字SQL} END AS 等,
 重紐,
 韻,
 聲,

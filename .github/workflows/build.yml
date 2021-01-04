@@ -20,7 +20,9 @@ jobs:
       with:
         python-version: '3.9'
     - name: Build
-      run: python build.py
+      run: |
+        python check.py
+        python build.py
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
