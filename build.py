@@ -29,6 +29,21 @@ def 生成號SQL(s):
 	('咸', '覃談鹽添咸銜嚴凡'),
 ]
 
+清濁列表 = [
+	('全清', '幫端知精心莊生章書見影曉'),
+	('次清', '滂透徹清初昌溪'),
+	('全濁', '並定澄從邪崇俟常船羣匣'),
+	('次濁', '明泥孃來日疑云以'),
+]
+
+音列表 = [
+	('脣', '幫滂並明'),
+	('舌', '端透定泥知徹澄孃來'),
+	('齒', '精清從心邪莊初崇生俟章昌常書船日'),
+	('牙', '見溪羣疑'),
+	('喉', '影曉匣云以'),
+]
+
 組列表 = [
 	('幫', '幫滂並明'),
 	('端', '端透定泥'),
@@ -42,6 +57,8 @@ def 生成號SQL(s):
 
 攝號SQL = '\n'.join(f"""WHEN 韻 IN ({','.join(f"'{韻}'" for 韻 in 韻們)}) THEN {攝號}""" for 攝號, (_, 韻們) in enumerate(攝順序, 1))
 攝SQL = '\n'.join(f"""WHEN 韻 IN ({','.join(f"'{韻}'" for 韻 in 韻們)}) THEN '{攝}'""" for 攝, 韻們 in 攝順序)
+清濁SQL = '\n'.join(f"""WHEN 母 IN ({','.join(f"'{母}'" for 母 in 母們)}) THEN '{清濁}'""" for 清濁, 母們 in 清濁列表)
+音SQL = '\n'.join(f"""WHEN 母 IN ({','.join(f"'{母}'" for 母 in 母們)}) THEN '{音}'""" for 音, 母們 in 音列表)
 組SQL = '\n'.join(f"""WHEN 母 IN ({','.join(f"'{母}'" for 母 in 母們)}) THEN '{組}'""" for 組, 母們 in 組列表)
 等數字SQL = "WHEN 1 THEN '一' WHEN 2 THEN '二' WHEN 3 THEN '三' WHEN 4 THEN '四'"
 
@@ -113,6 +130,8 @@ CASE 等數字 {等數字SQL} END AS 等,
 重紐,
 韻,
 聲,
+CASE {清濁SQL} END AS 清濁,
+CASE {音SQL} END AS 音,
 CASE {組SQL} END AS 組,
 CASE {攝SQL} END AS 攝,
 CASE 母 {母號SQL} END AS 母號,
@@ -126,7 +145,7 @@ cur.execute('''
 CREATE VIEW '字頭全' AS
 SELECT 字頭號, 字頭, 音韻描述,
 母, 呼, 等, 重紐, 韻, 聲,
-組, 攝,
+清濁, 音, 組, 攝,
 小韻號,
 母號, 攝號, 等數字, 韻號,
 上字, 下字,
